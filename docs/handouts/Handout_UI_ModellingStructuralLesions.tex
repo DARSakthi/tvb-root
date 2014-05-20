@@ -18,12 +18,12 @@
 
 \usepackage{amsmath}
 
-% Set up the images/graphics package
+% Set up the images/graphics \underline{\textbf{Analysis}}
 \usepackage{graphicx}
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{figures/}}
 
-\title{The Virtual Brain: Hands on Session \#1}
+\title{The Virtual Brain: Hands on Session \#3}
 \date{7th June 2014} 
 
 % The following package makes prettier tables.  
@@ -70,6 +70,7 @@
 
 % environment derived from framed.sty: see leftbar environment definition
 \definecolor{formalshade}{rgb}{0.95,0.95,1}
+\definecolor{simulationshade}{rgb}{0.92, 1.0, 0.95}
 
 \newenvironment{formal}{%
   \def\FrameCommand{%
@@ -87,13 +88,29 @@
   \vspace{2pt}\end{adjustwidth}\endMakeFramed%
 }
 
+\newenvironment{simulation}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{ForestGreen}\vrule width 2pt}%
+    {\color{simulationshade}\vrule width 4pt}%
+    \colorbox{simulationshade}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{2pt}\vspace{2pt}%
+}
+{%
+  \vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
 \begin{document}
 \maketitle % this prints the handout title, author, and date
 
 \begin{abstract}
-\noindent One of the goals of computational models of the human brain is to reproduce
-the resting-state activity. The dynamics of this activity is thought to be
-strongly dependent of the underlying anatomical substrate: the human
+\noindent One of the goals of computational models of the human brain is to
+reproduce the resting-state activity. The dynamics of this activity is thought
+to be strongly dependent of the underlying anatomical substrate: the human
 connectome. If the structural support is modified, then one would expect to
 observe changes in the global activity.
 
@@ -117,17 +134,17 @@ observe changes in the global activity.
 
 \section{Objectives}\label{sec:objectives}
 
-From a clinical point of view, the aim is to obtain a better understanding of
+From a scientific point of view, the aim is to obtain a better understanding of
 how structural lesions can be characterized and specifically how those
 characteristics may modify the local dynamics of the neural activity, as well
-as the impact on lower time scales signals such as BOLD.
+as the impact on lower time scales signals such as BOLD. The main goal of this
+session is to provide a clear understanding of the available tools to explore
+and work with a connectome. Furthermore, we will work with two additional
+connectivity matrices, one of a control subject and the other from a stroke
+patient.
 
-\noindent The main goal of this session is to provide a clear understanding of the
-available tools to efficiently explore and modify the connectome from various
-perspectives.
 
-
-\subsection{What's inside Project X }\label{sec:project_data}
+\subsection{What's inside Project Session\_III\_ModellingStructuralLesions}\label{sec:project_data}
 
 \begin{margintable}
   \centering
@@ -136,27 +153,145 @@ perspectives.
     \toprule
     Datatype & Sumary info                       \\
     \midrule
-    Connectivity & 74 {nodes}                    \\
-    BOLD time-series & \unit[200]{s}             \\
+    Connectivity Control & 96 {nodes}            \\
+    Connectivity Stroke  & 96 {nodes}            \\
+    Region Time Series   & 2 seconds             \\
+    BOLD   Time Seres    & 4 minutes             \\  
+    PCC Matrices         & 96 x 96               \\
+    Fourier Spectra      &  - \\ 
     \bottomrule
   \end{tabular}
-  \caption{Here are the datatypes included in Project X}
+  \caption{Some of the dataypes}
   \label{tab:normaltab}
 \end{margintable}
 
 
 % let's start a new thought -- a new section
-
 \newthought{In this session}, because the execution times for BOLD simulations
-are long (in the order of days), we'll only go through the necessary steps
-required to reproduce the data described in Table~\ref{tab:normaltab}
+are long (in the order of hours or days), we'll only go through the necessary
+steps required to reproduce some of the data described in
+Table~\ref{tab:normaltab}. You can click along and/or try to change
+parameters.
 
 
-\subsection{Steps: Analyzing the Network Topology}\label{sec:steps}
+\subsection{Steps: Modelling Lesions}\label{sec:steps}
 
-First, we will explore the characteristics of the connectivity matrix. In
-\textsc{Analysis} you will find the BCT \sidenote{Brain Connectivity Toolbox}
-algorithms that provide a means to compute graph-metrics.
+Figure~\ref{fig:fig} shows one of the most prominent working areas in
+\textsc{TVB}: the connectivity editor. To get there, go to the
+\textsc{Connectivity} area $\rightarrow$ \textsc{Large scale}. Several
+displays are available for the matrices and some of them may use the node-wise
+metrics to set the colour and size of the nodes. If you do not select any
+metric before launching the connectivity editor, you can always set these
+properties later.
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_ConnectivityArea}%
+  \caption{Long-range connectivity editor}%
+  \label{fig:fig}%
+\end{figure}
+
+\noindent As a first step, we will explore the default connectivity (e.g., go through
+the visualizers). To model lesions, we will modify the connectivity, for
+instance, by deleting edges or nodes. As a working example we will remove the
+interhemispheric connections. 
+
+
+\begin{formal}
+  \begin{enumerate}
+  \item Select the left nodes from the \underline{Quick Select} menu. 
+  \item Apply the changes. The active or selected nodes will appear in green on the left. 
+  \item Save the selection for later use. The connectivity editor will be aware of two set of nodes: those in the selection (green) and those that have not been selected (white). 
+  \item Move to the third quadrant (Q3). On the left you can zoom in and draw the connections by selecting a node and then right clicking on it. (Fig. \ref{fig:steps_01_02_03_04})
+\end{enumerate}
+\end{formal}
+
+
+\begin{figure}%
+  \fbox{\includegraphics[width=0.75\linewidth]{Handout_UI_ModellingStructuralLesions_SelectLeftNodes.png}}\\
+  \fbox{\includegraphics[width=0.75\linewidth]{Handout_UI_ModellingStructuralLesions_SaveLeftNodes}}\\
+  \fbox{\includegraphics[width=0.75\linewidth]{Handout_UI_ModellingStructuralLesions_SelectedNodes}}\\
+  \fbox{\includegraphics[width=0.75\linewidth]{Handout_UI_ModellingStructuralLesions_DrawConnections}}
+  \caption{Edit and save node selection. Draw connections.}
+  \label{fig:steps_01_02_03_04}
+\end{figure}
+
+
+\noindent Now we'll proceed to perform operations on the edge values. There are four
+edge category of edges depending on the nodes they connect:
+
+\begin{itemize}
+  \item Edges IN-IN. These edges connect pair of nodes in the selected set. In this
+  particular case you would modify the edges from the left hemisphere.
+  \item Edges OUT-OUT. These edges connect pair of nodes in the \textit{unselected
+  set}. In this case they would be the right intrahemispheric edges.
+  \item Edges IN-OUT. These are the edges that connect nodes in the selected set
+  (rows) to nodes in the unselected set (columns). In this case it refers to
+  the edges in the second quadrant (Q2).
+  \item Edges OUT-IN. These edges connect nodes in the unselected set (rows) to
+  nodes in the selected set (columns). In this case it refers to the edges in the third
+  quadrant (Q3).
+\end{itemize}
+
+\begin{formal}
+  \begin{enumerate}[resume]
+  \setcounter{enumi}{4}
+  \item Select operation \textbf{Set(n)} for edges OUT-IN, set the value to 0 and then apply the changes. 
+  \item Select operation \textbf{Set(n)} for edges IN-OUT, set the value to 0 and then apply the changes. (Fig. \ref{fig:steps_05_06})
+  \end{enumerate}
+\end{formal}
+
+
+\begin{figure}%
+  \fbox{\includegraphics[width=0.75\linewidth]{Handout_UI_ModellingStructuralLesions_SelectLeftNodes.png}}\\
+  \fbox{\includegraphics[width=0.75\linewidth]{Handout_UI_ModellingStructuralLesions_SaveLeftNodes}}\\
+  \fbox{\includegraphics[width=0.75\linewidth]{Handout_UI_ModellingStructuralLesions_SelectedNodes}}\\
+  \fbox{\includegraphics[width=0.75\linewidth]{Handout_UI_ModellingStructuralLesions_DrawConnections}}
+  \caption{Edit and save node selection. Draw connections.}
+  \label{fig:steps_01_02_03_04}
+\end{figure}
+
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_EdgeOperations}%
+  \caption{Set interhemispheric connections to 0}%
+  \label{fig:steps_05_06}%
+\end{figure}
+
+
+
+\noindent In the matrix editor the interhemispheric connections are gone.
+We'll now save the new matrix, but before make sure all the nodes are
+included, otherwise TVB will assume you only want the nodes in the current
+selection and will set the rest to zero. In the connectivity editor, the nodes
+that are not in the selection appear as if they were switched off. (Fig. \ref{fig:steps_save})
+
+\begin{figure}%
+  \fbox{\includegraphics[width=0.75\linewidth]{Handout_UI_ModellingStructuralLesions_SelectAllNodes}}\\
+  \fbox{\includegraphics[width=0.75\linewidth]{Handout_UI_ModellingStructuralLesions_SaveNewMatrix}}
+  \caption{Select all nodes and save}
+  \label{fig:steps_save}
+\end{figure}
+
+
+\begin{formal}
+  \begin{enumerate}[resume]
+  \setcounter{enumi}{6}
+    \item Load the new matrix. (Fig. \ref{fig:steps_07})
+  \end{enumerate}
+\end{formal}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_LoadNewMatrix}%
+  \caption{Set interhemispheric connections to 0}%
+  \label{fig:steps_07}%
+\end{figure}
+
+\noindent Next, we'll use a criterion based on graph-metrics to select which
+nodes will be deleted. Using the BCT \sidenote{Brain Connectivity Toolbox}
+algorithms in \underline{\textbf{Analysis}} we compute some degree and
+similarity measures and decide to remove the first 5 nodes with the highest
+in-strength.
+
 
 \begin{figure}[h]
   \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_Analysis}%
@@ -166,7 +301,8 @@ algorithms that provide a means to compute graph-metrics.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% STEPS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{formal}
-  \begin{enumerate}
+  \begin{enumerate}[resume]
+  \setcounter{enumi}{7}
   \item Select degree and similarity algorithms. 
   \item Select the metric you want to compute and the connectivity matrix used as input. Click on launch. 
   \end{enumerate}
@@ -177,12 +313,12 @@ algorithms that provide a means to compute graph-metrics.
 \noindent By default the last action will take you back to the Operations dashboard.
 Once the algorithm is finished, you can see the results in a 2D layout of the
 head, which gives an idea of the network topology based on the node-wise
-metrics.
+metrics. Alternatively you can display the results as a histogram. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% STEPS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{formal}
   \begin{enumerate}[resume]
-  \setcounter{enumi}{2}
+  \setcounter{enumi}{9}
   \item Click on \includegraphics[width=0.042\linewidth]{nodeConnectivityMeasure}. On
   the overlay window you can already see a summary of the basic descriptive
   statistics (Fig.~\ref{fig:step_02}).
@@ -202,8 +338,8 @@ metrics.
 \noindent Other network measures were previously computed so we can also have a look at them. 
 \begin{formal}
   \begin{enumerate}[resume] %% doesnt work with the formal enviornment :/
-  \setcounter{enumi}{4}
-  \item Select strength and clustering coefficient from the brain menu (Fig. ~\ref{fig:step_05}). Click on "Update Visualizer"
+  \setcounter{enumi}{11}
+  \item Select strength and clustering coefficient from the brain menu (Fig. ~\ref{fig:step_05}). Click on \underline{Update Visualizer}.
   \end{enumerate}
 \end{formal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -220,71 +356,101 @@ metrics.
   \label{fig:step_05b}%
 \end{figure}
 \newpage
-\subsection{Steps: Interacting with the Connectome}
 
-\noindent Figure~\ref{fig:fig} shows the connectivity editor. To get there, go to the
-\textsc{Connectivity} area $\rightarrow$ \textsc{Large scale}. Several
-displays are available for the matrices and some of them may use the node-wise
-metrics to set the colour and size of the nodes. If you do not select any
-metric before launching the connectivity editor, you can always set these
-properties later.
-\begin{figure}[h]
-  \includegraphics[width=\linewidth]{steps_Connectivity_ShowConnections.png}%
-  \caption{Long-range connectivity editor}%
-  \label{fig:fig}%
-\end{figure}
+\noindent We go back to the \textsc{Connectivity} area and in the field \underline{Node colours} we select
+the node-wise metric we just computed and set a threshold of 56. Launch the connectivity editor.
 
-\noindent Sometimes you may need to modify the connectivity, for instance, by deleting
-specific nodes or edges. As working examples we will remove the subcortical
-nuclei (nodes).
 \begin{formal}
-  \begin{enumerate}
-  \setcounter{enumi}{5}
-  \item In the quick-select menu remove the labels corresponding to these regions. Apply the changes (Fig.~\ref{fig:step_06}). 
-  \item Save the node selection. This list can be used in other areas as well.
+  \begin{enumerate}[resume] %% doesnt work with the formal enviornment :/
+  \setcounter{enumi}{12}
+  \item Go to the Transverse visualizer wich displays a spring-like layout of the network graph (top view). Clikc on \underline{Show all} to apply the threshold previously set. Fig. \ref{fig:step_12}
   \end{enumerate}
 \end{formal}
 
-\begin{figure}%
-  \fbox{\includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_RemoveThalamicNodes.png}}\\
-  \fbox{\includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_SaveSelection}}\\
-  \fbox{\includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_SaveNewMatrix}}\\
-  \fbox{\includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_NewMatrix}}
-  \caption{Edit and save node selection. Save the matrix as a new Connectivity. The connections of the inactive nodes were removed.}
-  \label{fig:step_06}
+\begin{figure}[h]
+  \includegraphics[width=0.9\linewidth]{Handout_UI_ModellingStructuralLesions_ShowColourNodes}%
+  \caption{Show node colours.}%
+  \label{fig:step_12}%
 \end{figure}
-%TODO: add tables with region labels once we agree on the dataset will be using for this tutorial
- 
-\noindent In the connectivity editor the nodes that are not in the selection appear as if they were switched 'off'. 
-You can save the new connectivity matrix, where the connections comprising the inactive nodes will be set to zero (so they are effectively removed). 
+\newpage
 
-TODO: there is much more that we can include here. Some steps will be redundant with the tutorials and documentation.
+To completely remove the nodes we could create a selection excluding these
+high-degree nodes nodes and save the new matrix, or creating a small selection
+with the target nodes and using the edge operations we set the edges of the
+IN-IN, IN-OUT and OUT-IN to zero. (Fig. \ref{fig:step_subnetwork})
 
+
+\begin{figure}[h]
+  \includegraphics[width=0.9\linewidth]{Handout_UI_ModellingStructuralLesions_SelectSubnetwork}%
+  \caption{Select subnetwork with the highest in-strength nodes.}%
+  \label{fig:step_subnetwork}%
+\end{figure}
+\newpage
+
+
+We could repeat from step 13 on using a different metric. From the \underline{Brain menu}
+ you can change the measure used to colour the nodes as well as the threshold. Fig. \ref{fig:step_change_threshold}
+
+\begin{figure}[h]
+  \includegraphics[width=0.9\linewidth]{Handout_UI_ModellingStructuralLesions_ChangeNodeColourThreshold}%
+  \caption{Change the metric and threshold.}%
+  \label{fig:step_change_threshold}%
+\end{figure}
+\newpage
 
 \subsection{Steps: Simulation}
 
-\noindent we can now evaluate the difference between the activity generated by both Connectomes. 
-Go to the \textsc{simulator} area.
+\noindent We can now try to evaluate the difference between the activity generated by both the different connectivty matrices. 
+Go to the \textsc{simulator} area. Now, we'd like to see how these modifications have altered the stability plane
+of our system. Many figures are available in \textsc{Projects} $\rightarrow$ \textsc{Image archive}.
 
-\begin{formal}
+\begin{simulation}
   \begin{enumerate}
-  \setcounter{enumi}{7}
-  \item Set up the brain network model according to the parameters in Table X. (This will be already available, but people can do it anyway).
-  \item Launch the simulation.
-  \item BOLD signals are already available.
+  \item We proceed to launch a PSE using the same parameters as in the first session and second PSE where
+the only element that has changed is the connectivity matrix.
+
+  \item Select point in the PSE maps (e.g., points with the same parameters). Tag the time-series. Go to \textsc{Analysis} $\rightarrow$ \textsc{Fourier spectrum}. Apply a filter to find your the time-series and launch the analyzer. Fig. \ref{fig:steps_sim_03}.
+
+  \item We can now compare the results.
+
+  \item In addition we explore the model presented in the previous talk (Stefanescu-Jirsa 3D) using the control and stroke connectivity matrices. 
+  \item Select a point from each PSE map. Tag the corresponding time-series. Launch the \underline{Animated time-series visualizer}. Apply a filter to find the interesting traces. 
+
+  \item Then using the parameters from these points, we launch two 60 seconds long simulations using the BOLD monitor to have a proper history for our actual simulation. (This was done for both models). 
+
+  \item Using the branching mechanims, we launch 4 minutes simulations and compute the Pearson correlation coefficients matrix. (Fig. \ref{fig:steps_sim_07}) 
+
   \end{enumerate}
-\end{formal}
+\end{simulation}
 
-\section{Results}\label{sec:results}
-If the time-series were processed in matlab or python to obtain certain
-figures like Fig.~\ref{fig:fig_results}, then they should be reproducible.
-Provide a code snippet to reproduce the figure. Add some conclusions.
 
-\begin{figure}[h]
-  \includegraphics[width=\linewidth]{results_Example_ER_stochastic.pdf}%
-  \caption{Long-range connectivity editor}%
-  \label{fig:fig_results}%
+\begin{figure}%
+  \fbox{\includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_SelectPointFromPSE_a}}\\
+  \fbox{\includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_SelectPointFromPSE_b}}
+  \caption{Select points}
+  \label{fig:steps_sim_03}
 \end{figure}
+
+
+\begin{figure}%
+  \fbox{\includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_bold_pearson_g2d_control}}\\
+  \fbox{\includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_bold_pearson_g2d_stroke}}
+  \caption{Pair-wise Pearson correlation coefficient matrix computed over the long BOLD time-series. Top: control matrix. Bottom: stroke matrix.}
+  \label{fig:steps_sim_07}
+\end{figure}
+
+
+
+% \section{Results}\label{sec:results}
+% If the time-series were processed in matlab or python to obtain certain
+% figures like Fig.~\ref{fig:fig_results}, then they should be reproducible.
+% Provide a code snippet to reproduce the figure. Add some conclusions.
+
+% \begin{figure}[h]
+%   \includegraphics[width=\linewidth]{results_Example_ER_stochastic.pdf}%
+%   \caption{Long-range connectivity editor}%
+%   \label{fig:fig_results}%
+% \end{figure}
 
 
 \section{More Documentation}\label{sec:more-doc}
