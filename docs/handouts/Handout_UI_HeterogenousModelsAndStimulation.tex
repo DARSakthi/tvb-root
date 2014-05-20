@@ -1,0 +1,348 @@
+%!TEX TS-program = pdflatex                                          %
+%!TEX encoding = UTF8                                                %
+%!TEX spellcheck = en-US                                             %
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Handout_ModelingStructuralLesions.tex
+% A handout to follow during the hands-on sessions 
+% 
+% Authors: Paula Sanz Leon
+% 
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% based on the tufte-latex template                                  %
+
+\documentclass{tufte-handout}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+
+% Set up the images/graphics \underline{\textbf{Analysis}}
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{figures/}}
+
+\title{The Virtual Brain: Hands on Session \#4}
+\date{7th June 2014} 
+
+% The following package makes prettier tables.  
+\usepackage{booktabs}
+
+% 
+%\usepackage{caption}
+%\usepackage{subcaption}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+\usepackage[svgnames]{xcolor}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% For adjustwidth environment
+\usepackage[strict]{changepage}
+
+% For formal definitions
+\usepackage{framed}
+
+% Resume a list
+\usepackage{enumitem}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+% environment derived from framed.sty: see leftbar environment definition
+\definecolor{formalshade}{rgb}{0.95,0.95,1}
+\definecolor{simulationshade}{rgb}{0.92, 1.0, 0.95}
+
+\newenvironment{formal}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{DarkBlue}\vrule width 2pt}%
+    {\color{formalshade}\vrule width 4pt}%
+    \colorbox{formalshade}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{2pt}\vspace{2pt}%
+}
+{%
+  \vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
+\newenvironment{simulation}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{ForestGreen}\vrule width 2pt}%
+    {\color{simulationshade}\vrule width 4pt}%
+    \colorbox{simulationshade}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{2pt}\vspace{2pt}%
+}
+{%
+  \vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
+\begin{document}
+\maketitle % this prints the handout title, author, and date
+
+\begin{abstract}
+
+\noindent TVB allows for a systematic exploration and manipulation of every
+underlying component of a large-scale brain network model, such as the neural
+mass model governing the local dynamics or the structural connectivity
+constraining the space-time structure of the network couplings.
+\begin{marginfigure}%
+  \includegraphics[width=\linewidth]{tvb_logo_transparent_square}
+  %\caption{TVB evil logo}
+  \label{fig:marginfig}
+\end{marginfigure}
+\end{abstract}
+
+%\printclassoptions
+
+%\begin{fullwidth} % uncomment this environment to get full texwidth paragraphs 
+%\textsc{The Virtual Brain} is a facilitating technology. It enables
+%researchers from the domains of  computational neuroscience and medicine to
+%study and focus on a particular problem, and directly build a model of the
+%brain that can be tested under different scenarios. So, every time we require
+%to perform a simulation for our work, we do not require to develop the
+%underlying computational model.   
+%\end{fullwidth}
+
+\section{Objectives}\label{sec:objectives}
+
+This tutorial describes the process of adding a stimulation defined at the
+region level to a simulation and spatialization of parameters.
+
+
+\subsection{What's inside Project Session\_IV\_HeterogenousModelsAndStimulation}\label{sec:project_data}
+
+% let's start a new thought -- a new section
+\newthought{In this session}, we'll show you how to build stimulation patterns for your region or surface simulations. Furthemore, we'll go beyond homogenous models, that is all the nodes have the same initial local dynamics,  and define different dynamics for specific regions or patches of our model. 
+
+\subsection{Steps: How to stimulate a brain at the region level}\label{sec:steps}
+
+Within TVB, stimuli can be specified at either the region or surface level,
+with the latter only applying to the case of simulations including a mesh
+representation of the cortical surface. Here, we will first define a basic
+stimulus at the region level and apply it to a region level simulation. We'll
+use a deterministic integration scheme so that the effects of the stimuli are
+very clear and after that  we'll the do the same using a stochastic
+integration. This example has beeen published in Sanz-Leon, 2013, which is a
+toy example of evoked responses.
+
+
+Let's go to \textsc{Stimulus} $\rightarrow$ \textsc{Region stimulus} area and
+begin by selecting some nodes and defining the weighting of the stimuli coming
+into those nodes, to show what the basic process looks like. We now need to define the temporal profile and the weights per node. 
+
+
+\begin{formal}
+\begin{enumerate}
+\item This is done by selecting an equation, giving a name to the stimulation pattern and setting its parameters as desired.
+\item Here we'll just take the default Pulse Train. We'll shift the onset to 500 ms, tau is the duration of the pulse, 5ms, and T is the repetition period, 500ms or 2Hz.  
+\item On the right column you can change the end time to visualize the stimulus. 
+\item To define which and how much nodes will be affected by a stimulus, a scaling factor per node can be defined. Click on \underline{Set Region Scalings}. 
+\item Unselect the nodes. Then, select the primary visual cortices, left and right V1, save the selection for later use and set the new scaling to 3.5 -- only those nodes will receive stimulation. Select all the nodes again and save the stimulus.
+\end{enumerate}
+\end{formal}
+
+
+\subsection{Steps: How to stimulate a brain at the surface level}\label{sec:steps}
+
+
+\begin{formal}
+\begin{enumerate}
+\item As with the region level stimuli, we use an equation to define the temporal
+profile. The temporal component of the stimulus will be the same square pulse train as before, except that we'll set the onset and the repetition period to at 50ms.
+\item  However, unlike in the region level case, we also use an equation to
+define the spatial profile of the stimulus. For the spatial profile we'll use e Gaussian function with the only change being the width of the kernel, that we set to 10 mm.
+
+\item We also need to specify one or
+more "focal points" (vertices on the cortical surface), about which the
+spatial equation will be evaluated. To do this we go to \underline{View Stimulus progress} where we can select a few focal points. 
+\item Here, as with the LocalConnectivity, we
+must use an equation which drops toward zero with increasing distance.
+However, as we don't need to evaluate the equation for every single vertex on
+the surface, but rather just for a typically small set of focal points, we
+don't need to truncate the evaluation with an explicit cutoff.
+\item We save the stimulus and then we can visualize it as a movie. This was already done for you, so you can directly click on \underline{Play}. 
+\end{enumerate}
+\end{formal}
+ 
+
+Next, we go back to the \textsc{Simulator} area, and we'll set up the local dynamics using the generic 2D oscillator.
+
+\begin{simulation}
+\begin{enumerate}
+\item Now we'll build the model using the \underline{Connectivity}, \underline{Model}, \underline{Integrator} and \underline{Monitors} as in Sanz-Leon, 2013. In this configuration the topology of the phase portrait features a stable fixed point (a stable spiral) with a characteristics frequency of approximately 10Hz. You can check it using the phase plane interactive tool. 
+The model parameters that change are (a=-0.5, b=-15.0, c=0.0, d=0.02).
+\item Before applying the stimulus to our model we'll let the system reach a steady state first, to avoid the intial transient to mask the effect of the stimulation. Remember the branching mechanism?
+\item Simulation length is 4000 ms.
+\item Now, we add a stimulation pattern and continue the simulation for another 4000 ms.
+\item Do not forget to configure the visualizers and analyzers. 
+\item Finally, we repeat the procedure using a stochastic integration.
+\end{enumerate}
+\end{simulation}
+
+(Snapshots of the results with the Animated time-series viewer.)
+
+
+\begin{formal}
+\begin{enumerate}
+\item From the \textsc{Operation dashboard}, we select one of the time-series and from the \underline{Visualizer} tab we launch the \underline{Animated time series} visualizer. 
+\item The selection we had saved when we created the stimulus before is available, so we directly select the nodes were stimulation was applied and we add left and right V2. The stimulus was applied to V1, howver zooming in we can see the effect on V2. 
+\end{enumerate}
+\end{formal}
+
+
+
+\begin{simulation}
+\begin{enumerate}
+\item As with the region simulations we'll first run a short simulation, 200 ms to clear out the initial transient. We select the cortical surface and the local Connectivity.
+\item In addition we set up a few \underline{Monitors}.
+\item We now create a branch and add the \underline{Surface stimulus} we previously created before. This is a full brain network model making use of all the components of TVB.
+\item Simulation length is 4000 ms.
+\item Now, we add a stimulation pattern and continue the simulation for another 4000 ms.
+\item Do not forget to configure the visualizers and analyzers. 
+\item Finally, we repeat the procedure using a stochastic integration.
+\end{enumerate}
+\end{simulation}
+
+
+\begin{simulation}
+\begin{itemize}
+\item Results are in \textit{EvokedResponsesSurface\_init\_branch1}
+\end{itemize}
+\end{simulation}
+
+
+Note that surface simulations can also be run with stimuli defined at the
+region level. In this case, all the vertices that belong to one region will
+receive the same stimulus.
+
+\begin{simulation}
+\begin{itemize}
+\item This is what we did in \textit{EvokedResponsesSurface\_init\_branch2}
+\end{itemize}
+\end{simulation}
+
+
+\subsection{Steps: Heterogeneous models}\label{sec:steps}
+
+
+So far, we have assumed that every node either in a region or surface
+simulation has the same dynamics. TVB allows for the "spatialization" of
+parameters, that is, every node can have different dynamical regimes by
+varying the models parameters. This feature becomes relevant when modelling
+regions or patches of the brain that have "abnormal" dynamics. A specific case
+will be presented in the next session about modelling Epilepsy in TVB.
+
+For region simulations the mechanism is similar as the one for creating \underline{Region
+Stimulus} and for surface simulations a spatial profile determines the
+variation of the parameter according to a smooth function.
+
+
+\section{More Documentation}\label{sec:more-doc}
+For more documentation on The Virtual Brain, please see the following articles \cite{Sanz-Leon_2013, Spiegler_2013, Woodman_2014, Jirsa_2010b}
+
+
+\section{Support}\label{sec:support}
+
+The official TVB webiste is \url{www.thevirtualbrain.org}.  
+All the documentation and tutorials are hosted on \url{the-virtual-brain.github.io}.
+You'll find our public \smallcaps{git} repository at \url{https://github.com/the-virtual-brain}. 
+For questions and bug reports we have a users group \url{https://groups.google.com/forum/#!forum/tvb-users}
+
+\bibliography{tvb_references}
+\bibliographystyle{plainnat}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
