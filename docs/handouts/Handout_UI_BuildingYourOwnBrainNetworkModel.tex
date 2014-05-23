@@ -104,6 +104,22 @@
   \vspace{2pt}\end{adjustwidth}\endMakeFramed%
 }
 
+\newenvironment{blah}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{DarkOrange}\vrule width 2pt}%
+    {\color{PeachPuff}\vrule width 4pt}%
+    \colorbox{PeachPuff}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{2pt}\vspace{2pt}%
+}
+{%
+  \vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
 \begin{document}
 \maketitle % this prints the handout title, author, and date
 
@@ -168,16 +184,7 @@ some of the data described in Table~\ref{tab:normaltab}. You can always start
 over, click along and/or try to change parameters.
 
 
-\subsection{Steps: Building A Discrete Brain Network Model}\label{sec:steps}
-
-Figure~\ref{fig:fig} shows one of the most prominent working areas in
-\textsc{TVB}: the connectivity editor. To get there, go to the
-\textsc{Connectivity} area $\rightarrow$ \textsc{Large scale}. Several
-displays are available for the matrices and some of them may use the node-wise
-metrics to set the colour and size of the nodes. If you do not select any
-metric before launching the connectivity editor, you can always set these
-properties later.
-
+\subsection{Steps: Building A Discrete Brain Network Model (region-based simulations)}\label{sec:steps}
 
 In the \textsc{simulator} page (Fig.~\ref{fig:fig}), you could name your
 simulation and directly launch it with the default parameters. However, in
@@ -189,7 +196,7 @@ A basic simulation at using a coarse representation of the brain consists of
 five main components, each of these components is a configurable object in
 TVB:
 
-\begin{simulation}
+\begin{blah}
 \begin{itemize}
 \item Model, which is, at its core, a set of differential equations describing the local neuronal dynamics;
 \item Connectivity, represents the large scale structural connectivity of the brain, ie white-matter tracts;
@@ -197,7 +204,7 @@ TVB:
 \item Integrator, is the integration scheme that will be applied to the coupled set of differential equations;
 \item Monitors, one or more Monitors can be attached to a simulation, they act to record the output from the Simulator.
 \end{itemize}
-\end{simulation}
+\end{blah}
 
 \begin{figure}[h]
   \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_SimulatorArea}%
@@ -208,28 +215,61 @@ TVB:
 
 \begin{simulation}
 \begin{enumerate}
-\item Let's start defining some structure for our network. We'll rely on TVB's default \underline{Connectivity} matrix. Having loaded the default dataset we can then alter the speed of signal propagation through the network to 4.0 $m,s^{−1}$. 
+\item Let's start defining some structure for our network. We'll rely on TVB's default \underline{Connectivity} matrix. Having loaded the default dataset we can then alter the speed of signal propagation through the network to 4.0 $m\,s^{-1}$. 
 
-\item Then we define a \underline{Model} for the local dynamics we wish to use, there are a number of predefined \underline{Models} available in TVB, as an example here we'll use a generic 2 dimensional oscillator.
+\item Then we define a \underline{Model} for the local dynamics we wish to use, there are a number of predefined \underline{Models} available in TVB, as an example here we'll use a generic 2 dimensional oscillator. (Fig. \ref{fig:step_01}  and Table \ref{tab:modeltab}).
 
-\item The next step is to define a \underline{Coupling} function, proper setting of the parameters for this function requires some knowledge of the properties of both the \underline{Model} being used and the structure through which it is connected. For our present purposes, we happen to know that for the parameters we just set connected through TVB's default \underline{Connectivity} matrix, a linear function with a slope of 0.042 is a reasonable thing to use. 
+\item The next step is to define a \underline{Coupling} function, proper setting of the parameters for this function requires some knowledge of the properties of both the \underline{Model} being used and the structure through which it is connected. For our present purposes, we happen to know that for the parameters we just set connected through TVB's default \underline{Connectivity} matrix, a linear function with a slope of 0.0042 is a reasonable thing to use. 
 
 \item Now that we've defined our structure and dynamics we need to select an integration scheme. 
-To keep things simple, we'll use \underline{HeunDeterministic} with the default integration time step size. The most important thing here is to use a step size that is small enough for the integration to be numerically stable.
+To keep things simple, we'll use \underline{HeunDeterministic} with the default integration time step size. The most important thing here is to use a step size that is small enough for the integration to be numerically stable. Here, we chose a value of \underline{dt} equal to 0.1 ms.
 
-\item  The last component we need to define are some \underline{Monitors}. The \underline{TemporalAverage Monitor} averages over a time window of length period returning one time point every period ms. It also, by default, only returns those state-variables flagged in the \underline{Models} definition as variables\_of\_interest. 
-
+\item  The last component we need to define are some \underline{Monitors}. The \underline{TemporalAverage Monitor} averages over a time window of length period returning one time point every period ms. It also, by default, only returns those state-variables flagged in the \underline{Models} definition as \underline{Variables watched by Monitors}
 \end{enumerate}
 \end{simulation}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_Model}%
+  \caption{TVB Simulator page}%
+  \label{fig:step_01}%
+\end{figure}
+
+
+\begin{margintable}
+  \centering
+  \fontfamily{ppl}\selectfont
+  \begin{tabular}{ll}
+    \toprule
+    Model parameter & Value         \\
+    \midrule
+             $a$        &   1.05   \\
+             $b$        &  -1.0    \\
+             $c$        &   0      \\
+             $d$        &   0.1    \\
+             $e$        &   0      \\
+             $f$        &   1/3    \\
+             $g$        &   1      \\
+             $I$        &   0      \\
+             $\alpha$   &   1      \\
+             $\beta$    &   0.2    \\
+             $\gamma$   &  -1      \\
+             $\tau$     &   1.25   \\
+    \bottomrule
+  \end{tabular}
+  \caption{Generic 2d oscillator parameters}
+  \label{tab:modeltab}
+\end{margintable}
+
 
 
 The important thing to know here is that TVB doesn't support interpolation of
 the time-series it produces, which means that the period given to a monitor
-must be an integral multiple of the dt selected for the integration scheme.
+must be an integral multiple of the time step size, \underline{dt}, selected for the integration scheme.
+So, for our example the \underline{Monitor's} period is 1 ms. 
 Although there are Monitors which apply a biophysical measurement process to
 the simulated neural activity, such as EEG, MEG, etc, here we'll select only
 one simple monitor just to show the idea. The \underline{Raw Monitor} takes no arguments
-and simply returns all the simulated data -- note: as a general rule this
+and simply returns all the simulated data. As a general rule this monitor
 shouldn't be used for anything but very short simulations as the amount of
 data returned can become prohibitively large.
 
@@ -237,9 +277,9 @@ data returned can become prohibitively large.
 \begin{simulation}
 \begin{enumerate}[resume]
   \setcounter{enumi}{5}
-\item Before launching the simulation we should configure a set of visualizers and/or analyzers. It is possible to configure up to 12 different portlets. 
-\item Save the choices.
-\item Finally, we provide the simulation length and launch it.
+ \item The last simulation configuration step is to provide the simulation length, that here we'll use the default value of 1000 ms.
+ \item Before launching the simulation we can configure a set of visualizers and/or analyzers to have a glimpse of the results as soon as the simulation ends. It is possible to configure up to 12 different portlets. 
+ \item And now we're ready to launch the simulation. 
 \end{enumerate}
 \end{simulation}
 
@@ -253,27 +293,27 @@ merely set by default to be random walks within the general range of state-
 variable values expected from the model. As the current simulation is
 configured with fixed point dynamics, if we were to set the initial conditions
 exactly to the values corresponding to that fixed point there would be no such
-initial transient (we will how to achieve that later on).
+initial transient (we will see how to achieve that later on).
 
 \begin{formal}
 \begin{enumerate}
 \item Check the Fourier spectrum and select a linear scale on the Y axis. 
-We see that the instirinsic frequency of the oscillations is set at about 11Hz. 
-\item Now let's have a look at a second simulation with the same parameters, except that the coupling strength has been increased by an order of magnitude. 
+We see that the intrinsic frequency of the oscillations is set at about 11 Hz. 
+\item Now let's have a look at a second simulation (\textit{AnatomyOfARegionSimulation\_b}) with the same parameters, except that the coupling strength has been increased by an order of magnitude (0.042). 
 \end{enumerate}
 \end{formal}
 
 Looking at the time series, we can see that the system exhibits self-sustained
-oscillations. A frequent question is at wich value of coupling strenght this
-"bifurcation" occurs? Well, we can easily set up a prameter search by giving a
+oscillations. A frequent question is at which value of coupling strength this
+"bifurcation" occurs? Well, we can easily set up a parameter search by giving a
 range of values to the coupling strength. TVB will launch a simulation for
-every value. For the time being, parameter space exploration is restricted to
-two dimensional searchs (up to two parameters).
+every value. For the time being, parameter space explorations are restricted to
+two dimensions.
 
 
 \begin{simulation}
 \begin{itemize}
- \item An example in \textit{AnatomyOfARegionSimulation\_pse\_a}. One hundred and fifty (150) simulations of 2 seconds each were launched, each of them has the same underlying model, however two global parameters were explored: global coupling strength and conduction speed. These results are those shown in Ghosh, 2008 and Knoc, 2009. 
+ \item The example us set up in \textit{AnatomyOfARegionSimulation\_pse\_a}. One hundred and fifty (150) simulations of 2 seconds each were launched, each of them has the same underlying model, however two global parameters were explored: global coupling strength and conduction speed. These results are those shown in \citep{Ghosh_2008} and \citep{Knock_2009}. 
 \end{itemize}
 \end{simulation}
 
@@ -290,8 +330,15 @@ overcome this issue we have a few alternatives. First, we could narrow the range
 
 
 In this area there's a an interactive tool, which allows you to understand the
-local dynamics and by observing how the model parameters change the phase
+local dynamics by observing how the model parameters change the phase
 plane. 
+
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_PPI}%
+  \caption{Phase Plane Interactive}%
+  \label{fig:ppi}%
+\end{figure}
 
 \begin{simulation}
 \begin{enumerate}[resume]
@@ -382,7 +429,7 @@ modalities.
 
 
 \section{More Documentation}\label{sec:more-doc}
-For more documentation on The Virtual Brain, please see the following articles \cite{Sanz-Leon_2013, Spiegler_2013, Woodman_2014, Jirsa_2010b}
+For more documentation on The Virtual Brain, please see the following articles \citep{Ghosh_2008}-Leon_2013, Spiegler_2013, Woodman_2014, Jirsa_2010b}
 
 
 \section{Support}\label{sec:support}
@@ -396,26 +443,3 @@ For questions and bug reports we have a users group \url{https://groups.google.c
 \bibliographystyle{plainnat}
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
