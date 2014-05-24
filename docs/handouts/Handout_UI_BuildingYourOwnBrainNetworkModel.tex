@@ -187,6 +187,9 @@ Your Own Brain Network Model.
     \textit{AnatomyOfARegionSimulation\_d}  \\ 
     \textit{AnatomyOfARegionSimulation\_pse\_a} \\
     \textit{AnatomyOfARegionSimulation\_a\_branch1} \\
+    \textit{AnatomyOfASurfaceSimulation\_default\_lc} \\
+     \textit{AnatomyOfASurfaceSimulation\_gaussian\_lc} \\
+     \textit{AnatomyOfASurfaceSimulation\_mexicanhat\_lc}\\
     \bottomrule
   \end{tabular}
   \caption{Simulations in this project.}
@@ -198,7 +201,7 @@ Your Own Brain Network Model.
 \newthought{In this project}, all the data were already generated. We'll only go through the necessary steps required to reproduce some simulations listed in Table~\ref{tab:normaltab}. You can always start over, click along and/or try to change parameters.
 
 
-\subsection{Building A Discrete Brain Network Model (region-based simulations)}\label{sec:simulation}
+\subsection{Building A Discrete Brain Network Model (region-based simulations)}\label{sec:region_simulations}
 
 \newthought{In the simulator} page (Fig.~\ref{fig:fig}), you could name your
 simulation and directly launch it with the default parameters. However, in
@@ -383,7 +386,7 @@ A frequent question is at which value of coupling strength this
 range of values that will be explored. We'll se how to do this in the next section.
 
  
-\subsection{Parameter Space Exploration}\label{sec:results}
+\subsection{Parameter Space Exploration}\label{sec:pse}
 
 TVB will launch a simulation for
 every value. \sidenote{For the time being, parameter space explorations are restricted to
@@ -472,7 +475,7 @@ remain unchanged (e.g., the number of nodes, conduction speed, the recorded stat
 
 \textit{AnatomyOfARegionSimulation\_a\_branch1} is an example of this functionality, using the results from \textit{AnatomyOfARegionSimulation\_a} as initial conditions. 
 
-\subsection{Stochastic Simulations}\label{sec:results}
+\subsection{Stochastic Simulations}\label{sec:noisy_simulations}
 
 
 As a last point, we will show the basics of running a simulation driven by
@@ -551,15 +554,159 @@ Observe the differences using the \underline{Spectrogram of the Wavelet Transfor
 
 \subsection{Extra}\label{sec:results}
 
-If you are already anxious and wondering about fMRI and some other biophysical output modalities, in \textit{AnatomyOfARegionSimulation\_d} we've generated \unit[1]{min} worth of data using a convolution based model of the BOLD signal. Load this simulation of you want to see the parameter values.
+If you are already anxious and wondering about fMRI and some other biophysical output modalities, in \textit{AnatomyOfARegionSimulation\_d\_branch1} we've generated \unit[4]{min} worth of data using a convolution based model of the BOLD signal. Load this simulation if you want to see the parameter values.
 
-And that's it for this tutorial, while it's not a particularly scientifically
-interesting simulation hopefully it gave you a sense of the anatomy of a
-simulation within TVB and many of the configurable parameters and output
-modalities. Online help is available clicking on the icons \includegraphics[width=0.05\textwidth]{butt_green_help} next to each entry.
 
+
+
+\subsection{Modelling the Neural Activity on the Folded Cortex}\label{sec:surface_simulations}
+
+This extends the basic region simulation to include the folded cortical surface to the anatomical structure on which the simulation is based. If you haven't read or followed was written above you probably should do that now as here we only really discuss in detail the extra things that are specific to a simulation on the cortical surface.
+
+\begin{blah}
+In addition to the components discussed for a
+region simulation here we introduce two major components, that is:
+\begin{itemize}
+\item \underline{Cortical Surface}, which is a mesh surface defining
+a 2d representation of the convoluted cortical surface embedded in 3d space.
+\item \underline{Local Connectivity}, that defines the probability of the interactions between neighbouring nodes on a local patch. 
+\end{itemize}
+\end{blah}
+
+\begin{simulation}
+\begin{enumerate}
+\item The \underline{connectivity}, \underline{speed}, \underline{coupling strength} and \underline{local model} and its parameters are the same described in  \textit{AnatomyOfARegionSimulation\_b} and Table \ref{tab:modeltab}.
+\item Select the TVB's default \underline{Cortical Surface}, which has 16384 nodes. 
+\item We rely on TVB's default \underline{Local Connectivity}.
+\item Rescale the \underline{Local Connectivity} with \underline{Local coupling strength} equal to $\mathbf{0.1}$.
+\item For the integration we'll use \underline{HeunDeterministic}.  Here, integration time step size is the default: $\mathbf{dt=}$\textbf{\unit[0.1220703125]{ms}}.
+\end{enumerate}
+\end{simulation}
+
+The first significant thing of note about surface simulations is that certain \underline{Monitors} make a lot more sense in this context than they do at the region level, and so we'll introduce a couple new \underline{Monitors} here.
+simulations.
+
+\begin{simulation}
+\begin{enumerate}[resume]
+\setcounter{enumi}{5}
+\item The first of these new \underline{Monitors} is called
+\underline{SpatialAverage}.
+\item The second of these new \underline{Monitors}, which is an instantiation of a
+biophysical measurement process, is called \underline{EEG}. 
+\item The \underline{Monitors period} is left with the default value \unit[0.9765625]{ms} which is equivalent to a sampling frequency of \unit[512]{Hz}.
+\item Lastly the \underline{simulation length} is \unit[2000]{ms}.
+\end{enumerate}
+\end{simulation}
+
+The first of these new \underline{Monitors},  will average over the
+space (nodes) of the simulation. \sidenote{In the case of region level simulations we
+already have a situation of a relatively small number of nodes, with each one
+representing a fairly large chunk of brain. In surface simulations on the
+other hand we can easily have tens of thousands of nodes, and reducing this by
+averaging over sensible collections of these nodes can be valuable.} The basic
+mechanism is general, in the sense that the nodes can be broken up into any
+non-overlapping, complete, set of sets -- said another way, each node can only
+be counted in one collection and all nodes must be in one collection. As a
+concrete example, in surface simulations information regarding a break up
+into regions exists and is called \underline{Region Mapping}.  This breakup, that defines to which anatomical region each cortical mesh node belongs can be used to define the spatial average. \sidenote{In fact
+this is the default behaviour of the \underline{SpatialAverage} monitor when
+applied to a surface simulation, that is it averages over nodes and returns
+region based time-series. }
+
+%An alternative is to spatially average the signals
+%according to the hemisphers the nodes belong two.  When applied to region
+%simulation distinct spatial masks, or index vectors, can be used such as
+%\underline{hemispheres} which, as you may guess, will average the left nodes
+%and right nodes separetly resulting in two time-series; and,
+%\underline{cortical}, which will average all the cortical nodes and those
+%repsresenting subcortical structuresin two different time series.
+
+The second of these new \underline{Monitors},\underline{EEG}, hopefully also
+unsurprisingly, returns the EEG signals resulting from the simulated neural
+dynamics using in the process a lead-field or \underline{Projection Matrix}. \sidenote{The EEG monitor will return a relatively standard 62 channel set based on the
+10-20 system.}
+
+\begin{blah}
+EEG signals measured on the scalp depend strongly on the location
+and orientation of the underlying neural sources, which is why this monitor is
+more realistic and useful in the case of surface based simulations -- where
+the simulation is run on the explicit geometry of the cortex, which can
+potentially have been obtained from a specific individual's brain. 
+In addition
+a simulation being built on the specific anatomical structure of an individual
+subject, the specific electrodes used in experimental work can also be
+incorporated, providing as direct as possible a link between simulation and
+experiment. 
+\end{blah}
+
+\subsection{Define Your Own Local Connectivity}\label{sec:local_connectivity}
+
+The regularized mesh can support, in principle, arbitrary forms for the
+\underline{local connectivity kernel}. Coupled across the realistic surface geometry this
+allows for a detailed investigation of the local connectivity's effects on
+larger scale dynamics modelled by neural fields.
+
+We first should go to \textsc{Connectivity} $\rightarrow$ {Local Connectivity}. 
+In this area we'll build two different kernels: a Gaussian and a Mexican Hat kernel. 
+We'll start with the Gaussian kernel. \sidenote{This data structure is saved under the name \textit{LocalConnectivity\_Gaussian\_zc\_40}.
+}
+
+\begin{formal}
+\begin{enumerate}
+\item Select the \underline{equation defining the spatial profile} of your \underline{local connectivity}. Here, we'll leave the defaults.
+\item Select a \underline{cutoff distance}, that is, the distance up to which a given node is connected to its neighbourhood. Ideally, you want the function to have essentially dropped to zero by the cutoff distance. Here this value is set to \textbf{\unit[40]{mm}}. See Fig. \ref{fig:lc_gaussian}
+\item Name your \underline{local connectivity} and save it by clicking on \underline{Create new Local Connectivity} on the bottom lef corner. 
+\end{enumerate}
+\end{formal}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_YourOwnLocalConnectivity}%
+  \caption{Gaussian local connectivity. We have on the right a representation of the kernel for a quick idea of how
+the \underline{Local Connectivity} we've just specified will be represented on the
+surface. This plots the local connectivity function with different sampling
+based on the distribution of edge lengths in your mesh surface. If all the
+lines don't, at least mostly, overlap then you've probably specified a
+function with structure that is too fine for the resolution of your mesh
+surface. }%
+  \label{fig:lc_gaussian}%
+\end{figure}
+
+
+\begin{formal}
+\begin{enumerate}[resume]
+\setcounter{enumi}{3}
+\item Select the \underline{Mexican Hat equation}. Here, we changed all the default parameters, including the cuttoff distance. See the values in Table \ref{tab:mexicanstab}
+\end{enumerate}
+\end{formal}
+
+\begin{margintable}
+  \centering
+  \fontfamily{ppl}\selectfont
+  \begin{tabular}{ll}
+    \toprule
+    Parameter & Value \\
+    \midrule
+             midpoint\_2          &   \unit[5]{mm}   \\
+             midpoint\_1          &   \unit[0]{mm}\\
+             amp\_2                 &   \unit[0.5]{au}        \\
+             amp\_1                 &   \unit[1.5]{au}        \\
+             sigma\_2          &   \unit[5]{mm}   \\
+             sigma\_1          &   \unit[2]{mm}   \\
+             cutoff distance & \unit[20]{mm}\\
+    \bottomrule
+  \end{tabular}
+  \caption{\textit{LocalConnectivity\_MexicanHat\_zc\_20} parameters. }
+  \label{tab:mexicanstab}
+\end{margintable}
+
+Finally, we ran to more simulations, using the same parameters described in subsection \ref{sec:surface_simulations}, except thay we've changed the \underline{Local connectivity} kernel. These results are those of \textit{AnatomyOfASurfaceSimulation\_gaussian\_lc} and \textit{AnatomyOfASurfaceSimulation\_mexicanhat\_lc}.
+ 
 
 \section{More Documentation}\label{sec:more-doc}
+And that's it for this session, while the simulations are not particularly scientifically
+interesting, hopefully it gave you a sense of the anatomy of a
+simulation within TVB and many of the configurable parameters and output
+modalities. Online help is available clicking on the \includegraphics[width=0.05\textwidth]{butt_green_help} icons next to each entry.
 For more documentation on The Virtual Brain, please see the following articles \citep{Ghosh_2008, Sanz-Leon_2013, Spiegler_2013, Woodman_2014, Jirsa_2010b}
 
 
