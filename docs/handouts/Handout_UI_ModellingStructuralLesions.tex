@@ -4,9 +4,9 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Handout_ModelingStructuralLesions.tex
-% A handout to follow during the hands-on sessions 
+% A handout to follow during the hands-on session 3 
 % 
-% Authors: Paula Sanz Leon
+% Author: Paula Sanz Leon
 % 
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -19,9 +19,9 @@
 \usepackage{amsmath}
 
 % Set up the images/graphics \underline{\textbf{Analysis}}
-\usepackage{graphicx}
+\usepackage[pdftex]{graphicx}
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
-\graphicspath{{figures/}}
+\graphicspath{{figures/} {../../framework_tvb/tvb/interfaces/web/static/style/img/} {../../framework_tvb/tvb/interfaces/web/static/style/img/nav/}}
 
 \title{The Virtual Brain: Hands on Session \#3}
 \date{7th June 2014} 
@@ -29,9 +29,6 @@
 % The following package makes prettier tables.  
 \usepackage{booktabs}
 
-% 
-%\usepackage{caption}
-%\usepackage{subcaption}
 
 % The units package provides nice, non-stacked fractions and better spacing
 % for units.
@@ -52,8 +49,15 @@
 % For formal definitions
 \usepackage{framed}
 
+% And some maths
+\usepackage{amsmath}  % extended mathematics
+
 % Resume a list
 \usepackage{enumitem}
+
+% Background image
+
+\usepackage{wallpaper}
 
 % Provides paragraphs of dummy text
 \usepackage{lipsum}
@@ -68,10 +72,22 @@
 \newcommand{\doccls}[1]{\texttt{#1}}% document class name
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 
-% environment derived from framed.sty: see leftbar environment definition
+\newcommand\blfootnote[1]{\begingroup
+         \renewcommand\thefootnote{}\footnote{\phantom{\thefootnote} #1}%
+         \addtocounter{footnote}{-1}%
+         \endgroup
+          }
+
+% Colours: environment derived from framed.sty: see leftbar environment definition
 \definecolor{formalshade}{rgb}{0.95,0.95,1}
 \definecolor{simulationshade}{rgb}{0.92, 1.0, 0.95}
 
+% Title rule
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% Framed  coloured boxes
+
+%% Blue box: for steps regarding analysis and such
 \newenvironment{formal}{%
   \def\FrameCommand{%
     \hspace{1pt}%
@@ -88,6 +104,7 @@
   \vspace{2pt}\end{adjustwidth}\endMakeFramed%
 }
 
+%% Green box: for steps regarding simulatio **only**
 \newenvironment{simulation}{%
   \def\FrameCommand{%
     \hspace{1pt}%
@@ -104,24 +121,38 @@
   \vspace{2pt}\end{adjustwidth}\endMakeFramed%
 }
 
+%% Orange box: for verbose descriptions
+\newenvironment{blah}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{DarkOrange}\vrule width 2pt}%
+    {\color{PeachPuff}\vrule width 4pt}%
+    \colorbox{PeachPuff}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{2pt}\vspace{2pt}%
+}
+{%
+  \vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
 \begin{document}
-\maketitle % this prints the handout title, author, and date
-
+\input{./title_session_three.tex}
+\newpage
+\ClearWallPaper
 \begin{abstract}
-\noindent One of the goals of computational models of the human brain is to
-reproduce the resting-state activity. The dynamics of this activity is thought
-to be strongly dependent of the underlying anatomical substrate: the human
-connectome. If the structural support is modified, then one would expect to
-observe changes in the global activity.
-
+\noindent TVB allows for a systematic exploration and manipulation of every
+underlying component of a large-scale brain network model, such as the neural
+mass model governing the local dynamics \sidenote{There are a number of predefined models available in TVB} or the structural connectivity
+constraining the space-time structure of the network couplings.
 \begin{marginfigure}%
-  \includegraphics[width=\linewidth]{tvb_logo_transparent_square}
+  %\includegraphics[width=\linewidth]{tvb_logo_transparent_square}
   %\caption{TVB evil logo}
   \label{fig:marginfig}
 \end{marginfigure}
 \end{abstract}
-
-%\printclassoptions
 
 %\begin{fullwidth} % uncomment this environment to get full texwidth paragraphs 
 %\textsc{The Virtual Brain} is a facilitating technology. It enables

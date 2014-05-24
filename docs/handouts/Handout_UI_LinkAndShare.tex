@@ -3,10 +3,10 @@
 %!TEX spellcheck = en-US                                             %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Handout_ModelingStructuralLesions.tex
-% A handout to follow during the hands-on sessions 
+% Handout_UI_LinkAndShare.tex
+% A handout to follow during the hands-on session 2 
 % 
-% Authors: Paula Sanz Leon
+% Author: Paula Sanz Leon
 % 
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -19,9 +19,9 @@
 \usepackage{amsmath}
 
 % Set up the images/graphics \underline{\textbf{Analysis}}
-\usepackage{graphicx}
+\usepackage[pdftex]{graphicx}
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
-\graphicspath{{figures/}}
+\graphicspath{{figures/} {../../framework_tvb/tvb/interfaces/web/static/style/img/} {../../framework_tvb/tvb/interfaces/web/static/style/img/nav/}}
 
 \title{The Virtual Brain: Hands on Session \#2}
 \date{7th June 2014} 
@@ -29,9 +29,6 @@
 % The following package makes prettier tables.  
 \usepackage{booktabs}
 
-% 
-%\usepackage{caption}
-%\usepackage{subcaption}
 
 % The units package provides nice, non-stacked fractions and better spacing
 % for units.
@@ -52,8 +49,15 @@
 % For formal definitions
 \usepackage{framed}
 
+% And some maths
+\usepackage{amsmath}  % extended mathematics
+
 % Resume a list
 \usepackage{enumitem}
+
+% Background image
+
+\usepackage{wallpaper}
 
 % Provides paragraphs of dummy text
 \usepackage{lipsum}
@@ -68,10 +72,22 @@
 \newcommand{\doccls}[1]{\texttt{#1}}% document class name
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 
-% environment derived from framed.sty: see leftbar environment definition
+\newcommand\blfootnote[1]{\begingroup
+         \renewcommand\thefootnote{}\footnote{\phantom{\thefootnote} #1}%
+         \addtocounter{footnote}{-1}%
+         \endgroup
+          }
+
+% Colours: environment derived from framed.sty: see leftbar environment definition
 \definecolor{formalshade}{rgb}{0.95,0.95,1}
 \definecolor{simulationshade}{rgb}{0.92, 1.0, 0.95}
 
+% Title rule
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% Framed  coloured boxes
+
+%% Blue box: for steps regarding analysis and such
 \newenvironment{formal}{%
   \def\FrameCommand{%
     \hspace{1pt}%
@@ -88,6 +104,7 @@
   \vspace{2pt}\end{adjustwidth}\endMakeFramed%
 }
 
+%% Green box: for steps regarding simulatio **only**
 \newenvironment{simulation}{%
   \def\FrameCommand{%
     \hspace{1pt}%
@@ -104,58 +121,69 @@
   \vspace{2pt}\end{adjustwidth}\endMakeFramed%
 }
 
+%% Orange box: for verbose descriptions
+\newenvironment{blah}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{DarkOrange}\vrule width 2pt}%
+    {\color{PeachPuff}\vrule width 4pt}%
+    \colorbox{PeachPuff}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{2pt}\vspace{2pt}%
+}
+{%
+  \vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
 \begin{document}
-\maketitle % this prints the handout title, author, and date
-
-\begin{abstract}
-
-\noindent TVB allows for a systematic exploration and manipulation of every
-underlying component of a large-scale brain network model, such as the neural
-mass model governing the local dynamics or the structural connectivity
-constraining the space-time structure of the network couplings.
-\begin{marginfigure}%
-  \includegraphics[width=\linewidth]{tvb_logo_transparent_square}
-  %\caption{TVB evil logo}
-  \label{fig:marginfig}
-\end{marginfigure}
-\end{abstract}
-
-%\printclassoptions
-
-%\begin{fullwidth} % uncomment this environment to get full texwidth paragraphs 
-%\textsc{The Virtual Brain} is a facilitating technology. It enables
-%researchers from the domains of  computational neuroscience and medicine to
-%study and focus on a particular problem, and directly build a model of the
-%brain that can be tested under different scenarios. So, every time we require
-%to perform a simulation for our work, we do not require to develop the
-%underlying computational model.   
-%\end{fullwidth}
+\input{./title_session_two.tex}
+\newpage
+\ClearWallPaper
 
 \section{Objectives}\label{sec:objectives}
 
-\newthought{This short tutorial} provides the basic steps you need to know in order to
-share data with other users and/or link data to other projects.
+\newthought{This short tutorial} provides the basic steps you need to know in order to import data into TVB; share data with other users and/or link data to other TVB projects.
+After this session you should be able to export a project and share it with your neighbour. 
 
-
-\subsection{What's inside Project Session\_II\_ShareAndLink\_a}\label{sec:project_data}
+\section{Project :Session\_II\_ShareAndLink\_a}\label{sec:project_data}
 % let's start a new thought -- a new section
 
-\subsection{Steps: How to upload a connectivity in a zip file and share it}\label{sec:steps}
+\subsection{Multiple Users And One Virtual Brain}\label{sec:multiusers}
+In this exercise we will assume that multiple users are working with the same TVB installation. \sidenote{Working in pairs might be a good idea.}
 
 
 \begin{formal}
 \begin{enumerate}
+\item By default your are the \underline{Admin} user. 
+\item In \underline{Settings} change the admin email.
+\item Create a user for your neighbour
+\end{enumerate}
+\end{formal}
+
+\subsection{Importing A Connectivity}\label{sec:import_connectivity}
+
+\begin{formal}
+\begin{enumerate}
 \item Create a project (e.g. \textit{Session\_II\_ShareAndLink\_a}). 
-\item Upload a connectivity in a zip file.
-\item To do that you need to go to \textsc{projects} $\rightarrow$ \textsc{data-structure}.
-\item Select the connectivity you want to share. The metadata overlay will appear.
-\item Go to the tab \underline{Links}.
+\item Create a second project (e.g. \textit{Session\_II\_ShareAndLink\_a}). 
+\item Assuming that you are working in the first project, upload a Connectivity in a zip file. This was already done but you can repeat these steps. 
+\item Go to \textsc{Projects}$\rightarrow$ \textsc{Data structure}. Click on \underline{Update Data}. An overlay with the current supported formats will appear. See Fig. XXX. 
 \end{enumerate}
 \end{formal} 
 
-(Snaphsot here)
 
-You'll see a list with all your projects. 
+\subsection{Link And Share}\label{sec:link_and_share}
+\begin{formal}
+\begin{enumerate}
+\item Select the connectivity you want to share. The metadata overlay will appear. You'll see a list with all your projects. See Fig. XXXX.
+\item Go to the tab \underline{Links}. Select the second project.
+\end{enumerate}
+\end{formal} 
+
+(Snaphsot With the link tab here)
 
 \begin{formal}
 \begin{enumerate}[resume]
@@ -171,19 +199,20 @@ You'll see a list with all your projects.
     \setcounter{enumi}{6}
     \item Go to \textsc{PROJECT} $\rightarrow$ \textsc{LIST OF ALL PROJECTS}
     \item Switch to the \textit{Session\_II\_ShareAndLink\_b}.
+    \item  Then from \textsc{PROJECT} $\rightarrow$ \textsc{basic properties} 
+share this project with another user. 
+    \item Logout from your account and let your neighbour login to his/her account. 
   \end{enumerate}
 \end{formal} 
 
-Then from \textsc{PROJECT} $\rightarrow$ \textsc{basic properties} we could
-share this project with another user if TVB is usde in a multiuser
-configuration.  You should be able to see the connectivity matrices you linked
+You should be able to see the connectivity matrix (or other datatypes) you linked
 from project \textit{Session\_II\_ShareAndLink\_a}.
 
 
 \section{More Documentation}\label{sec:more-doc}
 
-For more documentation on The Virtual Brain, please see the following articles
-\cite{Sanz-Leon_2013, Spiegler_2013, Woodman_2014, Jirsa_2010b}
+For more details on technical aspects of The Virtual Brain, please see the following articles
+\citep{Sanz-Leon_2013, Woodman_2014}
 
 \section{Support}\label{sec:support}
 
