@@ -402,20 +402,21 @@ two dimensions.} The example is set up in \textit{AnatomyOfARegionSimulation\_ps
 \end{enumerate}
 \end{simulation}
 
-The results of 150 simulations are presented as a discrete 2D map in \underline{Parameter Space Discrete} (Fig. \ref{fig:pse_discrete})\sidenote{Each point represents a simulation. The size and the colour of the marker correspond to one of a few variEnce metrics implemented to have an idea of the network node and temporal variability.} or a continous pseudocolor map in \underline{Parameter Space Continous} (Fig. \ref{fig:pse_continuous})\sidenote{The colour scale  corresponds to one of the variance metrics}. 
+\newpage
 
+All the 150 simulations are presented as a discrete 2D map in \underline{Parameter Space Discrete} (Fig. \ref{fig:pse_discrete})\sidenote{Each point represents a simulation. The size and the colour of the marker correspond to one of a few variance metrics implemented to have an idea of the network node and temporal variability.} or a continous pseudocolor map in \underline{Parameter Space Continous} (Fig. \ref{fig:pse_continuous})\sidenote{The colour scale  corresponds to one of the variance metrics}. 
 
-\begin{figure}[h]
+\begin{marginfigure}
   \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_PSEDiscrete}%
   \caption{Discrete parameter space map from \textit{AnatomyOfARegionSimulation\_pse\_a}}%
   \label{fig:pse_discrete}%
-\end{figure}
+\end{marginfigure}
 
-\begin{figure}[h]
+\begin{marginfigure}
   \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_PSEContinuous}%
   \caption{Continuous parameter space map from \textit{AnatomyOfARegionSimulation\_pse\_a}}%
   \label{fig:pse_continuous}%
-\end{figure}
+\end{marginfigure}
 
 
 \begin{blah}
@@ -530,7 +531,7 @@ noise and any value greater than zero producing coloured noise.
 \item Set the noise dispersion, $\mathbf{D=0.005}$
 \end{enumerate}
 \end{simulation}
-
+\newpage
 \textit{AnatomyOfARegionSimulation\_b} and \textit{AnatomyOfARegionSimulation\_c} have the same parameters but the latter has an extra background noisy input. 
 
 \begin{formal}
@@ -554,9 +555,13 @@ Observe the differences using the \underline{Spectrogram of the Wavelet Transfor
 
 \subsection{Extra}\label{sec:results}
 
-If you are already anxious and wondering about fMRI and some other biophysical output modalities, in \textit{AnatomyOfARegionSimulation\_d\_branch1} we've generated \unit[4]{min} worth of data using a convolution based model of the BOLD signal. Load this simulation if you want to see the parameter values.
+If you are already anxious and wondering about fMRI and some other biophysical output modalities, in \textit{AnatomyOfARegionSimulation\_d\_branch1} we've generated \unit[4]{min} worth of data using a convolution based model of the BOLD signal (see Fig. \ref{fig:BOLD}). Load this simulation if you want to see the parameter values.
 
-
+\begin{marginfigure}%
+\includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_BOLD}%
+  \caption{BOLD signals from \textit{AnatomyOfARegionSimulation\_d\_branch1}}%
+  \label{fig:BOLD}%
+\end{marginfigure}
 
 
 \subsection{Modelling the Neural Activity on the Folded Cortex}\label{sec:surface_simulations}
@@ -608,10 +613,18 @@ mechanism is general, in the sense that the nodes can be broken up into any
 non-overlapping, complete, set of sets -- said another way, each node can only
 be counted in one collection and all nodes must be in one collection. As a
 concrete example, in surface simulations information regarding a break up
-into regions exists and is called \underline{Region Mapping}.  This breakup, that defines to which anatomical region each cortical mesh node belongs can be used to define the spatial average. \sidenote{In fact
+into regions exists and is called \underline{Region Mapping}.  This breakup, that defines to which anatomical region each cortical mesh node belongs to can be used to define the spatial average. \sidenote{In fact
 this is the default behaviour of the \underline{SpatialAverage} monitor when
 applied to a surface simulation, that is it averages over nodes and returns
-region based time-series. }
+region based time-series. }. In Fig. \ref{fig:default_lc_spectrogram} you can see the \underline{spectrogram of the wavelet transform } of the spatially averaged time-series from 
+the simulation \textit{AnatomyOfASurfaceSimulation\_default\_lc}. 
+
+\begin{marginfigure}
+ \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_DefaultLocalConnectivityWaveletSpectrogram.png}%
+  \caption{Spectrogram of the spatially averaged time-series from \textit{AnatomyOfASurfaceSimulation\_default\_lc}.}%
+  \label{fig:default_lc_spectrogram}%
+\end{marginfigure}
+
 
 %An alternative is to spatially average the signals
 %according to the hemisphers the nodes belong two.  When applied to region
@@ -621,10 +634,16 @@ region based time-series. }
 %\underline{cortical}, which will average all the cortical nodes and those
 %repsresenting subcortical structuresin two different time series.
 
+
 The second of these new \underline{Monitors},\underline{EEG}, hopefully also
 unsurprisingly, returns the EEG signals resulting from the simulated neural
 dynamics using in the process a lead-field or \underline{Projection Matrix}. \sidenote{The EEG monitor will return a relatively standard 62 channel set based on the
-10-20 system.}
+10-20 system.} See Fig. \ref{fig:potato_head}.
+\begin{marginfigure}
+  \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_DefaultLocalConnectivityPotatoHead}%
+  \caption{EEG signals}%
+  \label{fig:potato_head}%
+\end{marginfigure}
 
 \begin{blah}
 EEG signals measured on the scalp depend strongly on the location
@@ -632,8 +651,7 @@ and orientation of the underlying neural sources, which is why this monitor is
 more realistic and useful in the case of surface based simulations -- where
 the simulation is run on the explicit geometry of the cortex, which can
 potentially have been obtained from a specific individual's brain. 
-In addition
-a simulation being built on the specific anatomical structure of an individual
+In addition a simulation being built on the specific anatomical structure of an individual
 subject, the specific electrodes used in experimental work can also be
 incorporated, providing as direct as possible a link between simulation and
 experiment. 
