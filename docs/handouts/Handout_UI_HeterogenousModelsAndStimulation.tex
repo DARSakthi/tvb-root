@@ -225,7 +225,6 @@ into those nodes.
 \item Go to \textsc{Stimulus} $\rightarrow$ \textsc{Region stimulus} area. 
 \item Selecting an equation, give a name to the stimulation pattern and set its parameters as desired.
 \item Here we'll just take the default \underline{Pulse Train}. We'll shift the \textbf{onset} to \textbf{ \unit[500]{ms}}, \textbf{tau}$\mathbf{=}$\textbf{\unit[5]{ms}} is the duration of the pulse, and \textbf{T}$\mathbf{=}$\textbf{\unit[500]{ms}} is the repetition period (equivalent to \unit[2]{Hz}.  See Fig. \ref{fig:stimulus_region}.
-\item On the right column you can change the end time to visualize the stimulus. See Fig. \ref{fig:pulse_train}.
 \end{enumerate}
 \end{formal}
 
@@ -235,16 +234,28 @@ into those nodes.
   \label{fig:stimulus_region}%
 \end{figure}
 
+
+
+
+\begin{formal}
+\begin{enumerate}[resume]
+\setcounter{enumi}{3}
+\item On the right column you can change the end time to visualize the stimulus. See Fig. \ref{fig:pulse_train}.
+\end{enumerate}
+\end{formal}
+
 \begin{marginfigure}
   \includegraphics[width=\linewidth]{Handout_UI_HeterogenousModelAndStimulation_PulseTrain}%
   \caption{Square pulse train}%
   \label{fig:pulse_train}%
 \end{marginfigure}
 
+ To define which and how much nodes will be affected by a stimulus, a scaling factor per node can be defined. 
+
 \begin{formal}
 \begin{enumerate}[resume]
 \setcounter{enumi}{4}
-\item To define which and how much nodes will be affected by a stimulus, a scaling factor per node can be defined. Click on \underline{Set Region Scalings}. 
+\item Click on \underline{Set Region Scalings}. 
 \item Unselect all the nodes. Then, select the primary visual cortices, left and right V1, save the selection for later use. (Figs. \ref{fig:unselect_nodes} and \ref{fig:save_selection})
 \end{enumerate}
 \end{formal}
@@ -308,16 +319,6 @@ must use an equation which drops toward zero with increasing distance.
 \subsection{Stimulus-driven simulations}\label{sec:stim_sim}
 
 Next, we go back to the \textsc{Simulator} area, and we'll set up the local dynamics using the \underline{generic 2D oscillator.}
-
-\begin{simulation}
-\begin{enumerate}
-\item Now we'll build the model using the \underline{Connectivity}, \underline{Model}, \underline{Integrator} and \underline{Monitors} as in \citep{Sanz-Leon_2013}. You can check the local dynamics using the phase plane interactive tool. The model parameters are specified in Table \ref{tab:modeltab}.
-\item Remember the branching mechanism? Before applying the stimulus to our model we'll let the system reach a steady state first, to avoid the intial transient to mask the effect of the stimulation. This is what you have in \textit{EvokedResponses\_init}
-\item Run a simulation for \textbf{\unit[1000]{ms}}, with \underline{HeunDeterministic} and $\mathbf{dt=}$\textbf{\unit[0.1]{ms}}; use the \underline{Temporal Average} monitor with a \underline{sample period} equal to \textbf{\unit[1]{ms}}
-\item Next, we add a stimulation pattern  (Fig. \ref{fig:add_stimulus}) and continue the simulation for another \textbf{\unit[4000]{ms}}.
-\end{enumerate}
-\end{simulation}
-
 \begin{margintable}
   \centering
   \fontfamily{ppl}\selectfont
@@ -347,6 +348,16 @@ Next, we go back to the \textsc{Simulator} area, and we'll set up the local dyna
   \caption{Add a stimulation pattern}%
   \label{fig:add_stimulus}%
 \end{marginfigure}
+\begin{simulation}
+\begin{enumerate}
+\item Now we'll build the model using the \underline{Connectivity}, \underline{Model}, \underline{Integrator} and \underline{Monitors} as in \citep{Sanz-Leon_2013}. You can check the local dynamics using the phase plane interactive tool. The model parameters are specified in Table \ref{tab:modeltab}.
+\item Remember the branching mechanism? Before applying the stimulus to our model we'll let the system reach a steady state first, to avoid the intial transient to mask the effect of the stimulation. This is what you have in \textit{EvokedResponses\_init}
+\item Run a simulation for \textbf{\unit[1000]{ms}}, with \underline{HeunDeterministic} and $\mathbf{dt=}$\textbf{\unit[0.1]{ms}}; use the \underline{Temporal Average} monitor with a \underline{sample period} equal to \textbf{\unit[1]{ms}}
+\item Next, we add a stimulation pattern  (Fig. \ref{fig:add_stimulus}) and continue the simulation for another \textbf{\unit[4000]{ms}}.
+\end{enumerate}
+\end{simulation}
+
+
 
 
  Results are in \textit{EvokedResponses\_init} and  \textit{EvokedResponses\_init\_branch1}.
@@ -407,9 +418,20 @@ You'll have to change the page size, that is how many time points are displayed.
 \begin{blah}
 Note that surface simulations can also be run with stimuli defined at the
 region level. In this case, all the vertices that belong to one region will
-receive the same stimulus.
-\item This is what we did in \textit{EvokedResponsesSurface\_init\_branch2}
+receive the same stimulus. This is what we did in \textit{EvokedResponsesSurface\_init\_branch2}. The differences are shown in Figs. \ref{fig:surfstim_surfsim} and \ref{fig:regstim_surfsim}
 \end{blah}
+
+\begin{marginfigure}
+  \includegraphics[width=\linewidth]{Handout_UI_HeterogenousModelAndStimulation_SurfaceStimSurfaceSim.png}%
+  \caption{Surface simulation with a stimulus defined at the surface level.}%
+  \label{fig:surfstim_surfsim}%
+\end{marginfigure}
+
+\begin{marginfigure}
+  \includegraphics[width=\linewidth]{Handout_UI_HeterogenousModelAndStimulation_RegionStimSurfaceSim.png}%
+  \caption{Surface simulation with a stimulus defined at the region level.}%
+  \label{fig:regstim_surfsim}%
+\end{marginfigure}
 
 
 \subsection{Heterogeneous models}\label{sec:spatialization}
