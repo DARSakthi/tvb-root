@@ -155,11 +155,33 @@ After this session you should be able to export a project and share it with your
 In this exercise we will assume that multiple users are working with the same TVB installation. \sidenote{Working in pairs might be a good idea.}
 
 
+
+\begin{marginfigure}
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_ChangeAdminEmail}%
+  \caption{Change \underline{Admin} email.}%
+  \label{fig:change_email}%
+\end{marginfigure}
+
+\begin{marginfigure}
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_AddNewUser}%
+  \caption{Create a new user.}%
+  \label{fig:new_user}%
+\end{marginfigure}
+
+\begin{marginfigure}
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_ValidateNewUser}%
+  \caption{Validate user.}%
+  \label{fig:validate_user}%
+\end{marginfigure}
+
 \begin{formal}
 \begin{enumerate}
 \item By default your are the \underline{Admin} user. 
-\item In \underline{Settings} change the admin email.
-\item Create a user for your neighbour
+\item Change the admin email (Fig. \ref{fig:change_email}).
+\item Create a user for your neighbour by registering a new user. (Fig. \ref{fig:new_user}). 
+\item You'll receive a notification email.
+\item Make sure the new user has been validated. (Fig. \ref{fig:validate_user}).
+\item Login with the \underline{Admin} account. 
 \end{enumerate}
 \end{formal}
 
@@ -167,47 +189,74 @@ In this exercise we will assume that multiple users are working with the same TV
 
 \begin{formal}
 \begin{enumerate}
-\item Create a project (e.g. \textit{Session\_II\_ShareAndLink\_a}). 
-\item Create a second project (e.g. \textit{Session\_II\_ShareAndLink\_a}). 
-\item Assuming that you are working in the first project, upload a Connectivity in a zip file. This was already done but you can repeat these steps. 
-\item Go to \textsc{Projects}$\rightarrow$ \textsc{Data structure}. Click on \underline{Update Data}. An overlay with the current supported formats will appear. See Fig. XXX. 
+\item Create a project (e.g. \textit{Session\_II\_LinkAndShare\_a}). 
+\item Create a second project (e.g. \textit{Session\_II\_LinkAndShare\_b}). 
+\item Assuming that you are working in the first project, upload a \underline{Connectivity} in a zip file. This was already done but you can repeat these steps. 
+\item Go to \textsc{Projects}$\rightarrow$ \textsc{Data structure}. Click on \underline{Upload Data}. An overlay with the current supported formats will appear. See Fig. \ref{fig:uploaders}. 
+\item Select \underline{Connectivity ZIP}. 
+\item Select the file \textit{connectivity\_regions\_96.zip} found at \textit{TVB\_Distribution/tvb\_data/}.
 \end{enumerate}
 \end{formal} 
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_Uploaders}%
+  \caption{Supported data formats.}%
+  \label{fig:uploaders}%
+\end{figure}
+
+
+\begin{formal}
+\begin{enumerate}[resume]
+\setcounter{enumi}{6}
+\item Add a personalized tag to this newly created datatype (e.g. \textit{conn\_96}).  See Fig. \ref{fig:tag}. 
+\item Save the changes.
+\end{enumerate}
+\end{formal}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_TagDatatype}%
+  \caption{Add a personalized tag.}%
+  \label{fig:tag}%
+\end{figure}
 
 
 \subsection{Link And Share}\label{sec:link_and_share}
 \begin{formal}
-\begin{enumerate}
-\item Select the connectivity you want to share. The metadata overlay will appear. You'll see a list with all your projects. See Fig. XXXX.
-\item Go to the tab \underline{Links}. Select the second project.
-\end{enumerate}
-\end{formal} 
-
-(Snaphsot With the link tab here)
-
-\begin{formal}
 \begin{enumerate}[resume]
-\setcounter{enumi}{5}
+\setcounter{enumi}{8}
+\item Select the connectivity you want to share.
+\item In the \underline{metadata overlay}. Go to the tab \underline{Links}. You'll see a list with all your projects. See Fig. \ref{fig:linkstab}.
 \item Link this datatype (connectivity) with the project you'll share (e.g. \textit{Session\_II\_ShareAndLink\_b}).
 \end{enumerate}
 \end{formal} 
 
-(snaphsot here ) 
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_LinksTab}%
+  \caption{Links tab.}%
+  \label{fig:linkstab}%
+\end{figure}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_LinkedProject}%
+  \caption{Link a datatype to another project.}%
+  \label{fig:linkproject}%
+\end{figure}
 
 \begin{formal}
   \begin{enumerate}[resume]
-    \setcounter{enumi}{6}
-    \item Go to \textsc{PROJECT} $\rightarrow$ \textsc{LIST OF ALL PROJECTS}
-    \item Switch to the \textit{Session\_II\_ShareAndLink\_b}.
-    \item  Then from \textsc{PROJECT} $\rightarrow$ \textsc{basic properties} 
-share this project with another user. 
+    \setcounter{enumi}{10}
+    \item Go to \textsc{Project} $\rightarrow$ \textsc{List of all projects}
+    \item Switch to \textit{Session\_II\_ShareAndLink\_b}.
+    \item Then from \textsc{Project} $\rightarrow$ \textsc{Basic properties} 
+share this project with your neigbour's user account. 
     \item Logout from your account and let your neighbour login to his/her account. 
   \end{enumerate}
 \end{formal} 
 
+\begin{blah}
 You should be able to see the connectivity matrix (or other datatypes) you linked
 from project \textit{Session\_II\_ShareAndLink\_a}.
-
+\end{blah}
 
 \section{More Documentation}\label{sec:more-doc}
 
