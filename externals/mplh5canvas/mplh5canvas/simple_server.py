@@ -34,25 +34,19 @@
 
 import BaseHTTPServer
 import CGIHTTPServer
-import SimpleHTTPServer
 import SocketServer
-import optparse
 import os
-import re
 import select
 import socket
-import sys
 import threading
+import memorizingfile
+import logging
 
-from mod_pywebsocket import common
 from mod_pywebsocket import dispatch
 from mod_pywebsocket import handshake
 from mod_pywebsocket import http_header_util
-import memorizingfile
-# we use a local version with mods for python 2.7
 from mod_pywebsocket import util
 
-import logging
 logger = logging.getLogger("mplh5canvas.simple_server")
 
 
@@ -153,9 +147,13 @@ class _StandaloneRequest(object):
             self._logger.debug(
                 'Drained data following close frame: %r', drained_data)
 
+
+
  # dummy to hold minimally required options
 class Options(object):
     pass
+
+
 
 class WebSocketServer(SocketServer.ThreadingMixIn, BaseHTTPServer.HTTPServer):
     """HTTPServer specialized for WebSocket."""
@@ -169,7 +167,7 @@ class WebSocketServer(SocketServer.ThreadingMixIn, BaseHTTPServer.HTTPServer):
     def extra_handshake(self, request):
         logger.debug("Doing extra initial handshake...")
 
-    def web_socket_transfer_data(self,request):
+    def web_socket_transfer_data(self, request):
         while True:
             line = request.ws_stream.receive_message()
             if line is None:
@@ -196,10 +194,13 @@ class WebSocketServer(SocketServer.ThreadingMixIn, BaseHTTPServer.HTTPServer):
         options.use_tls = False
         options.cgi_directories = []
         options.is_executable_method = None
-        options.dispatcher = dispatch.Dispatcher('.',None)
-        options.dispatcher._handler_suite_map['/echo'] = dispatch._HandlerSuite(self.extra_handshake, self.web_socket_transfer_data, self.closing_handshake)
+        options.dispatcher = dispatch.Dispatcher('.', None)
+        options.dispatcher._handler_suite_map['/echo'] = dispatch._HandlerSuite(self.extra_handshake,
+                                                                                self.web_socket_transfer_data,
+                                                                                self.closing_handshake)
          # add an echo handler for testing purposes
-        options.dispatcher._handler_suite_map['/'] = dispatch._HandlerSuite(self.extra_handshake, transfer_data, self.closing_handshake)
+        options.dispatcher._handler_suite_map['/'] = dispatch._HandlerSuite(self.extra_handshake, transfer_data,
+                                                                            self.closing_handshake)
          # add the supplied transfer method as the default handler
         options.allow_draft75 = True
         options.strict = False
@@ -238,20 +239,19 @@ class WebSocketServer(SocketServer.ThreadingMixIn, BaseHTTPServer.HTTPServer):
             except Exception, e:
                 logger.warning('Skip by failure: %r', e)
                 continue
+
             if self.websocket_server_options.use_tls:
+                import OpenSSL
                 ctx = OpenSSL.SSL.Context(OpenSSL.SSL.SSLv23_METHOD)
-                ctx.use_privatekey_file(
-                    self.websocket_server_options.private_key)
-                ctx.use_certificate_file(
-                    self.websocket_server_options.certificate)
+                ctx.use_privatekey_file(self.websocket_server_options.private_key)
+                ctx.use_certificate_file(self.websocket_server_options.certificate)
                 socket_ = OpenSSL.SSL.Connection(ctx, socket_)
             self._sockets.append((socket_, addrinfo))
 
-    def server_bind(self):
-        """Override SocketServer.TCPServer.server_bind to enable multiple
-        sockets bind.
-        """
 
+    def server_bind(self):
+        """Override SocketServer.TCPServer.server_bind to enable multiple sockets bind.
+        """
         for socket_, addrinfo in self._sockets:
             logger.debug('Bind on: %r', addrinfo)
             if self.allow_reuse_address:
@@ -397,14 +397,12 @@ class WebSocketRequestHandler(CGIHTTPServer.CGIHTTPRequestHandler):
         if host is not None:
             validation_host = server_options.validation_host
             if validation_host is not None and host != validation_host:
-                logger.warning('invalid host %r '
-                             '(expected: %r)' % (host, validation_host))
+                logger.warning('invalid host %r (expected: %r)' % (host, validation_host))
                 return True
         if port is not None:
             validation_port = server_options.validation_port
             if validation_port is not None and port != validation_port:
-                logger.warning('invalid port %r '
-                             '(expected: %r)' % (port, validation_port))
+                logger.warning('invalid port %r (expected: %r)' % (port, validation_port))
                 return True
         self.path = resource
 
@@ -431,7 +429,7 @@ class WebSocketRequestHandler(CGIHTTPServer.CGIHTTPRequestHandler):
                 return False
             except handshake.AbortedByUserException, e:
                 logger.warning('%s' % e)
-            except Exception, e:
+            except Exception:
                 # Catch exception in transfer_data.
                 # In this case, handshake has been successful, so just log
                 # the exception and return False. User has closed browser.
@@ -453,16 +451,14 @@ class WebSocketRequestHandler(CGIHTTPServer.CGIHTTPRequestHandler):
     def log_request(self, code='-', size='-'):
         """Override BaseHTTPServer.log_request."""
 
-        logger.info('"%s" %s %s',
-                     self.requestline, str(code), str(size))
+        logger.info('"%s" %s %s', self.requestline, str(code), str(size))
 
     def log_error(self, *args):
         """Override BaseHTTPServer.log_error."""
 
         # Despite the name, this method is for warnings than for errors.
         # For example, HTTP status code is logged by this method.
-        logger.warning('%s - %s' %
-                        (self.address_string(), (args[0] % args[1:])))
+        logger.warning('%s - %s' % (self.address_string(), (args[0] % args[1:])))
 
     def is_cgi(self):
         """Test whether self.path corresponds to a CGI script.
