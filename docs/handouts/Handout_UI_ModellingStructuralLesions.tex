@@ -179,22 +179,32 @@ patient.
     \toprule
     Name           \\
     \midrule
-    \textit{Control\_g2d\_pse}           \\
-    \textit{Stroke\_g2d\_pse}             \\
-    \textit{Control\_g2d\_init\_bold} \\
-    \textit{Stroke\_g2d\_init\_bold}        \\  
-    \textit{Control\_g2d\_init\_bold\_branch1}           \\
-    \textit{Stroke\_g2d\_init\_bold\_branch1} \\ 
-    \textit{Control\_sj3d\_pse}\\
-    \textit{Stroke\_sj3d\_pse}\\
-    \textit{Control\_sj3d\_init\_bold}\\
-    \textit{Stroke\_sj3d\_init\_bold}\\
-    \textit{Default\_g2d\_pse}\\
+    \multicolumn{1}{l}{The Effect Of The Structural}\\
+    \multicolumn{1}{l}{Connectivity On The Global Stability Map}\\
     \textit{NoInterhemispheric\_g2d\_pse}\\
     \textit{NoHighInStrength\_g2d\_pse}\\
     \textit{NoHighInDegree\_g2d\_pse}\\
-    \textit{NoHighInDegree\_g2d\_pse\_branch1}\\
-    \textit{NoHighInDegree\_g2d\_pse\_branch2}\\   
+    \textit{Default\_g2d\_pse}\\
+     \\
+	\multicolumn{1}{l}{Region-based Simulations Of A Control }\\
+    \multicolumn{1}{l}{And Stroke Connectome}\\
+
+    $\quad$\textit{Control\_g2d\_pse}           \\
+    $\quad$\textit{Stroke\_g2d\_pse}             \\
+    $\quad$\textit{Control\_g2d\_init\_bold} \\
+    $\quad$\textit{Stroke\_g2d\_init\_bold}        \\  
+    $\quad$\textit{Control\_g2d\_init\_bold\_branch1}           \\
+    $\quad$\textit{Stroke\_g2d\_init\_bold\_branch1} \\ 
+    \\
+    \multicolumn{1}{l}{Region-based Simulations Of A Control  }\\
+    \multicolumn{1}{l}{And Stroke Connectome Using}\\
+    \multicolumn{1}{l}{A Higher-dimensional Model}\\
+    $\quad$\textit{Control\_sj3d\_pse}\\
+    $\quad$\textit{Stroke\_sj3d\_pse}\\
+    $\quad$\textit{Control\_sj3d\_init\_bold}\\
+    $\quad$\textit{Stroke\_sj3d\_init\_bold}\\
+    $\quad$\textit{Control\_sj3d\_init\_bold\_branch1}\\
+    $\quad$\textit{Stroke\_sj3d\_init\_bold\_branch2}\\
     \bottomrule
   \end{tabular}
   \caption{Simulations in this project.}
@@ -230,13 +240,13 @@ properties later.
 \subsection{Modelling Lesions: Removing Interhemispheric Connections}\label{sec:steps}
 
 \begin{marginfigure}%
-  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_QuickSelectRemoveNodes}%
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_QuickSelectRemoveNodes.png}%
   \caption{Remove the right nodes from the list.}%
   \label{fig:quickselect_removenodes}%
 \end{marginfigure}%
 
 \begin{marginfigure}%
-  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_QuickSelectApplyChanges}%
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_QuickSelectApplyChanges.png}%
   \caption{Select only the left nodes and apply the changes.}%
   \label{fig:quickselect_applychanges}%
 \end{marginfigure}%
@@ -324,7 +334,7 @@ There are four category of edges depending on the nodes they connect:
     Before you save the new connectivity matrix, make sure all the nodes are
 included, otherwise TVB will assume you only want the nodes in the current
 selection and will set the rest to zero. (Fig. \ref{fig:steps_selectall}).
-   \item Give a name to the new connectivity and click on . (Fig. \ref{fig:steps_savenew})
+   \item Give a name to the new connectivity and click on \includegraphics[width=0.08\textwidth]{butt_star_create.png}. (Fig. \ref{fig:steps_savenew})
     \item The last action will take you back to the \textsc{Connectivity} $\rightarrow$ \textsc{Long-range connectivity}. From this page, load the new matrix. (Fig. \ref{fig:steps_07})
   \end{enumerate}
 \end{formal}
@@ -354,7 +364,7 @@ nodes will be deleted. The metrics are computed using the BCT \sidenote{Brain Co
   \setcounter{enumi}{9}
   \item Go to \textsc{Analysis} $\rightarrow$ \textsc{Degree and similarity algorithms}.  (Fig. \ref{fig:degree_similarity}).
   \item Select the metric \textbf{Degree} and \textbf{TVB's default connectivity matrix} as input. Click on \underline{Launch}.
-  \item Repeat for the previous step for the following metrics: \textbf{Indegree and Outdegree, Strength, Instrength and Outstrength}.
+  \item Repeat the previous step for the following metrics: \textbf{Indegree and Outdegree, Strength, Instrength and Outstrength}.
   \end{enumerate}
 \end{formal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -372,7 +382,7 @@ nodes will be deleted. The metrics are computed using the BCT \sidenote{Brain Co
   \item Click on \includegraphics[width=0.042\linewidth]{nodeConnectivityMeasure}. On
   the overlay window you can already see a summary of the basic descriptive
   statistics (Fig.~\ref{fig:step_02}).
-  \item You can display the results as a histogram by launching the \underline{Connectivity Mesure Visualizer}. However, here we'll launch the \underline{Topographic Viewer}. This 2D layout of the
+  \item You can display the results as a histogram by launching the \underline{Connectivity Measure Visualizer}. However, here we'll launch the \underline{Topographic Viewer}. This 2D layout of the
 head gives an idea of the network topology based on the node-wise
 metrics. 
   \end{enumerate}
@@ -396,7 +406,7 @@ metrics.
 \begin{formal}
   \begin{enumerate}[resume] %% doesnt work with the formal enviornment :/
   \setcounter{enumi}{15}
-  \item In this visualizer, it is possible to view and compare up to three metrics (Fig. ~\ref{fig:step_05b}). From the brain menu (Fig. ~\ref{fig:step_05}) select \textbf{strength} and \textbf{clustering coefficient}. Click on \underline{Update Visualizer}.
+  \item In this visualizer, it is possible to view and compare up to three metrics (Fig. ~\ref{fig:step_05b}). From the menu \includegraphics[width=0.1\textwidth]{butt_brain_menu} on the top right select \textbf{strength} and \textbf{clustering coefficient}. Click on \underline{Update Visualizer}. (See Fig. ~\ref{fig:step_05})
   \end{enumerate}
 \end{formal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -425,7 +435,7 @@ the node-wise \textbf{Instrength, ID: 116005} .
 high in-strength nodes and directly save the new matrix; or,
 \item create a small selection with the high in-strength nodes (Fig. \ref{fig:step_subnetwork}) and use \underline{Edge operations} to  set the IN-IN, IN-OUT and OUT-IN edges to zero. 
 \item Save the new matrix.
-\item From the \underline{Brain menu}
+\item From \includegraphics[width=0.1\textwidth]{butt_brain_menu} 
  you can change the measure used to colour the nodes as well as the threshold  (Fig. \ref{fig:step_change_threshold}). Repeat the necessary steps using \textbf{Degree}. 
 
   \end{enumerate}
@@ -439,8 +449,6 @@ high in-strength nodes and directly save the new matrix; or,
 \newpage
 
 
-
-
 \begin{figure}[h]
   \includegraphics[width=0.9\linewidth]{Handout_UI_ModellingStructuralLesions_ChangeNodeColourThreshold}%
   \caption{Change the metric and threshold.}%
@@ -448,67 +456,152 @@ high in-strength nodes and directly save the new matrix; or,
 \end{figure}
 \newpage
 
-\subsection{Region-based Simulations Of A Control And Stroke Connectome.}
+\subsection{The Effect Of The Structural Connectivity On The Global Stability Map}
+ \begin{marginfigure}%
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_DefaultPSE}
+    \caption{Global variance map from $\circ$  \textit{Default\_g2d\_pse}}
+  \label{fig:default_pse}
+  \end{marginfigure}
+ \begin{marginfigure}%
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_NoInterHemisphericPSE}
+    \caption{Global variance map from $\circ$  \textit{NoInterhemispheric\_g2d\_pse}}
+  \label{fig:nointer_pse}
+  \end{marginfigure}
+ \begin{marginfigure}%
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_NoHighInStrengthPSE}
+    \caption{Global variance map from $\circ$  \textit{NoHighInStrength\_g2d\_pse} }
+  \label{fig:nostrength_pse}
+  \end{marginfigure}
+ \begin{marginfigure}%
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_NoHighInDegreePSE}
+    \caption{Global variance map from $\circ$  \textit{NoHighInDegree\_g2d\_pse}}
+  \label{fig:nodegree_pse}
+  \end{marginfigure}
+  
+\begin{simulation}
+\begin{enumerate}
+\item Go to \textsc{simulator}. Copy the simulation \textit{Control\_g2d\_pse}.  Launch a \underline{Parameter Space Exploration} (PSE) using \textbf{TVB's default connectivity}.
+\item Repeat the previous step but using the following matrices \textbf{NoInterhemispheric, NoHighInStrength} and \textbf{NoHighInDegree}.
+These are simulations $\circ$  \textit{Default\_g2d\_pse}, $\circ$ \textit{NoInterhemispheric\_g2d\_pse}, $\circ$ \textit{NoHighInStrength\_g2d\_pse} and $\circ$ \textit{NoHighInDegree\_g2d\_pse}. Their respective PSE maps are displayed in Figs. \ref{fig:default_pse}, \ref{fig:nointer_pse}, \ref{fig:nostrength_pse} and \ref{fig:nodegree_pse}.
+\end{enumerate}
+\end{simulation}
 
-\newthought{We can now try} to evaluate the difference between the activity generated by both connectivty matrices. We'd like to see how the structural diffrences alter the stability plane of our system. 
+
+
+\subsection{Region-based Simulations Of A Control And Stroke Connectome}
+
+\newthought{We will now} to evaluate the difference between the activity generated by both control and stroke connectivity matrices. We'd like to see how the structural differences alter the stability plane of our system. 
+
 
 \begin{simulation}
   \begin{enumerate}
   \item Go to the \textsc{simulator} area. 
-  \item Select the \textbf{stroke connectivity, ID: 111886}. We proceed to launch a \underline{Parameter Space Exploration} (PSE) using the same model and simulation parameters as found in Table 2 of the first session. This is simulation \textit{Control\_g2d\_pse}.
-  \item Copy the previous simulation and launch a second PSE where, but this time use the \textbf{stroke connectivity, ID:111887}. The results are in sinmulation \textit{Stroke\_g2d\_pse}.
-  \item Select a point in the resulting \underline{Parameter Space Discrete} map, for instance the one with \underline{conduction speed} equalt to \textbf{\unitfrac[7]{mm/ms}} and \underline{global coupling strength} \textbf{a}$\mathbf{=}$\textbf{\unit[0.008][au]}. Tag the time-series (e.g \underline{Datatype Tag 3}: \textbf{ThisPoint}). 
+  \item Select the \textbf{stroke connectivity, ID: 111886}. We proceed to launch a (PSE) using the same model and simulation parameters as found in Table 2 of the first session. This is simulation \textit{Control\_g2d\_pse}.
+  \item Copy the previous simulation and launch a second PSE where, but this time use the \textbf{stroke connectivity, ID:111887}. The results are in simulation \textit{Stroke\_g2d\_pse}.
+  \item Select a point in the resulting \underline{Parameter Space Discrete} map, for instance the one with \underline{conduction speed} equal to \textbf{\unitfrac[7]{mm}{ms}} and \underline{global coupling strength} \textbf{a}$\mathbf{=}$\textbf{\unit[0.008][au]}. Tag the time-series (e.g \underline{Datatype Tag 3}: \textbf{ThisPoint}). 
   
  \item Repeat the previous step for the same point in \textit{Control\_g2d\_pse}.
  
   \end{enumerate}
 \end{simulation}
  
+ \begin{marginfigure}%
+  \includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_FourierAddFilter}
+    \caption{Add and apply a filter.}
+  \label{fig:fourier_addfilter}
+  \end{marginfigure}
  \begin{formal}
   \begin{enumerate}
-  Go to \textsc{Analysis} $\rightarrow$\textsc{Fourier spectral analysis}. Add and apply a filter to find the time-series tagged with \textit{ThisPoint}. Select a \textbf{Hamming} \underline{window} with a length of \textbf{\unit[500]{ms}}.  Launch the analyzer. Fig. \ref{fig:steps_sim_03}.
-  \item Go to \textsc{Projects}$\rightarrow${Operation dashboard} and have a look at the spectra of the time-series.
-  
+  \item Go to \textsc{Analysis} $\rightarrow$\textsc{Fourier spectral analysis}. 
+  \item Add and apply a filter to find the time-series tagged with \textit{ThisPoint}. (Fig. \ref{fig:fourier_addfilter}). Select \textbf{All}.
+  \item Select a \textbf{Hamming} \underline{window} with a length of \textbf{\unit[500]{ms}}.  Launch the analyzer. (See Fig. \ref{fig:steps_sim_03}).
+  \item Go to \textsc{Projects}$\rightarrow$\textsc{Operation dashboard} and have a look at the spectra of the time-series.
  \end{enumerate}
 \end{formal}
 
-\subsection{Region-based Simulations Of A Control And Stroke Connectome: Using A Higher-dimensional Model.}
+\subsection{Region-based Simulations Of A Control And Stroke Connectome Using A Higher-dimensional Model}
 
 \begin{marginfigure}%
   \includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_SelectPointFromPSE_a}
     \caption{Select points}
   \label{fig:steps_sim}
   \end{marginfigure}
+  
   \begin{marginfigure}
 \includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_SelectPointFromPSE_b}
   \caption{Select points}
   \label{fig:steps_sim_03}
 \end{marginfigure}
 
+\begin{margintable}
+  \centering
+  \fontfamily{ppl}\selectfont
+  \begin{tabular}{ll}
+    \toprule
+    Model parameter & Value \\
+    \midrule
+             $r$   & 0.006 \\
+             $a$          &   1   \\
+             $b$          &  3    \\
+             $c$          &   1        \\
+             $d$          &   5    \\
+             $s$          &   4    \\
+             $x_0$        &   -1.6        \\
+             $K_{11}$     &   0.5        \\
+             $K_{12}$     &   0.15     \\
+             $K_{21}$     &   0.15       \\
+             $\sigma$     &   0.3   \\
+             $\mu$        &   3.3 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Stefanescu-Jirsa 3D parameters}
+  \label{tab:modeltab}
+\end{margintable}
+
+
   \begin{simulation}
-\begin{enumerate}
+  \begin{enumerate}
   \item Here, we will use the Stefanescu-Jirsa 3D (sj3d) presented in the previous talk. 
-  \item Select the \textbf{control connectivity}, \textbf{long range linear coupling} with \underline{a range} between \textbf{0.002} and \textbf{0.02}. Set the \underline{conduction speed} in the range \textbf{\unitfrac[1]{mm/ms}} and \textbf{\unitfrac[10]{mm/ms}}.
-  \item The model parameters are specified in Table XX. 
-  \item Select a point from each PSE map. Tag the corresponding time-series with \underline{Tag 2}: \textbf{sj3d} and \underline{Tag 3}: \textbf{A}. 
+  \item Select the \textbf{control connectivity}, \textbf{long range linear coupling} with \underline{a range} between \textbf{0.002} and \textbf{0.02}, step \textbf{0.002}. Set the \underline{conduction speed} in the range \textbf{\unitfrac[1]{mm}{ms}} and \textbf{\unitfrac[10]{mm}{ms}}, step \textbf{\unitfrac[1]{mm}{ms}}.
+  \item The model parameters are specified in Table \ref{tab:modeltab}. 
+  \item In \underline{Variables watched by monitors} select only \textbf{xi}.
+  \item The integration scheme is \textbf{HeunDeterministic} with \textbf{dt}$\mathbf{=}$\textbf{\unit[0.01]{ms}}.
+  \item Launch two PSEs. The results are shown in Figs. \ref{fig:sj3d_control} and \ref{fig:sj3d_stroke} and correspond to simulations
+  \textit{Control\_sj3d\_pse} and \textit{Stroke\_sj3d\_pse}.
+  \item Select the point corresponding to a \underline{speed} of \textbf{\unitfrac[7]{mm}{ms}} and \underline{linear coupling strength} of \textbf{a=0.008} from each PSE map. Tag the corresponding time-series with \underline{Tag 2}: \textbf{sj3d} and \underline{Tag 3}: \textbf{A}. 
    \end{enumerate}
 \end{simulation}
 
 
 
-   \begin{simulation}
+\begin{marginfigure}%
+  \includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_ControlSJ3DPSE}
+    \caption{Variance map of \textit{Control\_sj3d\_pse}.}
+  \label{fig:sj3d_control}
+  \end{marginfigure}
+  
+  \begin{marginfigure}
+\includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_StrokeSJ3DPSE}
+  \caption{Variance map of \textit{Stroke\_sj3d\_pse}.}
+  \label{fig:sj3d_stroke}
+\end{marginfigure}
+
+
+\begin{simulation}
 \begin{enumerate}[resume]
-\setcounter{enumi}{4}
-  \item Then using the parameters from the previosuly tagged points, launch two \textbf{\unit[60]{s}} long simulations. This time use the \textbf{BOLD monitor} and the \textbf{Mixture of Gammas} \underline{HRF kernel} with its default parmaters. The \underline{sampling period of the monitor is} \textbf{\unit[2000]{ms}}. The results are in \textit{Control\_sj3d\_init\_bold} and \textit{Stroke\_sj3d\_init\_bold}.
-  \item Using the branching mechanim, launch \textbf{\unit[4]{min}} simulations. 
+\setcounter{enumi}{7}
+  \item Then, using the parameters from the previously tagged points, launch two \textbf{\unit[60]{s}} long simulations. This time, in addition to the variable \textbf{xi}, select also the variable \textbf{alpha}.
+  \item  Use the \textbf{BOLD monitor} and the \textbf{Mixture of Gammas} \underline{HRF kernel} with its default parameters. The \underline{sampling period} of the monitor is \textbf{\unit[2000]{ms}}. The results are in \textit{Control\_sj3d\_init\_bold} and \textit{Stroke\_sj3d\_init\_bold}.
+  \item Using the branching mechanism, launch \textbf{\unit[4]{min}} simulations from the two previous ones. These are \textit{Control\_sj3d\_init\_bold\_branch1} and \textit{Stroke\_sj3d\_init\_bold\_branch1}.
   \end{enumerate}
 \end{simulation}
 
+\newpage
 
 \begin{formal}
 \begin{enumerate}[resume]
-\setcounter{enumi}{6}
-\item Go to From \textsc{projects}$\rightarrow$ \textsc{Operation dashboard} compute the Pearson correlation coefficients matrix of the resulting time-series. (Figs. \ref{fig:last} \ref{fig:steps_sim_07}) 
+\setcounter{enumi}{10}
+\item Go to From \textsc{projects}$\rightarrow$ \textsc{Operation dashboard} compute the Pearson correlation coefficients matrix of the resulting time-series. (Figs. \ref{fig:last} and \ref{fig:steps_sim_07}) 
   \end{enumerate}
 \end{formal}
 
