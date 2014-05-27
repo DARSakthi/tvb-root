@@ -29,7 +29,7 @@
 #
 
 """
-This script takes a file named: face_surface_new.obj as input,
+This script takes a file named: face_surface_original.obj as input,
 and generated another one named: face_surface.obj,
 after applying a rotation and a translation on the vertices in the input file.
 
@@ -43,15 +43,14 @@ import math
 import numpy as np
 
 
-
-def vertex_transform(vertex):
-    return np.dot(rotation_matrix(np.array([0.0, 0.0, 1.0]), math.pi),
-                  np.dot(rotation_matrix(np.array([1.0, 0.0, 0.0]), -math.pi / 1.6),
-                         np.array([float(x) / 1.5 for x in vertex[:3]]) + np.array([0.0, -40.0, 20.0])))
-
+def scaling_matrix(a, b, c):
+    return np.array([[ a, 0, 0],
+                     [ 0, b, 0],
+                     [ 0, 0, c]])
 
 
 def rotation_matrix(axis, theta):
+    axis = np.array(axis)
     axis /= math.sqrt(np.dot(axis, axis))
     a = math.cos(theta / 2)
     b, c, d = -axis * math.sin(theta / 2)
@@ -60,9 +59,16 @@ def rotation_matrix(axis, theta):
                      [2 * (b * d - a * c), 2 * (c * d + a * b), a * a + d * d - b * b - c * c]])
 
 
+def vertex_transform(vertex):
+    vertex = [float(x) for x in vertex[:3]]
+    rotation = rotation_matrix([0.0, 0.0, 1.0], math.pi)
+
+    return rotation.dot( np.array(vertex[:3]) + np.array([1.0, 2.0, -10.0]))
+
+
 if __name__ == "__main__":
 
-    with open("face_surface_new.obj") as obj_file:
+    with open("face_surface_original.obj") as obj_file:
         with open("face_surface.obj", "w") as result_file:
 
             for line_nr, line in enumerate(obj_file):
