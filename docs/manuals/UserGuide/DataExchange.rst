@@ -31,7 +31,9 @@ at different levels and formats:
     transformation, so users have to ensure their data (especially in case 
     of import) is generated/stored in the same space.
 
-
+    |TVB|'s default project contains data in a space where the nose is pointing
+    in the direction of ``-y`` and the left ear in the direction of ``+x``.
+    The space is right handed: ``+z`` points up.
 
 Before proceeding with more details about data exchange, it would be helpful to
 give you an idea how |TVB| stores its data. Basically there are two major
