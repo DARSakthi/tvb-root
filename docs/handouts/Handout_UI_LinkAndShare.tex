@@ -334,6 +334,63 @@ Out[9]: <matplotlib.text.Text at 0x118eb0ad0>
   \label{fig:ipython}%
 \end{figure}
 
+In matlab \sidenote{hdf5read will be removed in a future version. Use h5read instead.}:
+
+\begin{verbatim}
+>> hinfo = hdf5info('LinkAndShare_TimeSeriesRegion.h5');
+>> hinfo.GroupHierarchy.Datasets.Name
+
+ans =
+
+/data
+
+
+ans =
+
+/time
+
+
+>> hinfo.GroupHierarchy.Attributes.Name
+
+...
+
+
+>> data = hdf5read(hinfo.GroupHierarchy.Datasets(1));
+>> time = hdf5read(hinfo.GroupHierarchy.Datasets(2));
+>> plot(time, squeeze(data))
+>> xlabel('time [ms]')	
+>> ylabel('amplitude [au]')
+
+\end{verbatim}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_MatlabTimeSeriesRegion.png}%
+  \caption{Plotting time-series with matlab.}%
+  \label{fig:matlab}%
+\end{figure}
+
+In R \sidenote{You need the rhdf5 package}:
+
+\begin{verbatim}
+> data <- h5read("/Users/paupau/GithubProjects/tvb-handbook/
+tvbworkshop/LinkAndShare_TimeSeriesRegion.h5", "data")
+
+> time <- h5read("/Users/paupau/GithubProjects/tvb-handbook/
+tvbworkshop/LinkAndShare_TimeSeriesRegion.h5", "time")
+
+> data = drop(mydata)
+
+> plot(mytime, data[,1], type="l")
+\end{verbatim}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_RTimeSeriesRegion.png}%
+  \caption{Plotting time-series with R.}%
+  \label{fig:r}%
+\end{figure}
+
+
+
 \section{More Documentation}\label{sec:more-doc}
 
 For more details on technical aspects of The Virtual Brain, please see the following articles
