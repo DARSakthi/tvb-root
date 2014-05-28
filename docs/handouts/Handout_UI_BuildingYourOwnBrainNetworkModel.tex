@@ -584,7 +584,7 @@ If you are already anxious and wondering about fMRI and some other biophysical o
 
 \subsection{Modelling the Neural Activity on the Folded Cortex}\label{sec:surface_simulations}
 
-This extends the basic region simulation to include the folded cortical surface to the anatomical structure on which the simulation is based. If you haven't read or followed was written above you probably should do that now as here we only really discuss in detail the extra things that are specific to a simulation on the cortical surface.
+This extends the basic region simulation to include the folded cortical surface to the anatomical structure on which the simulation is based. If you haven't read or followed was written above you probably should do that now as here we only really discuss in detail the extra components that are specific to a simulation on the cortical surface.
 
 \begin{blah}
 In addition to the components discussed for a
@@ -592,7 +592,8 @@ region simulation here we introduce two major components, that is:
 \begin{itemize}
 \item \underline{Cortical Surface}, which is a mesh surface defining
 a 2d representation of the convoluted cortical surface embedded in 3d space.
-\item \underline{Local Connectivity}, that defines the probability of the interactions between neighbouring nodes on a local patch. 
+\item \underline{Local Connectivity}, that represents the probability of the interactions between neighbouring nodes on a local patch. 
+\item \underline{Region Mapping},  a breakup that defines to which anatomical region in the \underline{Connectivity} each vertex of mesh belongs. 
 \end{itemize}
 \end{blah}
 
@@ -606,8 +607,7 @@ a 2d representation of the convoluted cortical surface embedded in 3d space.
 \end{enumerate}
 \end{simulation}
 
-The first significant thing of note about surface simulations is that certain \underline{Monitors} make a lot more sense in this context than they do at the region level, and so we'll introduce a couple new \underline{Monitors} here.
-simulations.
+The first significant thing to note about surface simulations is that certain \underline{Monitors} make a lot more sense in this context than they do at the region level, and so we'll introduce a couple new \underline{Monitors} here.
 
 \begin{simulation}
 \begin{enumerate}[resume]
@@ -631,10 +631,10 @@ mechanism is general, in the sense that the nodes can be broken up into any
 non-overlapping, complete, set of sets -- said another way, each node can only
 be counted in one collection and all nodes must be in one collection. As a
 concrete example, in surface simulations information regarding a break up
-into regions exists and is called \underline{Region Mapping}.  This breakup, that defines to which anatomical region each cortical mesh node belongs to can be used to define the spatial average. \sidenote{In fact
+into regions exists and it is called \underline{Region Mapping}.  This breakup, that defines to which anatomical region each cortical mesh node belongs to can be used to define the spatial average. \sidenote{In fact
 this is the default behaviour of the \underline{Spatial Average} monitor when
 applied to a surface simulation, that is it averages over nodes and returns
-region based time-series. }. In Fig. \ref{fig:default_lc_spectrogram} you can see the \underline{spectrogram of the wavelet transform } of the spatially averaged time-series from 
+region based time-series. } In Fig. \ref{fig:default_lc_spectrogram} you can see the \underline{spectrogram of the wavelet transform } of the spatially averaged time-series from 
 the simulation \textit{AnatomyOfASurfaceSimulation\_DefaultLocalConnectivity}. 
 
 \begin{marginfigure}
@@ -671,7 +671,7 @@ the simulation is run on the explicit geometry of the cortex, which can
 potentially have been obtained from a specific individual's brain. 
 In addition a simulation being built on the specific anatomical structure of an individual
 subject, the specific electrodes used in experimental work can also be
-incorporated, providing as direct as possible a link between simulation and
+incorporated, providing a link between simulation and
 experiment. 
 \end{blah}
 
@@ -686,12 +686,12 @@ larger scale dynamics modelled by neural fields.
 
 \begin{formal}
 \begin{enumerate}
-\item Go to \textsc{Connectivity} $\rightarrow$ {Local Connectivity}. 
+\item Go to \textsc{Connectivity} $\rightarrow$ \textsc{Local Connectivity}. 
 In this area we'll build two different kernels: a Gaussian and a Mexican Hat kernel. 
 We'll start with the Gaussian kernel. This data structure is saved under the name \textit{LocalConnectivity\_Gaussian\_zc\_40}.
 \item Select the \underline{equation defining the spatial profile} of your \underline{local connectivity}. Here, we'll leave the defaults.
 \item Select a \underline{cutoff distance}, that is, the distance up to which a given node is connected to its neighbourhood \citep{Spiegler_2013}. Ideally, you want the function to have essentially dropped to zero by the cutoff distance. Here this value is set to \textbf{\unit[40]{mm}}. See Fig. \ref{fig:lc_gaussian}
-\item Name your \underline{local connectivity} and save it by clicking on \underline{Create new Local Connectivity} on the bottom lef corner. 
+\item Name your \underline{Local connectivity} and save it by clicking on \underline{Create new Local Connectivity} on the bottom left corner. 
 \end{enumerate}
 \end{formal}
 
@@ -735,7 +735,7 @@ surface. }%
   \label{tab:mexicanstab}
 \end{margintable}
 
-Finally, we ran to more simulations, using the same parameters described in subsection \ref{sec:surface_simulations}, except thay we've changed the \underline{Local connectivity} kernel. These results are those of \textit{AnatomyOfASurfaceSimulation\_GaussianLocalConnectivity} and \textit{AnatomyOfASurfaceSimulation\_MexicanHatLocalConnectivity}.
+Finally, we ran two more simulations, using the same parameters described in subsection \ref{sec:surface_simulations}, except thay we've changed the \underline{Local connectivity} kernel. These results are those of \textit{SurfaceSimulation\_GaussianLocalConnectivity} and \textit{SurfaceSimulation\_MexicanHatLocalConnectivity}.
  
 
 \section{More Documentation}\label{sec:more-doc}
