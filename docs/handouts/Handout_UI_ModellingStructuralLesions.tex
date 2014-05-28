@@ -56,8 +56,11 @@
 \usepackage{enumitem}
 
 % Background image
-
 \usepackage{wallpaper}
+
+% Background
+\usepackage{hyperref}
+
 
 % Provides paragraphs of dummy text
 \usepackage{lipsum}
@@ -256,15 +259,16 @@ properties later.
   \caption{Save the left nodes selection.}%
   \label{fig:saveleftnodes}%
 \end{marginfigure}%
-\newthought{As a first step}, we will explore the TVB's default connectivity (e.g., go through
-the different displays). Next, to model lesions, we will modify the connectivity, for
+\newthought{As a first step}, we will explore the TVB's default connectivity. Next, to model lesions, we will modify the connectivity, for
 instance, by deleting edges or nodes. Here, as a working example we will remove the
 interhemispheric connections. 
+
+% (e.g., go through the different displays)
 
 \begin{formal}
   \begin{enumerate}
   \item Go to the \textsc{Connectivity} area $\rightarrow$ \textsc{Large scale}.
-  \item Select the the right nodes from the \underline{Quick Select} menu and delete them (Fig. \ref{fig:quickselect_removenodes}). Leave only the left nodes and apply the changes. (Fig. \ref{fig:quickselect_applychanges}). 
+  \item Select the the right nodes from the \underline{Quick Select} menu and delete them (Fig. \ref{fig:quickselect_removenodes}). Leave only the left nodes. (Fig. \ref{fig:quickselect_applychanges}). 
   \item Apply the changes. The active or selected nodes will appear in green on the left \underline{3D Edges}. 
   \item In the \underline{Select Nodes} menu, write a name for the new selection and save the selection for later use. (Fig. \ref{fig:saveleftnodes}). The connectivity editor will now be aware of two set of nodes: those in the selection (green) and those that have not been selected (white).
   \end{enumerate}
@@ -302,7 +306,7 @@ From the quadrant selector, move to the third quadrant (Q3). You can zoom in the
 \begin{blah}
 There are four category of edges depending on the nodes they connect:
 \begin{itemize}
-  \item Edges IN-IN. These edges connect pair of nodes in the selected set. In this
+  \item Edges IN-IN. These edges connect pair of nodes in the \textit{selected set}. In this
   particular case you would modify the edges from the left hemisphere.
   \item Edges OUT-OUT. These edges connect pair of nodes in the \textit{unselected
   set}. In this case they would be the right intrahemispheric edges.
@@ -334,7 +338,7 @@ There are four category of edges depending on the nodes they connect:
     Before you save the new connectivity matrix, make sure all the nodes are
 included, otherwise TVB will assume you only want the nodes in the current
 selection and will set the rest to zero. (Fig. \ref{fig:steps_selectall}).
-   \item Give a name to the new connectivity and click on \includegraphics[width=0.08\textwidth]{butt_star_create.png}. (Fig. \ref{fig:steps_savenew})
+   \item Give a name to the new connectivity and click on \includegraphics[width=0.08\textwidth]{butt_star_create.png} (Fig. \ref{fig:steps_savenew})
     \item The last action will take you back to the \textsc{Connectivity} $\rightarrow$ \textsc{Long-range connectivity}. From this page, load the new matrix. (Fig. \ref{fig:steps_07})
   \end{enumerate}
 \end{formal}
@@ -393,7 +397,7 @@ metrics.
 \newpage
 \begin{marginfigure}
   \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_AnalysisView}%
-  \caption{Select additional network metrics}%
+  \caption{Select additional metrics}%
   \label{fig:step_05}%
 \end{marginfigure}
 
@@ -431,9 +435,9 @@ the node-wise \textbf{Instrength, ID: 116005} .
 \begin{formal}
   \begin{enumerate}[resume] %% doesnt work with the formal enviornment :/
   \setcounter{enumi}{20}
-\item To completely remove the nodes we could create a selection excluding these
-high in-strength nodes and directly save the new matrix; or,
-\item create a small selection with the high in-strength nodes (Fig. \ref{fig:step_subnetwork}) and use \underline{Edge operations} to  set the IN-IN, IN-OUT and OUT-IN edges to zero. 
+\item To completely remove the nodes, from \underline{Quick select} we create a selection excluding these high in-strength nodes and directly save the new matrix. 
+%or,
+%\item create a small selection with the high in-strength nodes (Fig. \ref{fig:step_subnetwork}) and use \underline{Edge operations} to  set the IN-IN, IN-OUT and OUT-IN edges to zero. Here, we did the latter.
 \item Save the new matrix.
 \item From \includegraphics[width=0.1\textwidth]{butt_brain_menu} 
  you can change the measure used to colour the nodes as well as the threshold  (Fig. \ref{fig:step_change_threshold}). Repeat the necessary steps using \textbf{Degree}. 
@@ -496,7 +500,7 @@ These are simulations $\circ$  \textit{Default\_g2d\_pse}, $\circ$ \textit{NoInt
 \begin{simulation}
   \begin{enumerate}
   \item Go to the \textsc{simulator} area. 
-  \item Select the \textbf{stroke connectivity, ID: 111886}. We proceed to launch a (PSE) using the same model and simulation parameters as found in Table 2 of the first session. This is simulation \textit{Control\_g2d\_pse}.
+  \item Select the \textbf{stroke connectivity, ID: 111886}. We proceed to launch a PSE using the same model and simulation parameters as found in Table 2 of the first session. This is simulation \textit{Control\_g2d\_pse}.
   \item Copy the previous simulation and launch a second PSE where, but this time use the \textbf{stroke connectivity, ID:111887}. The results are in simulation \textit{Stroke\_g2d\_pse}.
   \item Select a point in the resulting \underline{Parameter Space Discrete} map, for instance the one with \underline{conduction speed} equal to \textbf{\unitfrac[7]{mm}{ms}} and \underline{global coupling strength} \textbf{a}$\mathbf{=}$\textbf{\unit[0.008][au]}. Tag the time-series (e.g \underline{Datatype Tag 3}: \textbf{ThisPoint}). 
   

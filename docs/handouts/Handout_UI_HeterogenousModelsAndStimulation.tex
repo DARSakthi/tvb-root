@@ -143,12 +143,11 @@
 \newpage
 \ClearWallPaper
 \begin{abstract}
-\noindent Virtual stimulation will allows researchers to directly apply an external perturbation to cortical and subcortical regions. TVB provides
-a way of accessing and altering neural dynamics in networks that are widely
-distributed anatomically. The induced activation propagates through long-range
+\noindent Virtual stimulation will allows researchers to directly apply an external perturbation to cortical and subcortical regions. The induced activation propagates through long-range
 connections to other brain areas. Here, we focus on the generation of
 simulation trains to be able to study for instance changes in
-functional connectivity.
+functional connectivity.  
+
 \begin{marginfigure}%
   %\includegraphics[width=\linewidth]{tvb_logo_transparent_square}
   %\caption{TVB evil logo}
@@ -168,7 +167,8 @@ functional connectivity.
 \section{Objectives}\label{sec:objectives}
 
 This tutorial describes the process of generating a virtual stimulus at the
-region and surface. This spatiotemporal patter will be applied to the brain network model. Furthermore, we will explore what happens when the local dynamics are not homogeneous.
+region and surface. This spatiotemporal pattern will be applied to the brain network model.
+Furthermore, we will explore what happens when the local dynamics are not homogeneous.
 
 
 \subsection{Project: Session\_IV\_HeterogenousModelsAndStimulation}\label{sec:project_data}
@@ -186,19 +186,19 @@ All the data were already generated. We'll only go through the necessary steps r
     Name \\
     \midrule
     \multicolumn{1}{l}{Stimulus-driven simulations}\\
-    \textit{EvokedResponses\_init} \\
-    \textit{EvokedResponses\_init\_branch1}  \\ 
-    \textit{EvokedResponses\_init\_stochastic}  \\ 
-    \textit{EvokedResponses\_init\_stochastic}  \\ 
-     \textit{EvokedResponsesSurface\_init} \\
-    \textit{EvokedResponsesSurface\_init\_branch1} \\
-     \textit{EvokedResponsesSurface\_init\_branch2} \\
+    $\quad$\textit{EvokedResponses\_init} \\
+    $\quad$\textit{EvokedResponses\_init\_branch1}  \\ 
+    $\quad$\textit{EvokedResponses\_init\_stochastic}  \\ 
+    $\quad$\textit{EvokedResponses\_init\_stochastic}  \\ 
+     $\quad$\textit{EvokedResponsesSurface\_init} \\
+    $\quad$\textit{EvokedResponsesSurface\_init\_branch1} \\
+     $\quad$\textit{EvokedResponsesSurface\_init\_branch2} \\
      \\
          \multicolumn{1}{l}{Heterogeneous models}\\
-     \textit{HomogeneousRegionModel}\\
-     \textit{HeterogeneousRegionModel} \\
-     \textit{HomogeneoussSurfaceModel}\\
-     \textit{HeterogeneousSurfaceModel}\\
+     $\quad$\textit{HomogeneousRegionModel}\\
+     $\quad$\textit{HeterogeneousRegionModel} \\
+     $\quad$\textit{HomogeneoussSurfaceModel}\\
+     $\quad$\textit{HeterogeneousSurfaceModel}\\
     \bottomrule
   \end{tabular}
   \caption{Simulations in this project.}
@@ -207,7 +207,7 @@ All the data were already generated. We'll only go through the necessary steps r
 
 \subsection{Stimuli Generation For Region-based Simulations}\label{sec:region_stim}
 
-Within TVB, stimuli can be specified at either the region or surface level,
+\newthought{Within TVB, stimuli} can be specified at either the region or surface level,
 with the latter only applying to the case of simulations including a mesh
 representation of the cortical surface. Here, we will first define a basic
 stimulus at the region level and apply it to a region-based simulation. We'll
@@ -348,7 +348,7 @@ more \underline{focal points} (vertices on the cortical surface), about which th
 
 \subsection{Stimulus-driven simulations}\label{sec:stim_sim}
 
-Next, we go back to the \textsc{Simulator} area, and we'll set up the local dynamics using the \underline{generic 2D oscillator.}
+{Next, we go back to the} \textsc{Simulator} area, and we'll set up the local dynamics using the \underline{generic 2D oscillator.}
 \begin{margintable}
   \centering
   \fontfamily{ppl}\selectfont

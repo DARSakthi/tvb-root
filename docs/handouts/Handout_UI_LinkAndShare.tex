@@ -148,7 +148,7 @@
 \newthought{This short tutorial} provides the basic steps you need to know in order to import data into TVB; share data with other users and/or link data to other TVB projects.
 After this session you should be able to export a project and share it with your neighbour. 
 
-\section{Project :Session\_II\_ShareAndLink\_a}\label{sec:project_data}
+\section{Project Session\_II\_ShareAndLink\_a}\label{sec:project_data}
 % let's start a new thought -- a new section
 
 \subsection{Multiple Users And One Virtual Brain}\label{sec:multiusers}
@@ -240,7 +240,7 @@ In this exercise we will assume that multiple users are working with the same TV
 \begin{enumerate}[resume]
 \setcounter{enumi}{8}
 \item Select the connectivity you want to share.
-\item In the \underline{metadata overlay}. Go to the tab \underline{Links}. You'll see a list with all your projects. See Fig. \ref{fig:linkstab}.
+\item In the \underline{metadata overlay}, go to the tab \underline{Links}. You'll see a list with all your projects. See Fig. \ref{fig:linkstab}.
 \item Link this datatype (connectivity) with the project you'll share (e.g. \textit{Session\_II\_ShareAndLink\_b}).
 \item Link the two time-series from simulations \textit{SimulationConnectivity74} and \textit{SimulationConnectivity96}.
 \end{enumerate}
@@ -282,9 +282,17 @@ from project \textit{Session\_II\_ShareAndLink\_a}.
     \item Click on \includegraphics[width=0.01\textwidth]{nodeTimeSeriesRegion.png} from \textit{TimeSeriesRegion - conn\_74}. 
     \item From the overlay, \underline{Export} tab, download the data in TVB format (h5).
     \item Rename the file if you want (e.g. \textit{LinkAndShare\_TimeSeriesRegion}).
-    \item From an ipython shell you can follow the commmands presented below. 
   \end{enumerate}
 \end{formal} 
+
+From an ipython shell you can follow the commmands presented below. See Fig. \ref{fig:ipython}
+
+\begin{marginfigure}
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_IpythonTimeSeriesRegion.png}%
+  \caption{Plotting time-series with matplotlib.}%
+  \label{fig:ipython}%
+\end{marginfigure}
+
 
 \begin{blah}
 \begin{verbatim}
@@ -343,49 +351,41 @@ Out[9]: <matplotlib.text.Text at 0x118eb0ad0>
 \end{blah}
 
 
-\begin{figure}[h]
-  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_IpythonTimeSeriesRegion.png}%
-  \caption{Plotting time-series with matplotlib.}%
-  \label{fig:ipython}%
-\end{figure}
+In \textbf{Matlab} (see Fig. \ref{fig:matlab})\sidenote{hdf5read will be removed in a future version. Use h5read instead.}:
 
-In matlab \sidenote{hdf5read will be removed in a future version. Use h5read instead.}:
-
+\begin{blah}
 \begin{verbatim}
 >> hinfo = hdf5info('LinkAndShare_TimeSeriesRegion.h5');
 >> hinfo.GroupHierarchy.Datasets.Name
-
 ans =
-
 /data
-
-
 ans =
-
 /time
-
-
 >> hinfo.GroupHierarchy.Attributes.Name
-
 ...
-
-
 >> data = hdf5read(hinfo.GroupHierarchy.Datasets(1));
 >> time = hdf5read(hinfo.GroupHierarchy.Datasets(2));
 >> plot(time, squeeze(data))
 >> xlabel('time [ms]')	
 >> ylabel('amplitude [au]')
-
 \end{verbatim}
+\end{blah}
 
-\begin{figure}[h]
+\begin{marginfigure}
   \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_MatlabTimeSeriesRegion.png}%
   \caption{Plotting time-series with matlab.}%
   \label{fig:matlab}%
-\end{figure}
+\end{marginfigure}
 
-In R \sidenote{You need the rhdf5 package}:
+\newpage
+In \textbf{R} (see Fig. \ref{fig:r})\sidenote{You need the rhdf5 package}:
+\begin{marginfigure}
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_RTimeSeriesRegion.png}%
+  \caption{Plotting time-series with R.}%
+  \label{fig:r}%
+\end{marginfigure}
 
+\begin{blah}
 \begin{verbatim}
 > data <- h5read("/Users/paupau/GithubProjects/tvb-handbook/
 tvbworkshop/LinkAndShare_TimeSeriesRegion.h5", "data")
@@ -397,12 +397,9 @@ tvbworkshop/LinkAndShare_TimeSeriesRegion.h5", "time")
 
 > plot(mytime, data[,1], type="l")
 \end{verbatim}
+\end{blah}
 
-\begin{figure}[h]
-  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_RTimeSeriesRegion.png}%
-  \caption{Plotting time-series with R.}%
-  \label{fig:r}%
-\end{figure}
+
 
 
 
