@@ -183,29 +183,29 @@ Your Own Brain Network Model.
     \midrule
     \multicolumn{1}{l}{Building A Discrete Brain Network Model }\\
     \multicolumn{1}{l}{(region-based simulations)}\\
-    \hspace{0.2cm}\textit{AnatomyOfARegionSimulation\_a} \\
-    \hspace{0.2cm}\textit{AnatomyOfARegionSimulation\_b}  \\ 
+    $\quad$ \textit{AnatomyOfARegionSimulation\_a} \\
+    $\quad$\textit{AnatomyOfARegionSimulation\_b}  \\ 
     \\
     \multicolumn{1}{l}{Stochastic Simulations}\\
-     \hspace{0.2cm}\textit{AnatomyOfARegionSimulation\_c}  \\
+     $\quad$\textit{AnatomyOfARegionSimulation\_c}  \\
     \\
     \multicolumn{1}{l}{Parameter Space Exploration}\\
-     \hspace{0.2cm}\textit{AnatomyOfARegionSimulation\_pse\_a} \\
+     $\quad$\textit{AnatomyOfARegionSimulation\_pse\_a} \\
     \\
     \multicolumn{1}{l}{Simulation Continuation or branching}\\
-     \hspace{0.2cm}\textit{AnatomyOfARegionSimulation\_a\_branch1} \\
+     $\quad$\textit{AnatomyOfARegionSimulation\_a\_branch1} \\
     \\
     \multicolumn{1}{l}{Extra}\\
-     \hspace{0.2cm}\textit{AnatomyOfARegionSimulation\_d}  \\ 
-     \hspace{0.2cm}\textit{AnatomyOfARegionSimulation\_d\_branch1}  \\ 
+     $\quad$\textit{AnatomyOfARegionSimulation\_d}  \\ 
+     $\quad$\textit{AnatomyOfARegionSimulation\_d\_branch1}  \\ 
     \\
-     \hspace{0.2cm}\multicolumn{1}{l}{Modelling the Neural Activity}\\
-     \hspace{0.2cm}\multicolumn{1}{l}{On the Folded Cortex}\\
-    \textit{AnatomyOfASurfaceSimulation} \\
+     \multicolumn{1}{l}{Modelling the Neural Activity}\\
+     \multicolumn{1}{l}{On the Folded Cortex}\\
+    $\quad$\textit{AnatomyOfASurfaceSimulation} \\
     \\
     \multicolumn{1}{l}{Define Your Own Local Connectivity}\\
-      \hspace{0.2cm}\textit{SurfaceSimulation\_GaussianLocalConnectivity} \\
-      \hspace{0.2cm}\textit{SurfaceSimulation\_MexicanHatLocalConnectivity}\\
+      $\quad$\textit{SurfaceSimulation\_GaussianLocalConnectivity} \\
+      $\quad$\textit{SurfaceSimulation\_MexicanHatLocalConnectivity}\\
     \bottomrule
   \end{tabular}
   \caption{Simulations in this project.}
@@ -531,8 +531,8 @@ much less than 1\% of the expected state-variable range if you don't want the
 noise to dominate the intrinsic dynamics of the system.
 If you are not sure about the level of noise, using the Phase Plane
 Interactive tool for plotting noisy trajectories is a good place to start. See Fig. \ref{fig:ppi_noise}}, defining the
-standard deviation of the noise amplitude; and $\mathbf{\tau}$ which defines the
-correlation time of the noise source, with $\mathbf{\tau = 0}$ corresponding to white
+standard deviation of the noise amplitude; and $\boldsymbol{\tau}$ which defines the
+correlation time of the noise source, with $\boldsymbol{\tau = 0}$ corresponding to white
 noise and any value greater than zero producing coloured noise. 
 
 \begin{marginfigure}%
@@ -545,7 +545,7 @@ noise and any value greater than zero producing coloured noise.
 \begin{enumerate}[resume]
 \setcounter{enumi}{1}
 \item After configuring a model similar to the one presented in  \textit{AnatomyOfARegionSimulation\_b}, we select \textbf{HeunStochastic} as our integration scheme.  
-\item Set the values for {$\mathbf{\tau=0}$}  and \textbf{seed=42}. 
+\item Set the values for {$\boldsymbol{\tau=0}$}  and \textbf{seed=42}. 
 \item Set the noise dispersion, $\mathbf{D=0.005}$
 \end{enumerate}
 \end{simulation}
