@@ -149,8 +149,8 @@
 
 \begin{abstract}
 \noindent It is possible to use TVB to model a specific subject such as an epileptic patient. Using relevant neural
-mass models, TVB allows to aks multiple questions such as the localisation of the epileptogenic zone or the validity
-of different neuroimaging modalities to assess the epileptogenicity of a structure. Here we will present a example of
+mass models, TVB allows to ask multiple questions such as the localisation of the epileptogenic zone or the validity
+of different neuroimaging modalities to assess the epileptogenicity of a brain structure. Here we will present a example of
 such a modelisation.
 \end{abstract}
 
@@ -166,8 +166,8 @@ relevant scenarios such as stimulation, modelisation of forward solution of sEEG
 forward solution of MEG  with interictal spikes, modelisation of surgery with resection of a part of the brain.\sidenote{
 Another important step is to process data from neuroimaging modalities into TVB. We are currently developping a pipeline (github.com/timpx/scripts) that will let you easily prepare your data in a format suitable for import
 into TVB. All you will need for this pipeline will be a T1 MRI and a Diffusion MRI from the subject. You can find these data
-in database such as The Human Connectome project. At the end of the pipeline, you will have a connectivity, a surface and a region mapping,
-i.e. you will be able to do region and surface simulation.} 
+in database such as the Human Connectome project. At the end of the pipeline, you will have a connectivity, a surface and a region mapping,
+i.e. you will be able to do region based and surface based simulations.} 
 We will use the different fonctionalities that you have learned in the previous sessions.
 
 
@@ -187,17 +187,22 @@ We wil use the default subject connectivity matrix and surface.
     Name \\
     \midrule
     Exploring the Epileptor model\\
+    \\
     Region based simulation of an epileptic patient \\
-    \textit{Region\_TemporalLobe} \\
-    \textit{Region\_TemporalLobe\_sEEG/EEG/MEG}  \\
+    $\quad$\textit{Region\_TemporalLobe} \\
+    $\quad$\textit{Region\_TemporalLobe\_sEEG/EEG/MEG}  \\
+    \\
     Surface based simulation of an epileptic patient \\
-    \textit{Surface\_TemporalLobe\_sEEG/EEG}  \\
+    $\quad$\textit{Surface\_TemporalLobe\_sEEG/EEG}  \\
+    \\
     Modeling a stimulus \\
-    \textit{Surface\_Stimulation}  \\ 
+    $\quad$\textit{Surface\_Stimulation}  \\ 
+    \\
     MEG forward solution for interictal spikes \\
-    \textit{Surface\_InterictalSpikes\_MEG} \\
+    $\quad$\textit{Surface\_InterictalSpikes\_MEG} \\
+    \\
     Modeling surgical resection\\
-     \indent \textit{Surface\_Resection} \\
+    $\quad$\textit{Surface\_Resection} \\
     \bottomrule
   \end{tabular}
   \caption{Simulations in this project.}
@@ -214,16 +219,15 @@ to understand better its dynamics. We will use the interactive tool that you hav
 
 \begin{formal}
   \begin{enumerate}[resume]
-  \item Go to \textsc{simulator} and select the Epileptor model
+  \item Go to \textsc{simulator} and select the $\mathbf{Epileptor}$ model
   \item Click on \underline{Set Up Region Model}.
   \item Look at the phase space (Fig. \ref{fig:phase_space}). We have here the first population (variables $y_0$ in abscissa and 
   $y_1$ in ordinate).
   The left most intersection of the nullcline defines a stable fix point whereas the rightmost intersection 
   is the center of a limit cycle. Both states are separated by a separatrix, as you can se by trying different trajectories
-  in this phase space (left click on the figure) limit cycle.
-  \item Now change the value of the parameter $\mathbf{x_0}$ to the value $\mathbf{-2.2}$ and see what happens to the phase space: the cubic nullcline
-  is raised such that only the leftmost fix point now exists. The model is set in a non-epileptogenic state.
-  \item You can also look at the phase space for other variables, such as $y_2$/$y_0$ (slow-fast subsystem) or $y_5$/$y_4$ (second population)
+  in this phase space (left click on the figure).
+  \item You can also look at other variables in the phase space, such as $y_2$/$y_0$ (slow-fast subsystem) or 
+  $y_5$/$y_4$ (second population), and change parameters to see what is the effect on the nullclines.
   \end{enumerate}
 \end{formal}
 
@@ -235,20 +239,20 @@ to understand better its dynamics. We will use the interactive tool that you hav
 \end{figure}
 \subsection{Region based simulation of an epileptic patient}
 
-\newthought{We are going} to model a patient with temporal lobe epilepsy (TLE)	. For this we choose different values of
-epileptogenicity in the Epileptor $x_0$ parameters according to the region positions, this is a case of heterogeneity 
-(Session \#4). We choose epileptic regions in the right limbic areas 
+\newthought{We are going} to model a patient with temporal lobe epilepsy (TLE). We will choose different values of
+epileptogenicity ($x_0$ parameters in the Epileptor) according to the region positions, thereby introducing heterogeneities in
+the model parameters (Session \#4). We choose epileptic regions in the right limbic areas 
 (right hippocampus (rHC), parahippocampus (rPHC) and amygdala (rAMYG)). We also add two less epileptogenic regions: 
-the superior temporal cortex (rTS) and the ventral temporal cortex (rTV)
+the superior temporal cortex (rTS) and the ventral temporal cortex (rTV).
 
 \begin{simulation}
   \begin{enumerate}
   \item Stay in the same page; all nodes are selected by default, give them the value $\mathbf{-2.2}$ for the $\mathbf{x_0}$ parameter.
   \item \underline{Remove all} selected nodes, select lHC, lAMYG and lPHC, save the selection with a name
 	and set the parameter $\mathbf{x_0}$ to the value $\mathbf{-1.6}$. \underline{Submit Region Parameters} values.
-  \item Configure the \underline{Visualizers} and add a \underline{Brain Viewer} and a \underline{Fourier Spectrum}, 
+  \item \underline{Configure the Visualizers} and add a \underline{Brain Viewer} and a \underline{Fourier Spectrum}, 
   then \underline{Save your choices}.
-  \item Choose an integration $\mathbf{step size}$ of $\mathbf{0.1}$, a $\mathbf{raw monitor}$ and $\mathbf{\unit{6000}[ms]}$ as a simulation length. 
+  \item Choose an $\mathbf{integration\:step\:size}$ of $\mathbf{0.1}$, a $\mathbf{raw\:monitor}$ and $\mathbf{\unit{6000}[ms]}$ as a simulation length. 
   All the other parameters are
   given in the table \ref{tab:modeltab}.
  \end{enumerate}
@@ -308,6 +312,12 @@ The results are already computed for you in \textit{Region\_TemporalLobe}
   \label{fig:second_pop}%
 \end{figure}
 
+\begin{blah}
+  \begin{enumerate}[resume]
+  The length of seizures here is not realistic ($\sim$\unit{2}[s]), but you can always obtain realist time by multiplying
+  all the dervivatives of the model by a small factor.
+  \end{enumerate}
+\end{blah}
 We now are going to run this simulation again, but with intracranial electrodes (sEEG), EEG and MEG monitors.
 
 \begin{simulation}
@@ -315,7 +325,7 @@ We now are going to run this simulation again, but with intracranial electrodes 
   \item Copy the former simulation.
   \item Add three new monitors (EEG, Spherical MEG and sEEG) by hitting Ctrl and in the same time clicking on the monitor
   you want to add.
-  \item For this simulation, we will not use the \underline{Brain Viewer} so reconfigure the Viewer Tabs accordingly.
+  \item For this simulation, we will not use the \underline{Brain Viewer} so reconfigure the \underline{Viewer} tabs accordingly.
 \end{enumerate}
 \end{simulation}
 
@@ -326,7 +336,7 @@ The results are already computed for you in \textit{Region\_TemporalLobe\_sEEG/M
     \setcounter{enumi}{3}
   \item Click on \underline{Results}.
   \item Click on the EEG time series and visualize them with the 3d/2d visualizer (Fig. \ref{fig:sEEG}).
-  \item Go back, click on the sEEG and visualize them with the 3d/2d visualizer (Fig. \ref{fig:EEG}).
+  \item Go back, click on the sEEG time series and visualize them with the 3d/2d visualizer (Fig. \ref{fig:EEG}).
 \end{enumerate}
 \end{simulation}
 
@@ -347,14 +357,14 @@ The results are already computed for you in \textit{Region\_TemporalLobe\_sEEG/M
 \subsection{Surface based simulation of an epileptic patient}
 
  \newthought{To account} also for seizure propagation and not only seizure recruitement, we have to use surface based simulations.
- It also allow to have a more accurate representation of the MEG/EEG/sEEG signal.
+ It also allows to have a more accurate representation of the MEG/EEG/sEEG signal.
  
   \begin{simulation}
   \begin{enumerate}
   \item Copy the former simulation.
   \item Add a \underline{Brain Viewer} visualizer.
-  \item Choose the TVB default surface, the corresponding local connectivity and a $\mathbf{Local\:coupling\:strength}$ of $\mathbf{a=0.2}$.
-  \item Add a \underline{Temporal average} monitor.
+  \item Choose the TVB $\mathbf{default\:surface}$, the $\mathbf{corresponding\:local\:connectivity}$ and a $\mathbf{Local\:coupling\:strength}$ of $\mathbf{a=0.2}$.
+  \item Add a $\mathbf{Temporal\:average}$ monitor.
   \item Click on \underline{Set up surface model} (Fig. \ref{fig:set_up_surface_parameters}). Choose working parameters
   ($\mathbf{Model\:parameter\:x_0}$, $\mathbf{Equation:\:Gaussian}$, $\mathbf{amp=0.6}$, $\mathbf{sigma=10.}$, $\mathbf{offset=-2.2}$) and 
   click on \underline{Apply equation}.
@@ -374,7 +384,7 @@ The results are already computed for you in \textit{Region\_TemporalLobe\_sEEG/M
  \begin{simulation}
   \begin{enumerate}
      \setcounter{enumi}{5}
-  \item click on \underline{Results}, click on the TimeSeriesSurface an visualize them in the 
+  \item Click on \underline{Results}, click on the TimeSeriesSurface an visualize them in the 
   \underline{Brain Activity Visualizer} (Fig. \ref{fig:bv_surf}). You can use the arrows of the numpad to rapidly 
   move the brain.
   \item Go back,  click on TimeSeries and visualize them with the spatial average time series.
@@ -537,17 +547,19 @@ we are going to simulate that.
 \begin{simulation}
   \begin{enumerate}
   \item Go to \textsc{connectivity} $\rightarrow$ \textsc{Large scale Connectivity}.
-  \item As you learned in session \#3, select the nodes lAMYG, lHC and lPHC via your former selection,delete all their in-out and out-in connections
+  \item As you learned in session \#3, select the nodes lAMYG, lHC and lPHC via your former selection, delete all their in-out and out-in connections
   with the other nodes, give a name to the selection and save it. (Fig. \ref{fig:resec})
   \item As we choose the same regional parameters that in the first simulation, we are going to copy them directly from our
-  former setting. Go to the \textit{temporal lobe region} simulation, select and copy the vaues for the parameter  $x_0$. 
-  \item Copy the surface simulation \textit{Surface temporal lobe EEG MEG sEEG} and paste the array of values in the parameter $\mathbf{x_0}$.
-  Change the values $\mathbf{-1.6}$ by $\mathbf{-2.2}$ in this array (i.e. we replace the dyanmics of the resected node by a stable node).
+  former setting. Go to the \textit{Region\_TemporalLobe} simulation, select and copy the vaues for the parameter  $x_0$. 
+  \item Copy the surface simulation \textit{Surface\_TemporalLobe\_sEEG/EEG/MEG} and paste the array of values in the parameter $\mathbf{x_0}$.
+  With this direct copy-paste method, we avoid to redo the work previously done via the \underline{Set Up Region Model} panel.
+  You can also use you own vector, as long as the length of this vector correspond to the number of regions.
+  Change the values $\mathbf{-1.6}$ by $\mathbf{-2.2}$ in this array (i.e. we replace the dynamics of the resected node by a stable node).
   \item Do not forget to choose the right connectivity matrix and you are ready to launch the simulation.
   \end{enumerate}
 \end{simulation}
 
-The results are given in \textit{surface resection tempoal lobe EEG MEG sEEG}.
+The results are given in \textit{Surface\_Resection}.
 
 \begin{figure}[h]
   \includegraphics[width=\linewidth]{Handout_UI_ModellingAnEpilepticPatient_ConnectivityMatrixResection}%
@@ -573,7 +585,7 @@ The results are given in \textit{surface resection tempoal lobe EEG MEG sEEG}.
 
 
 \section{More Documentation}\label{sec:more-doc}
-For more documentation on The Virtual Brain, please see the following articles \cite{Sanz-Leon_2013, Spiegler_2013, Jirsa_2010b}
+For more documentation on The Virtual Brain, please see the following articles \citep{Sanz-Leon_2013, Woodman_2014, Jirsa_2014}
 
 
 \section{Support}\label{sec:support}
