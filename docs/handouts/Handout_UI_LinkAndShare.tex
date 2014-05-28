@@ -21,7 +21,7 @@
 % Set up the images/graphics \underline{\textbf{Analysis}}
 \usepackage[pdftex]{graphicx}
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
-\graphicspath{{figures/} {../../framework_tvb/tvb/interfaces/web/static/style/img/} {../../framework_tvb/tvb/interfaces/web/static/style/img/nav/}}
+\graphicspath{{figures/} {../../framework_tvb/tvb/interfaces/web/static/style/img/} {../../framework_tvb/tvb/interfaces/web/static/style/img/nav/}{../../framework_tvb/tvb/interfaces/web/static/style/nodes/}}
 
 \title{The Virtual Brain: Hands on Session \#2}
 \date{7th June 2014} 
@@ -227,6 +227,7 @@ In this exercise we will assume that multiple users are working with the same TV
 \item Select the connectivity you want to share.
 \item In the \underline{metadata overlay}. Go to the tab \underline{Links}. You'll see a list with all your projects. See Fig. \ref{fig:linkstab}.
 \item Link this datatype (connectivity) with the project you'll share (e.g. \textit{Session\_II\_ShareAndLink\_b}).
+\item Link the two time-series from simulations \textit{SimulationConnectivity74} and \textit{SimulationConnectivity96}.
 \end{enumerate}
 \end{formal} 
 
@@ -254,9 +255,84 @@ share this project with your neigbour's user account.
 \end{formal} 
 
 \begin{blah}
-You should be able to see the connectivity matrix (or other datatypes) you linked
+You should be able to see the connectivity matrix (and other datatypes) you linked
 from project \textit{Session\_II\_ShareAndLink\_a}.
 \end{blah}
+
+\subsection{Export and Read}\label{sec:link_and_share}
+
+\begin{formal}
+  \begin{enumerate}
+    \item Go to \textsc{Project} $\rightarrow$ \textsc{Data structure}
+    \item Click on \includegraphics[width=0.01\textwidth]{nodeTimeSeriesRegion.png} from \textit{TimeSeriesRegion - conn\_74}. 
+    \item From the overlay, \underline{Export} tab, download the data in TVB format (h5).
+    \item Rename the file if you want (e.g. \textit{LinkAndShare\_TimeSeriesRegion}).
+    \item From an ipython shell you can follow the commmands presented below. 
+  \end{enumerate}
+\end{formal} 
+
+\begin{blah}
+\begin{verbatim}
+In [1]: import h5py
+In [2]: import matplotlib.pyplot as plt
+
+In [3]: f = h5py.File('LinkAndShare_TimeSeriesRegion.h5')
+
+In [4]: f.keys()
+Out[4]: [u'data', u'time']
+
+In [5]: f.attrs.keys()
+Out[5]: 
+[u'TVB_User_tag_1',
+ u'TVB_Title',
+ u'TVB_Length_2d',
+ u'TVB_Gid',
+ u'TVB_Length_3d',
+ u'TVB_Sample_period_unit',
+ u'TVB_Labels_ordering',
+ u'TVB_Length_1d',
+ u'TVB_User_tag_4',
+ u'TVB_User_tag_5',
+ u'TVB_Subject',
+ u'TVB_Length_4d',
+ u'TVB_Data_version',
+ u'TVB_User_tag_3',
+ u'TVB_Is_nan',
+ u'TVB_Type',
+ u'TVB_Invalid',
+ u'TVB_Connectivity',
+ u'TVB_Create_date',
+ u'TVB_User_tag_2',
+ u'TVB_Labels_dimensions',
+ u'TVB_Sample_rate',
+ u'TVB_State',
+ u'TVB_Start_time',
+ u'TVB_Sample_period',
+ u'TVB_Nr_dimensions',
+ u'TVB_Visible',
+ u'TVB_Module']
+
+
+In[6]: plt.plot(f['time'], f['data'][:, 0, :, 0])
+...
+
+In [7]: plt.xlabel('time [ms]')
+Out[7]: <matplotlib.text.Text at 0x118e95310>
+
+In [8]: plt.ylabel('amplitude [au]')
+Out[8]: <matplotlib.text.Text at 0x118e9a190>
+
+In [9]: plt.title(f.attrs['TVB_Title'])
+Out[9]: <matplotlib.text.Text at 0x118eb0ad0>
+\end{verbatim}
+\end{blah}
+
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_LinkAndShare_IpythonTimeSeriesRegion.png}%
+  \caption{Plotting time-series with matplotlib.}%
+  \label{fig:ipython}%
+\end{figure}
 
 \section{More Documentation}\label{sec:more-doc}
 
