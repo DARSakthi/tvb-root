@@ -254,12 +254,12 @@ simulated data.
 
 \item \underline{Conduction speed:} Alter the speed of signal propagation through the network to \textbf{\unitfrac[4]{mm}{ms}}. 
 
-\item \underline{Local dynamics:} Then define a \underline{Model} for the local dynamics . Here we'll use the \textbf{generic 2 dimensional oscillator} (see Fig. \ref{fig:step_01} ) with the parameters shown in Table \ref{tab:modeltab}.
+\item \underline{Local dynamics:} Then define a \underline{Model} for the local dynamics . Here we'll use the \textbf{generic 2 dimensional oscillator} (see Fig. \ref{fig:step_01}) with the parameters shown in Table \ref{tab:modeltab}.
 
 
 \item Now that we've defined our structure and dynamics we need to select an integration scheme. We'll use \textbf{HeunDeterministic}. The most important thing here is to use a step size that is small enough for the integration to be numerically stable. Here, we chose a value of $\mathbf{dt=}$\textbf{\unit[0.1]{ms}}.
 
-\item  Select the \textbf{Temporal Average} monitor. It averages over a time window of length \underline{sampling period} returning one time point every period. It also, by default, only returns those state-variables flagged in the \underline{Models} definition as \underline{Variables watched by Monitors}. For our example the \underline{Monitor's period} is \textbf{\unit[1]{ms}}. 
+\item  Select the \textbf{Temporal Average} monitor. It averages over a time window of length \underline{sampling period} returning one time point every period. It also, by default, only returns those state-variables flagged in the \underline{Models} definition as \underline{Variables watched by Monitors}. For our example the \underline{Monitor's sampling period} is \textbf{\unit[1]{ms}}. 
 \end{enumerate}
 \end{simulation}
 
@@ -323,7 +323,7 @@ data returned can become prohibitively large.}
   \fontfamily{ppl}\selectfont
   \begin{tabular}{ll}
     \toprule
-    Portlet & Visualizer/Analyzer \\
+    Window & Visualizer/Analyzer \\
     \midrule
              top-left          &   Time Series   \\
              top-right        &   Brain Viewer\\
@@ -331,7 +331,7 @@ data returned can become prohibitively large.}
              bottom-right  &   Wavelet Spectrogram \\
     \bottomrule
   \end{tabular}
-  \caption{Selected portlets. It is possible to configure up to 12 different portlets. }
+  \caption{Selected visualizers. It is possible to configure up to 12 different windows. }
   \label{tab:portletstab}
 \end{margintable}
 
@@ -348,9 +348,8 @@ simulation (see Fig. \ref{fig:time_series}) is a result of the imperfectly set i
 \end{figure}
  
 \begin{blah}
-The initial history (i.e., intial conditions) is
-merely set by default to be random walks within the general \underline{range of state-
-variable values} expected from the model. 
+The initial history (i.e., initial conditions) is
+merely set by default to be random walks within the general \underline{range of state-variable values} expected from the model. 
 As the current simulation is
 configured with fixed point dynamics, if we were to set the initial conditions
 exactly to the values corresponding to that fixed point there would be no such
@@ -361,7 +360,7 @@ initial transient (we will see how to achieve that later on).
 \begin{formal}
 \begin{enumerate}
 \item Go to \textsc{Projects} $\rightarrow$ \textsc{operations dashboard}.
-\item Click on the icon from the time-series \includegraphics[width=0.05\textwidth]{nodeTimeSeriesRegion.png}. From the metadata overlay's visualizers tab, launch the \underline{Animated Time Series Visualizer}.
+\item Click on the icon of the time-series \includegraphics[width=0.05\textwidth]{nodeTimeSeriesRegion.png}. From the metadata overlay's visualizers tab, launch the \underline{Animated Time Series Visualizer}.
 \item Go back to the \textsc{simulator} page and check the Fourier spectrum. Select a linear scale on the Y axis. We see that the intrinsic frequency of the oscillations is set at about \unit[11]{Hz} (see Fig. \ref{fig:fourier}). 
 \end{enumerate}
 \end{formal}
@@ -382,8 +381,8 @@ initial transient (we will see how to achieve that later on).
 \begin{simulation}
 \begin{enumerate}
 \item Now let's have a look at a \textit{AnatomyOfARegionSimulation\_b} which has the same parameters as \textit{AnatomyOfARegionSimulation\_a} except that
-The coupling strength has been increased by an order of magnitude. Hence, the slope of the linear coupling function is  $\mathbf{a=0.042}$.
-\item To make things easy, we can \underline{copy the first simulation}  by clicking on \includegraphics[width=0.05\textwidth]{butt_pencil.png} on the top right corner of a simulation tab. 
+the coupling strength has been increased by an order of magnitude. Hence, the slope of the linear coupling function is  $\mathbf{a=0.042}$.
+\item To make things easy, we \underline{copy the first simulation}  by clicking on \includegraphics[width=0.05\textwidth]{butt_pencil.png} on the top right corner of a simulation tab. 
 From the menu you can get a copy, edit the name the simulation or delete it. (Fig. \ref{fig:sim_copy}).
 \item Change the name of the new simulation (e.g., \textit{AnatomyOfARegionSimulation\_b} ) and set the coupling strength to the value in step 1. Launch the simulation.
 \end{enumerate}
@@ -401,8 +400,8 @@ oscillations.
 
 
 A frequent question is at which value of coupling strength this
-"bifurcation" occurs? Well, we can easily set up a parameter search by defining a
-range of values that will be explored. We'll se how to do this in the next section.
+"bifurcation" occurs. Well, we can easily set up a parameter search by defining a
+range of values that will be explored. We'll see how to do this in the next section.
 
  \newpage
 \subsection{Parameter Space Exploration (PSE)}\label{sec:pse}
@@ -414,7 +413,7 @@ two dimensions.} The example is set up in \textit{AnatomyOfARegionSimulation\_ps
 \begin{simulation}
 \begin{enumerate}
  \item In \underline{Long range coupling function}, under \textbf{a}, click on \includegraphics[width=0.1\textwidth]{butt_expand_range.png}. 
- Set the range between $\mathbf{0.012-0.042}$ and the step to $\mathbf{0,002}$.
+ Set the range between $\mathbf{0.012 \text{ and } 0.042}$ and the step to $\mathbf{0.002}$.
  \item Do the same under \underline{conduction speed}, setting the range between $\mathbf{1-10}$ \unitfrac{mm}{ms} and the step to \textbf{\unitfrac[1]{mm}{ms}}.
  
  \item Set the \underline{simulation length} to \unit[2000]{ms} and launch the simulations.
@@ -444,9 +443,9 @@ All the 150 simulations are presented as a discrete 2D map in \underline{Paramet
 
 \subsection{Simulation continuation or Branching}\label{sec:results}
 
-Let's see a few other parameters that could be adjusted. We mentioned before
-that the big transient at the beginning is due to the initial conditions. To
-overcome this issue we have a couple of alternatives. First, we could narrow the range of the state variables around the values of a fixed point. How can we know this value? \sidenote{go back to the \textsc{simulator} page and load either \textit{AnatomyOfARegionSimulation\_a} or \textit{AnatomyOfARegionSimulation\_b}}.
+\newthought{Other parameters could be} adjusted as well. We mentioned before
+that the big transient at the beginning of the time-series is due to the initial conditions. To
+overcome this issue we have a couple of alternatives. First, we could narrow the range of the state variables around the values of a fixed point. How can we know this value?. \sidenote{go back to the \textsc{simulator} page and load either \textit{AnatomyOfARegionSimulation\_a} or \textit{AnatomyOfARegionSimulation\_b}}.
 
 \begin{simulation}
 \begin{enumerate}
@@ -455,7 +454,7 @@ overcome this issue we have a couple of alternatives. First, we could narrow the
 \end{simulation}
 
 
-In this area there's a an interactive tool, the \underline{Phase Plane}, which allows you to understand the local dynamics, that is the dynamics of a single isolated node, by observing how the model parameters change its phase plane. See Fig. \ref{fig:ppi}.
+In this area there's a an interactive tool, the \underline{Phase Plane}, which allows you to understand the local dynamics, that is the dynamics of a single isolated node, by observing how the model parameters change its phase plane. (See Fig. \ref{fig:ppi}).
 
 \begin{marginfigure}%
   \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_PhasePlane}%
@@ -467,7 +466,7 @@ In this area there's a an interactive tool, the \underline{Phase Plane}, which a
 \begin{enumerate}[resume]
   \setcounter{enumi}{1}
 \item  Click on any point of the phase plane. A trajectory will be drawn.
-We see that the fixed point is approx (V, W) = 1.5, -0.6
+We see that the fixed point is approx (V, W) = (1.5, -0.6)
 \end{enumerate}
 \end{simulation}
 
@@ -508,11 +507,11 @@ scheme.
 
 \begin{blah}
 \begin{itemize}
-\item Here we'll define a simple constant level of noise that enters all
+Here we'll define a simple constant level of noise that enters all
 nodes and all state variables, however, the noise is configurable on a per
 node and per state variable level, and as such the noise can be reconfigured
 to, for example, only enter appropriate state variables of certain thalamic
-nodes, thus emulating a very crude model of brain stem input to the brain. 
+nodes, thus emulating a very crude model of external inputs to the brain. 
 \end{itemize}
 \end{blah}
 
@@ -532,7 +531,7 @@ much less than 1\% of the expected state-variable range if you don't want the
 noise to dominate the intrinsic dynamics of the system.
 If you are not sure about the level of noise, using the Phase Plane
 Interactive tool for plotting noisy trajectories is a good place to start. See Fig. \ref{fig:ppi_noise}}, defining the
-standard deviation of the noise amplitude; and $\mathbf{{\tau}}$ which defines the
+standard deviation of the noise amplitude; and $\mathbf{\tau}$ which defines the
 correlation time of the noise source, with $\mathbf{\tau = 0}$ corresponding to white
 noise and any value greater than zero producing coloured noise. 
 
