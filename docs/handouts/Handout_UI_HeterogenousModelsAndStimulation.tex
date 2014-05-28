@@ -166,7 +166,7 @@ functional connectivity.
 
 \section{Objectives}\label{sec:objectives}
 
-This tutorial describes the process of generating a virtual stimulus at the
+\newthought{This tutorial describes} the process of generating a virtual stimulus at the
 region and surface. This spatiotemporal pattern will be applied to the brain network model.
 Furthermore, we will explore what happens when the local dynamics are not homogeneous.
 
@@ -227,7 +227,7 @@ into those nodes.
 \begin{enumerate}
 \item Go to \textsc{Stimulus} $\rightarrow$ \textsc{Region stimulus} area. 
 \item Selecting an equation, give a name to the stimulation pattern and set its parameters as desired.
-\item Here we'll just take the default \underline{Pulse Train}. We'll shift the \textbf{onset} to \textbf{ \unit[500]{ms}}, \textbf{tau}$\mathbf{=}$\textbf{\unit[5]{ms}} is the duration of the pulse, and \textbf{T}$\mathbf{=}$\textbf{\unit[500]{ms}} is the repetition period (equivalent to \unit[2]{Hz}.  See Fig. \ref{fig:stimulus_region}.
+\item Here we'll just take the default \underline{Pulse Train}. We'll shift the \textbf{onset} to \textbf{ \unit[500]{ms}}, \textbf{tau}$\mathbf{=}$\textbf{\unit[5]{ms}} is the duration of the pulse, and \textbf{T}$\mathbf{=}$\textbf{\unit[500]{ms}} is the repetition period (equivalent to \unit[2]{Hz}.  (See Fig. \ref{fig:stimulus_region}).
 \end{enumerate}
 \end{formal}
 
@@ -280,7 +280,7 @@ into those nodes.
 \begin{enumerate}[resume]
 \setcounter{enumi}{6}
 \item Set the new scaling to 3.5 -- only those nodes will receive stimulation. 
-\item Select all the nodes again and save the stimulus. (Figs. \ref{fig:set_scaling} and \ref{fig:save_scaling} )
+\item Select all the nodes again and save the stimulus. (Figs. \ref{fig:set_scaling} and \ref{fig:save_scaling}).
 \end{enumerate}
 \end{formal}
 
@@ -306,7 +306,7 @@ into those nodes.
 \item As with the region level stimuli, we use an equation to define \underline{the temporal
 profile}. The temporal component of the \underline{surface stimulus} will be the same square pulse train as before, except that we'll set the \underline{onset} and the \underline{repetition period} to \textbf{\unit[50]{ms}}.
 \item  However, unlike in the region level case, we also use an equation to
-define the \underline{spatial profile of the stimulus}. For the spatial profile we'll use e \underline{Sigmoid function} with the only change being the width of the kernel, \underline{sigma}, that we set to \textbf{\unit[10]{mm}}.  Here, as with the \underline{local connectivity}, we
+define the \underline{spatial profile of the stimulus}. For the spatial profile we'll use a \underline{Sigmoid function} with the only change being the width of the kernel, \underline{sigma}, that we set to \textbf{\unit[10]{mm}}.  Here, as with the \underline{local connectivity}, we
 must use an equation which drops toward zero with increasing distance.(Fig. \ref{fig:surface_stimulus})
 \end{enumerate}
 \end{formal}
@@ -335,7 +335,7 @@ more \underline{focal points} (vertices on the cortical surface), about which th
 \begin{formal}
 \begin{enumerate}
 \setcounter{enumi}{4}
-\item We save the stimulus and then we can visualize it as a movie. This was already done for you, so you can directly click on \includegraphics[width=0.01\textwidth]{butt_launch_project.png}. (Fig. \ref{fig:surface_stim_movie}).
+\item We save the stimulus and then we can visualize it as a movie. This was already done for you, so you can directly click on \includegraphics[width=0.05\textwidth]{butt_launch_project.png}. (Fig. \ref{fig:surface_stim_movie}).
 \end{enumerate}
 \end{formal}
  
@@ -431,7 +431,7 @@ Now, we'll have a look at the resulting time-series.
 \item From the \textsc{Operation dashboard}, select  the time-series  \includegraphics[width=0.05\textwidth]{nodeTimeSeriesRegion.png} from \textit{EvokedResponses\_init\_branch1}. Then, from the \underline{Visualizer} tab launch the \underline{Animated time series} visualizer. (Fig. \ref{fig:operation_dashboard}).
 \item The node selection we saved when we created the stimulus is available. You can directly select the nodes were stimulation was applied. (Fig. \ref{fig:node_selection}). 
 You'll have to change the page size, that is how many time points are displayed. (Fig. \ref{fig:page_size}).
-\item The stimulus was applied to V1, however if we select left V2 and zoom in we can see the effect of the stimuls. (Fig. \ref{fig:zoom_in})
+\item The stimulus was applied to V1, however if we select left V2 and zoom in we can see the effect of the stimulus. (Fig. \ref{fig:zoom_in})
 \end{enumerate}
 \end{formal}
 
@@ -486,7 +486,7 @@ variation of the parameter according to a smooth function.
 \begin{simulation}
 \begin{enumerate}
 \item For \underline{region simulations}, set up a simulation using the \underline{generic 2d oscillator} with the parameters from Table 2  found in the \textsc{Buidling Your Own Brain Network Model} handout. 
-\item \item Run a simulation for \textbf{\unit[1000]{ms}}, with \underline{HeunDeterministic} and $\mathbf{dt=}$\textbf{\unit[0.1]{ms}}; use the \underline{Temporal Average} monitor with a \underline{sample period} equal to \textbf{\unit[1]{ms}}.  This is simulation \textit{HomogeneousRegionModel}.
+\item Run a simulation for \textbf{\unit[1000]{ms}}, with \underline{HeunDeterministic} and $\mathbf{dt=}$\textbf{\unit[0.1]{ms}}; use the \underline{Temporal Average} monitor with a \underline{sample period} equal to \textbf{\unit[1]{ms}}. This is simulation \textit{HomogeneousRegionModel}.
 \item Next, configure a second simulation with the same parameters as before (e.g., by coping the previous simulation). 
 \item Click on \underline{Set Up Region Model} (see Fig. \ref{fig:setup_regionmodel}). We'll change the value of the model parameter \textbf{b} for a selection of nodes. This selection is already available under the name \textit{oscillatory\_nodes}. (Fig. \ref{fig:oscillatory_nodes})
 \end{enumerate}
@@ -501,7 +501,7 @@ variation of the parameter according to a smooth function.
 \begin{simulation}
 \begin{enumerate}
 \setcounter{enumi}{4}
-\item Under the \underline{Phase Plane}, change the parameter \textbf{b} to a value of approximatevely \textbf{\unit[3.7]}. Click on the \underline{pahse plane} and observe the changes. (Fig. \ref{fig:oscillatory_nodes_trajectory}).
+\item Under the \underline{Phase Plane}, change the parameter \textbf{b} to a value of approximatevely \textbf{\unit[3.7]}. Click on the \underline{phase plane} and observe the changes. (Fig. \ref{fig:oscillatory_nodes_trajectory}).
 \item Click on \textit{Submit Region Parameters}. This action will take you back to the \textsc{simulator} page. You'll see that the parameter \textbf{b} is a vector with different values for each node. 
 \item This simulation corresponds to  \textit{HeterogeneousRegionModel}.
 \end{enumerate}
