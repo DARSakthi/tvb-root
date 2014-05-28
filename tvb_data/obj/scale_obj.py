@@ -59,11 +59,24 @@ def rotation_matrix(axis, theta):
                      [2 * (b * d - a * c), 2 * (c * d + a * b), a * a + d * d - b * b - c * c]])
 
 
-def vertex_transform(vertex):
+def vertex_transform1(vertex):
+    """
+    This transform was applied on the original surface.
+    """
+    return np.dot(rotation_matrix(np.array([0.0, 0.0, 1.0]), math.pi),
+                  np.dot(rotation_matrix(np.array([1.0, 0.0, 0.0]), -math.pi / 1.6),
+                         np.array([float(x) / 1.5 for x in vertex[:3]]) + np.array([0.0, -40.0, 20.0])))
+
+
+def vertex_transform2(vertex):
+    """
+    This transform was applied on the surface created by `vertex_transform1`.
+    This was required by TVB-1397: eliminating special transformation of faces by the viewer.
+    """
     vertex = [float(x) for x in vertex[:3]]
     rotation = rotation_matrix([0.0, 0.0, 1.0], math.pi)
 
-    return rotation.dot( np.array(vertex[:3]) + np.array([1.0, 2.0, -10.0]))
+    return rotation.dot( np.array(vertex[:3])*1.08 + np.array([1.0, 2.0, -10.0]))
 
 
 if __name__ == "__main__":
@@ -85,7 +98,7 @@ if __name__ == "__main__":
                     result_file.write(line + "\n")
                     continue
 
-                new_vertex = vertex_transform(tokens[1:])
+                new_vertex = vertex_transform2(tokens[1:])
                 result_file.write("v %f %f %f \n" % tuple(new_vertex.tolist()))
 
 
