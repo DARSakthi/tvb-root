@@ -342,7 +342,7 @@ class DocGenerateException(Exception):
 if __name__ == "__main__":
     #By default running this module we generate documentation
     CURRENT_FOLDER = os.getcwd()
-    ROOT_FOLDER = os.path.join(CURRENT_FOLDER, "..")
+    ROOT_FOLDER = os.path.dirname(os.path.dirname(os.path.join(CURRENT_FOLDER)))
 
     ABS_DIST_FOLDER = os.path.join(ROOT_FOLDER, DocGenerator.DIST_FOLDER)
     if os.path.exists(ABS_DIST_FOLDER):
