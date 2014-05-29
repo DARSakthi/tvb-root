@@ -43,7 +43,7 @@ the stimulation.
 	frequency 	0.1
 	============    ======
   
-  - Click on View Stimulus Progress
+  - Click on `Edit Focal Points and View`
 
   - Select 10 focal nodes on the right hemisphere.
 

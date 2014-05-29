@@ -88,7 +88,7 @@ On the left column:
 
 From the action bar in the right side you have access to:
 
-**View Stimulus Progress** page where you are able to:
+**Edit Focal Points and View** page where you are able to:
 
       - select the spatial focal points:
 
