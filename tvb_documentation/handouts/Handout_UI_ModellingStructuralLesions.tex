@@ -173,15 +173,17 @@ session is to provide a clear understanding of the available tools to explore, a
 a connectome. Furthermore, in addition to TVB's default connectivity matrix we will have two additional matrices, one of a control subject and the other from a stroke
 patient.
 
-\section{Project Session\_III\_ModellingStructuralLesions}\label{sec:project_data}
+\section{Project: Session\_III\_ModellingStructuralLesions}\label{sec:project_data}
 
 \begin{margintable}
   \centering
   \fontfamily{ppl}\selectfont
   \begin{tabular}{l}
     \toprule
-    Name           \\
+    Name                                              \\
     \midrule
+    \multicolumn{1}{l}{Removing Interhemispheric Connections}\\
+    \multicolumn{1}{l}{Removing Nodes Based On Network Metrics}\\
     \multicolumn{1}{l}{The Effect Of The Structural}\\
     \multicolumn{1}{l}{Connectivity On The Global Stability Map}\\
     \textit{NoInterhemispheric\_g2d\_pse}\\
@@ -240,7 +242,7 @@ properties later.
 
 
 \newpage
-\subsection{Modelling Lesions: Removing Interhemispheric Connections}\label{sec:steps}
+\subsection{Removing Interhemispheric Connections}\label{sec:steps}
 
 \begin{marginfigure}%
   \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_QuickSelectRemoveNodes.png}%
@@ -346,11 +348,11 @@ selection and will set the rest to zero. (Fig. \ref{fig:steps_selectall}).
 
 \begin{figure}[h]
   \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_LoadNewMatrix}%
-  \caption{Load the newlys created matrix.}%
+  \caption{Load the newly created matrix.}%
   \label{fig:steps_07}%
 \end{figure}
 
-\subsection{Modelling Lesions: Removing Nodes Based On Network Metrics}\label{sec:steps}
+\subsection{Removing Nodes Based On Network Metrics}\label{sec:steps}
 
 \newthought{Next, we'll use a criterion} based on graph-metrics to select which
 nodes will be deleted. The metrics are computed using the BCT \sidenote{Brain Connectivity Toolbox} algorithms.  
@@ -395,17 +397,19 @@ metrics.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% STEPS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\begin{marginfigure}
-  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_AnalysisView}%
-  \caption{Select additional metrics}%
-  \label{fig:step_05}%
-\end{marginfigure}
 
 \begin{marginfigure}
   \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_AnalysisResultCompare}%
   \caption{View and compare network metrics}%
   \label{fig:step_05b}%
 \end{marginfigure}
+\begin{marginfigure}
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_AnalysisView}%
+  \caption{Select additional metrics}%
+  \label{fig:step_05}%
+\end{marginfigure}
+
+
 \noindent Since other network measures were previously computed so we can also have a look at them. 
 \begin{formal}
   \begin{enumerate}[resume] %% doesnt work with the formal enviornment :/
@@ -435,24 +439,21 @@ the node-wise \textbf{Instrength, ID: 116005} .
 \begin{formal}
   \begin{enumerate}[resume] %% doesnt work with the formal enviornment :/
   \setcounter{enumi}{20}
-\item To completely remove the nodes, from \underline{Quick select} we create a selection excluding these high in-strength nodes and directly save the new matrix. 
+\item To completely remove the nodes, from \underline{Quick select} we create a selection excluding these high in-strength nodes (Fig. \ref{fig:step_subnetwork}) and directly save the new matrix. 
 %or,
 %\item create a small selection with the high in-strength nodes (Fig. \ref{fig:step_subnetwork}) and use \underline{Edge operations} to  set the IN-IN, IN-OUT and OUT-IN edges to zero. Here, we did the latter.
-\item Save the new matrix.
 \item From \includegraphics[width=0.1\textwidth]{butt_brain_menu} 
  you can change the measure used to colour the nodes as well as the threshold  (Fig. \ref{fig:step_change_threshold}). Repeat the necessary steps using \textbf{Degree}. 
 
   \end{enumerate}
 \end{formal}
 
-\begin{figure}[h]
+\begin{marginfigure}
   \includegraphics[width=0.9\linewidth]{Handout_UI_ModellingStructuralLesions_SelectSubnetwork}%
   \caption{Select subnetwork with the highest in-strength nodes.}%
   \label{fig:step_subnetwork}%
-\end{figure}
-\newpage
-
-
+\end{marginfigure}
+\vspace{1.1cm}
 \begin{figure}[h]
   \includegraphics[width=0.9\linewidth]{Handout_UI_ModellingStructuralLesions_ChangeNodeColourThreshold}%
   \caption{Change the metric and threshold.}%
@@ -621,14 +622,11 @@ These are simulations $\circ$  \textit{Default\_g2d\_pse}, $\circ$ \textit{NoInt
 \end{marginfigure}
 
 \begin{blah}
-The region pair-wise Pearson correlation coefficients matrix is commonly referred to as to functional connectivity. It is often computed from BOLD time series. Here, for simplicity and compartive purpose we compute the matrix using spatially averaged time-series of neural activity. The results are exhibited in Figs. \ref{fig:last} and \ref{fig:steps_sim_07}.
+The region pair-wise Pearson correlation coefficients matrix is commonly referred to as to functional connectivity. It is often computed from BOLD time series. Here, for simplicity and comparative purpose we compute the matrix using spatially averaged time-series of neural activity. The results are exhibited in Figs. \ref{fig:last} and \ref{fig:steps_sim_07}.
 \end{blah}
 
 \section{More Documentation}\label{sec:more-doc}
 For peer reviewed documentation on the software The Virtual Brain, please see the following articles \citep{Sanz-Leon_2013,  Woodman_2014}
-
-
-
 
 
 \section{Support}\label{sec:support}
