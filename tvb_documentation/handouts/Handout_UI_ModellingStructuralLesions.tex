@@ -605,12 +605,9 @@ These are simulations $\circ$  \textit{Default\_g2d\_pse}, $\circ$ \textit{NoInt
 \begin{formal}
 \begin{enumerate}[resume]
 \setcounter{enumi}{10}
-\item Go to From \textsc{projects}$\rightarrow$ \textsc{Operation dashboard} compute the Pearson correlation coefficients matrix of the resulting time-series. (Figs. \ref{fig:last} and \ref{fig:steps_sim_07}) 
+\item Go to From \textsc{projects}$\rightarrow$ \textsc{Operation dashboard} compute the Pearson correlation coefficients matrix of the resulting spatially averaged time-series. 
   \end{enumerate}
 \end{formal}
-
-\section{More Documentation}\label{sec:more-doc}
-For peer reviewed documentation on the software The Virtual Brain, please see the following articles \citep{Sanz-Leon_2013,  Woodman_2014}
 
 \begin{marginfigure}%
   \includegraphics[width=\linewidth]{Handout_UI_ModellingStructuralLesions_bold_pearson_g2d_control.png}
@@ -622,6 +619,14 @@ For peer reviewed documentation on the software The Virtual Brain, please see th
   \caption{Pair-wise Pearson correlation coefficient matrix computed over the long BOLD time-series. Stroke matrix.}
   \label{fig:steps_sim_07}
 \end{marginfigure}
+
+\begin{blah}
+The region pair-wise Pearson correlation coefficients matrix is commonly referred to as to functional connectivity. It is often computed from BOLD time series. Here, for simplicity and compartive purpose we compute the matrix using spatially averaged time-series of neural activity. The results are exhibited in Figs. \ref{fig:last} and \ref{fig:steps_sim_07}.
+\end{blah}
+
+\section{More Documentation}\label{sec:more-doc}
+For peer reviewed documentation on the software The Virtual Brain, please see the following articles \citep{Sanz-Leon_2013,  Woodman_2014}
+
 
 
 
