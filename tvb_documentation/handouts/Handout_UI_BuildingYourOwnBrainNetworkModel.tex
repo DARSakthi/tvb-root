@@ -182,7 +182,6 @@ Your Own Brain Network Model.
     Name \\
     \midrule
     \multicolumn{1}{l}{Building A Discrete Brain Network Model }\\
-    \multicolumn{1}{l}{(region-based simulations)}\\
     $\quad$ \textit{AnatomyOfARegionSimulation\_a} \\
     $\quad$\textit{AnatomyOfARegionSimulation\_b}  \\ 
     \\
@@ -217,12 +216,11 @@ Your Own Brain Network Model.
 \newthought{In this project}, all the data were already generated. We'll only go through the necessary steps required to reproduce some simulations listed in Table~\ref{tab:normaltab}. You can always start over, click along and/or try to change parameters.
 
 
-\subsection{Building A Discrete Brain Network Model (region-based simulations)}\label{sec:region_simulations}
+\subsection{Building A Discrete Brain Network Model}\label{sec:region_simulations}
 
 \newthought{A basic simulation} at the region level uses a coarse representation of the brain and consists of
 five main components, each of these components is a configurable object in
 TVB:
-
 \begin{blah}
 \begin{itemize}
 \item \underline{Model} or \underline{Local population model}, which is, at its core, a set of differential equations describing the local neuronal dynamic;
@@ -239,14 +237,12 @@ TVB:
   \label{fig:fig}%
 \end{figure}
 
-
-\begin{simulation}
-\begin{enumerate}
-
-\item Go to the \textsc{simulator} page. (Fig.~\ref{fig:fig})
-\item In this example, \textit{AnatomyOfARegionSimulation\_a}, we will change the default parameters and configure some
+In this example, \textit{AnatomyOfARegionSimulation\_a}, we will change the default parameters and configure some
 visualizers on the right column to have a quick idea of some properties of the
 simulated data.
+\begin{simulation}
+\begin{enumerate}
+\item Go to the \textsc{simulator} page. (Fig.~\ref{fig:fig})
 
 \item \underline{Connectivity:} Define some structure for your network. Here, we'll rely on \textbf{TVB's default  matrix.} 
 
@@ -311,7 +307,7 @@ data returned can become prohibitively large.}
 
 \begin{simulation}
 \begin{enumerate}[resume]
-  \setcounter{enumi}{5}
+  \setcounter{enumi}{7}
  \item Provide the \underline{simulation length}, that here we'll use the default value of \textbf{\unit[1000]{ms}}.
  \item Before launching the simulation, configure a set of \underline{Visualizers} and/or \underline{Analyzers} by clicking on \underline{Configure}, selecting the what you want to see and saving your choices. (see Table \ref{tab:portletstab}). These windows will enable you to have a glimpse of the results as soon as the simulation ends. 
  \item Enter a name for the current simulation (e.g, \textit{AnatomyOfARegionSimulation\_a}) and click on  \includegraphics[width=0.025\textwidth]{butt_launch_project.png}.
@@ -593,7 +589,7 @@ region simulation here we introduce two major components, that is:
 \item \underline{Cortical Surface}, which is a mesh surface defining
 a 2d representation of the convoluted cortical surface embedded in 3d space.
 \item \underline{Local Connectivity}, that represents the probability of the interactions between neighbouring nodes on a local patch. 
-\item \underline{Region Mapping},  a breakup that defines to which anatomical region in the \underline{Connectivity} each vertex of mesh belongs. 
+\item \underline{Region Mapping},  a breakup that defines to which anatomical region in the \underline{Connectivity} each vertex of the mesh belongs to. 
 \end{itemize}
 \end{blah}
 
@@ -621,6 +617,13 @@ biophysical measurement process, is called \textbf{EEG}.
 \end{enumerate}
 \end{simulation}
 
+
+\begin{marginfigure}
+ \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_DefaultLocalConnectivityWaveletSpectrogram.png}%
+  \caption{Spectrogram of the spatially averaged time-series from \textit{AnatomyOfASurfaceSimulation\_DefaultLocalConnectivity}.}%
+  \label{fig:default_lc_spectrogram}%
+\end{marginfigure}
+
 The first of these new \underline{Monitors},  will average over the
 space (nodes) of the simulation. \sidenote{In the case of region level simulations we
 already have a situation of a relatively small number of nodes, with each one
@@ -629,19 +632,12 @@ other hand we can easily have tens of thousands of nodes, and reducing this by
 averaging over sensible collections of these nodes can be valuable.} The basic
 mechanism is general, in the sense that the nodes can be broken up into any
 non-overlapping, complete, set of sets -- said another way, each node can only
-be counted in one collection and all nodes must be in one collection. As a
-concrete example, in surface simulations information regarding a break up
-into regions exists and it is called \underline{Region Mapping}.  This breakup, that defines to which anatomical region each cortical mesh node belongs to can be used to define the spatial average. \sidenote{In fact
+be counted in one collection and all nodes must be in one collection.  \sidenote{In fact
 this is the default behaviour of the \underline{Spatial Average} monitor when
 applied to a surface simulation, that is it averages over nodes and returns
 region based time-series. } In Fig. \ref{fig:default_lc_spectrogram} you can see the \underline{spectrogram of the wavelet transform } of the spatially averaged time-series from 
 the simulation \textit{AnatomyOfASurfaceSimulation\_DefaultLocalConnectivity}. 
 
-\begin{marginfigure}
- \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_DefaultLocalConnectivityWaveletSpectrogram.png}%
-  \caption{Spectrogram of the spatially averaged time-series from \textit{AnatomyOfASurfaceSimulation\_DefaultLocalConnectivity}.}%
-  \label{fig:default_lc_spectrogram}%
-\end{marginfigure}
 
 
 %An alternative is to spatially average the signals
@@ -711,7 +707,7 @@ surface. }%
 \begin{formal}
 \begin{enumerate}[resume]
 \setcounter{enumi}{3}
-\item Select the \underline{Mexican Hat equation}. Here, we changed all the default parameters, including the cuttoff distance. See the values in Table \ref{tab:mexicanstab}
+\item Select the \underline{Mexican Hat equation}. Here, we changed the default parameters See the values in Table \ref{tab:mexicanstab}
 \end{enumerate}
 \end{formal}
 
@@ -722,20 +718,28 @@ surface. }%
     \toprule
     Parameter & Value \\
     \midrule
-             midpoint\_2          &   \unit[5]{mm}   \\
              midpoint\_1          &   \unit[0]{mm}\\
-             amp\_2                 &   \unit[0.5]{au}        \\
-             amp\_1                 &   \unit[1.5]{au}        \\
-             sigma\_2          &   \unit[5]{mm}   \\
-             sigma\_1          &   \unit[2]{mm}   \\
-             cutoff distance & \unit[20]{mm}\\
+             midpoint\_2          &   \unit[0]{mm}   \\
+             amp\_1                 &   \unit[2]{au}        \\
+             amp\_2                 &   \unit[1]{au}        \\
+             sigma\_1          &   \unit[5]{mm}   \\
+             sigma\_2          &   \unit[15]{mm}   \\
+             cutoff distance & \unit[40]{mm}\\
     \bottomrule
   \end{tabular}
-  \caption{\textit{LocalConnectivity\_MexicanHat\_zc\_20} parameters. }
+  \caption{\textit{LocalConnectivity\_MexicanHat\_zc\_40} parameters. }
   \label{tab:mexicanstab}
 \end{margintable}
 
-Finally, we ran two more simulations, using the same parameters described in subsection \ref{sec:surface_simulations}, except thay we've changed the \underline{Local connectivity} kernel. These results are those of \textit{SurfaceSimulation\_GaussianLocalConnectivity} and \textit{SurfaceSimulation\_MexicanHatLocalConnectivity}.
+\begin{simulation}
+\begin{enumerate}[resume]
+\setcounter{enumi}{4}
+\item Finally, we run two  more simulations, using the same parameters described in \textit{AnatomyOfASurfaceSimulation}, but using  \textbf{\textit{LocalConnectivity\_MexicanHat\_zc\_40}} in one case and  \textbf{\textit{LocalConnectivity\_Guassian\_zc\_40}} in the other case. The \textbf{local connectivity strength} is set to \textbf{-0.001}. 
+
+\end{enumerate}
+\end{simulation}
+
+These results are those of and \textit{SurfaceSimulation\_MexicanHatLocalConnectivity} and \textit{SurfaceSimulation\_GaussianLocalConnectivity} respectively.
  
 
 \section{More Documentation}\label{sec:more-doc}
