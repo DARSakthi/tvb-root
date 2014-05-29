@@ -652,12 +652,15 @@ the simulation \textit{AnatomyOfASurfaceSimulation\_DefaultLocalConnectivity}.
 The second of these new Monitors, \underline{EEG}, hopefully also
 unsurprisingly, returns the EEG signals resulting from the simulated neural
 dynamics using in the process a lead-field or \underline{Projection Matrix}. \sidenote{The EEG monitor will return a relatively standard 62 channel set based on the
-10-20 system.} See Fig. \ref{fig:potato_head}.
+10-20 system.} 
+
+
 \begin{marginfigure}
-  \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_DefaultLocalConnectivityPotatoHead}%
-  \caption{EEG signals}%
+  \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_MexicanLocalConnectivityPotatoHead.png}%
+  \caption{EEG signals from \textit{SurfaceSimulation\_MexicanHatLocalConnectivity}}%
   \label{fig:potato_head}%
 \end{marginfigure}
+
 
 \begin{blah}
 EEG signals measured on the scalp depend strongly on the location
@@ -668,7 +671,7 @@ potentially have been obtained from a specific individual's brain.
 In addition a simulation being built on the specific anatomical structure of an individual
 subject, the specific electrodes used in experimental work can also be
 incorporated, providing a link between simulation and
-experiment. 
+experiment. See Fig. \ref{fig:potato_head}
 \end{blah}
 
 \subsection{Define Your Own Local Connectivity}\label{sec:local_connectivity}
