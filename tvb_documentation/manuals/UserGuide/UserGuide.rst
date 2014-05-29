@@ -205,6 +205,14 @@ This version was tested on Windows XP (x32), Windows Server 2008 (x64) and Windo
 
    PageBreak
 
+.. contributed through GitHub repo by Tim Proix
+
+.. include:: Complete_Dataset_Description.rst
+
+.. raw:: pdf
+
+   PageBreak
+
 .. DATA EXCHANGE
 
 .. include:: DataExchange.rst
