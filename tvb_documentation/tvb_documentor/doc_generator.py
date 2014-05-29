@@ -251,9 +251,9 @@ class DocGenerator:
             publish_file(source_path=rst_file_path, destination_path=result_html_path,
                          writer_name="html", settings_overrides=overrides)
             self.logger.debug("HTML file %s generated successfully." % result_html_path)
-        except Exception:
+        except Exception, ex:
             self.logger.exception("Could not generate HTML documentation")
-            raise DocGenerateException("Could not generate HTML documentation")
+            raise DocGenerateException("Could not generate HTML documentation", ex)
 
 
     def generate_manuals_pdfs(self):
@@ -285,9 +285,9 @@ class DocGenerator:
                 content = file_rst.read()
             r2p.createPdf(text=content, source_path=rst_file_path, output=result_pdf_path)
             self.logger.debug("PDF file %s generated successfully." % result_pdf_path)
-        except Exception:
+        except Exception, ex:
             self.logger.exception("Could not generate PDF documentation")
-            raise DocGenerateException("Could not generate PDF documentation")
+            raise DocGenerateException("Could not generate PDF documentation", ex)
 
 
     def generate_api_doc(self):
@@ -333,9 +333,10 @@ class DocGenerateException(Exception):
     """
 
 
-    def __init__(self, message):
-        Exception.__init__(self, message)
+    def __init__(self, message, parent_ex=None):
+        Exception.__init__(self, message, parent_ex)
         self.message = message
+        self.parent_ex = parent_ex
 
 
 
