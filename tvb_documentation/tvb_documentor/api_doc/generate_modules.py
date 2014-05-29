@@ -29,7 +29,7 @@ It also creates a modules index (named modules.<suffix>).
 import os
 import shutil
 import optparse
-from documentor.api_doc.conf import packages_specs, modules_specs
+from tvb_documentor.api_doc.conf import packages_specs, modules_specs
 
 DEFAULT_STYLE = """
 .. |tvb| replace:: `The Virtual Brain Project`

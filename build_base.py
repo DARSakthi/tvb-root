@@ -35,6 +35,7 @@ This module simply creates distribution package (ZIP).
 .. moduleauthor:: Lia Domide <lia.domide@codemart.ro>
 
 """
+
 from __future__ import with_statement
 import os
 import sys
@@ -45,18 +46,19 @@ from glob import glob
 from contextlib import closing
 from zipfile import ZipFile, ZIP_DEFLATED
 from subprocess import Popen, PIPE
-from documentor.doc_generator import DocGenerator
 from optparse import OptionParser
+from tvb_documentor.doc_generator import DocGenerator
+
 
 FW_FOLDER = "framework_tvb"
 DIST_FOLDER = "dist"
-DOCS_FOLDER = "docs"
+DOCS_RESULT_FOLDER = "docs"
 
 FOLDERS_TO_DELETE = ['.svn', '.project', '.settings']
 FILES_TO_DELETE = ['.DS_Store', 'dev_logger_config.conf']
 
-RELEASE_NOTES_PATH = os.path.join(DOCS_FOLDER, 'RELEASE_NOTES')
-LICENSE_PATH = os.path.join("framework_tvb", "LICENSE_TVB.txt")
+RELEASE_NOTES_PATH = os.path.join("tvb_documentation", 'RELEASE_NOTES')
+LICENSE_PATH = os.path.join(FW_FOLDER, "LICENSE_TVB.txt")
 DIST_FOLDER_FINAL = "TVB_Distribution"
 
 
@@ -74,13 +76,13 @@ def generate_distribution(final_name, library_path, version, extra_licensing_che
 
     # Copy library code before doc generation in order to avoid merging folders
     copy_simulator_library(os.path.join(DIST_FOLDER, library_path))
-    os.mkdir(os.path.join(dist_folder, DOCS_FOLDER))
+    os.mkdir(os.path.join(dist_folder, DOCS_RESULT_FOLDER))
     # Now generate TVB manuals and Online Help
     doc_generator = DocGenerator(current_folder, dist_folder, os.path.join(DIST_FOLDER, library_path))
     doc_generator.generate_all_docs()
 
     shutil.copy2(LICENSE_PATH, os.path.join(DIST_FOLDER, 'LICENSE_TVB.txt'))
-    shutil.copy2(RELEASE_NOTES_PATH, os.path.join(DIST_FOLDER, DOCS_FOLDER, 'RELEASE_NOTES.txt'))
+    shutil.copy2(RELEASE_NOTES_PATH, os.path.join(DIST_FOLDER, DOCS_RESULT_FOLDER, 'RELEASE_NOTES.txt'))
     shutil.copytree(os.path.join("externals", "BCT"), os.path.join(DIST_FOLDER, library_path, "externals", "BCT"))
     copy_distribution_dataset(DIST_FOLDER, library_path)
     write_svn_current_version(os.path.join(DIST_FOLDER, library_path))

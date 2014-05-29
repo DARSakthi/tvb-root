@@ -39,14 +39,14 @@ necessary for a distribution.
 import os
 import shutil
 import tempfile
-import documentor.api_doc.generate_modules
 from optparse import OptionParser
 from tvb.basic.logger.builder import get_logger
 from tvb.datatypes.api_datatypes import DATATYPES_FOR_DOCUMENTATION
 from tvb.analyzers.api_analyzers import ANALYZERS_FOR_DOCUMENTATION
 from rst2pdf.createpdf import RstToPdf
 from docutils.core import publish_file
-from documentor.api_doc.generate_modules import process_sources, GenOptions
+import tvb_documentor.api_doc.generate_modules
+from tvb_documentor.api_doc.generate_modules import process_sources, GenOptions
 
 
 
@@ -92,6 +92,7 @@ class DocGenerator:
     PDF = ".pdf"
 
     # Folders
+    DOCS_SRC = "tvb_documentation"
     DOCS = "docs"
     API = "api"
     DIST_FOLDER = "dist"
@@ -130,7 +131,7 @@ class DocGenerator:
         self.logger = get_logger(self.__class__.__name__)
         self._dist_folder = dist_folder
         self._tvb_root_folder = tvb_root_folder
-        self._manuals_folder = os.path.join(tvb_root_folder, self.DOCS, self.MANUALS)
+        self._manuals_folder = os.path.join(tvb_root_folder, self.DOCS_SRC, self.MANUALS)
         self._styles_folder = os.path.join(self._manuals_folder, self.STYLES)
 
         # Folders where to store results
@@ -305,7 +306,7 @@ class DocGenerator:
             process_sources(opts, tvb.__path__, self.EXCLUDES)
 
             # Now generate HTML doc
-            conf_folder = os.path.dirname(documentor.api_doc.generate_modules.__file__)
+            conf_folder = os.path.dirname(tvb_documentor.api_doc.generate_modules.__file__)
             args = ['anything',  # Ignored but must be there
                     '-b', 'html',  # Specify builder: html, dirhtml, singlehtml, txt, latex, pdf,
                     '-a',  # Use option "-a" : build all

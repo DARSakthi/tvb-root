@@ -29,7 +29,7 @@
 #
 
 """
-Install External Python modules, used for built/test/external libs.
+Install External Python modules, used for building, running or testing TVB..
 """
 
 import os
@@ -49,33 +49,36 @@ def load_package(package_name):
     setup(name=package_name, packages=find_packages(exclude=exclude_packages))
 
 
-# The packages tvb_bin and documentor depend on tvb. We should move their setup outside this file.
-# This file would then install only tvb prerequisites
+
+## First install Python modules:
+
 load_package('tvb_bin')
+shutil.rmtree('tvb_bin.egg-info', True)
+
 load_package('tvb_data')
+shutil.rmtree('tvb_data.egg-info', True)
+
+load_package('third_party_licenses')
+shutil.rmtree('third_party_licenses.egg-info', True)
+
 setup(
-    name='documentor',
-    packages=find_packages(exclude=[f for f in ROOT_FOLDERS if f !='documentor']),
+    name='tvb_documentor',
+    packages=find_packages('tvb_documentation'),
+    package_dir={'': 'tvb_documentation'},
     install_requires=["rst2pdf", "PIL>=1.1.7", "sphinx"]
 )
-load_package('third_party_licenses')
+shutil.rmtree(os.path.join("tvb_documentation", 'tvb_documentor.egg-info'), True)
 
-
-## Bellow we have special cases 
 setup(
     name='mplh5canvas',
     packages=find_packages(os.path.join('externals', 'mplh5canvas')),
     package_dir={'': os.path.join('externals', 'mplh5canvas')}
 )
+shutil.rmtree(os.path.join('externals', 'mplh5canvas', 'mplh5canvas.egg-info'), True)
 
+## Try to build the C code
 os.system("cd " + os.path.join("externals", "geodesic_distance") + "; python setup.py install")
 
-## Remove any left-over files:
-shutil.rmtree('tvb_bin.egg-info', True)
-shutil.rmtree('tvb_data.egg-info', True)
-shutil.rmtree('documentor.egg-info', True)
-shutil.rmtree('third_party_licenses.egg-info', True)
-shutil.rmtree(os.path.join('externals', 'mplh5canvas', 'mplh5canvas.egg-info'), True)
 shutil.rmtree(os.path.join('externals', 'geodesic_distance', 'build'), True)
 if os.path.exists(os.path.join('externals', 'geodesic_distance', 'gdist.cpp')):
     os.remove(os.path.join('externals', 'geodesic_distance', 'gdist.cpp'))
