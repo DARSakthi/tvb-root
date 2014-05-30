@@ -379,16 +379,15 @@ initial transient (we will see how to achieve that later on).
 
 \begin{simulation}
 \begin{enumerate}
-\item Now let's have a look at a \textit{AnatomyOfARegionSimulation\_b} which has the same parameters as \textit{AnatomyOfARegionSimulation\_a} except that
+\item Now let's have a look at a second simulation, which has the same parameters as \textit{AnatomyOfARegionSimulation\_a} except that
 the coupling strength has been increased by an order of magnitude. Hence, the slope of the linear coupling function is  $\mathbf{a=0.042}$.
-\item To make things easy, we \underline{copy the first simulation}  by clicking on \includegraphics[width=0.05\textwidth]{butt_pencil.png} on the top right corner of a simulation tab. 
-From the menu you can get a copy, edit the name the simulation or delete it. (Fig. \ref{fig:sim_copy}).
+\item To make things easy, we \underline{copy the first simulation}  by clicking on \includegraphics[width=0.05\textwidth]{butt_pencil.png} on the top right corner of a simulation tab. From the menu you can get a copy, edit the name the simulation or delete it. (Fig. \ref{fig:sim_copy}).
 \item Change the name of the new simulation (e.g., \textit{AnatomyOfARegionSimulation\_b} ) and set the coupling strength to the value in step 1. Launch the simulation.
 \end{enumerate}
 \end{simulation}
 
 
-Looking at the time series, we can see that the system exhibits self-sustained
+Looking at the time series of \textit{AnatomyOfARegionSimulation\_b}, we can see that the system exhibits self-sustained
 oscillations. 
 
 \begin{figure}[h]
@@ -415,7 +414,7 @@ two dimensions.} The example is set up in \textit{AnatomyOfARegionSimulation\_ps
  Set the range between $\mathbf{0.012 \text{ and } 0.042}$ and the step to $\mathbf{0.002}$.
  \item Do the same under \underline{conduction speed}, setting the range between $\mathbf{1-10}$ \unitfrac{mm}{ms} and the step to \textbf{\unitfrac[1]{mm}{ms}}.
  
- \item Set the \underline{simulation length} to \unit[2000]{ms} and launch the simulations.
+ \item Set the \underline{simulation length} to \textbf{\unit[2000]{ms}} and launch the simulations.
 \end{enumerate}
 \end{simulation}
 
@@ -476,7 +475,7 @@ However, there certainly is a more elegant way.
 \begin{enumerate}[resume]
  \setcounter{enumi}{2}
 \item Set your model with fixed point dynamics and a weak coupling strength (e.g., \textit{AnatomyOfARegionSimulation\_a})
-\item Run a simulation for \unit[1000]{ms}.
+\item Run a simulation for \textbf{\unit[1000]{ms}}.
 \end{enumerate}
 \end{simulation}
 
@@ -548,7 +547,7 @@ noise and any value greater than zero producing coloured noise.
 \item Set the noise dispersion, $\mathbf{D=0.005}$
 \end{enumerate}
 \end{simulation}
-\newpage
+%\newpage
 \textit{AnatomyOfARegionSimulation\_b} and \textit{AnatomyOfARegionSimulation\_c} have the same parameters but the latter has an extra background noisy input. 
 
 \begin{formal}
@@ -580,7 +579,7 @@ If you are already anxious and wondering about fMRI and some other biophysical o
   \label{fig:BOLD}%
 \end{marginfigure}
 
-
+\newpage
 \subsection{Modelling the Neural Activity on the Folded Cortex}\label{sec:surface_simulations}
 
 This extends the basic region simulation to include the folded cortical surface to the anatomical structure on which the simulation is based. If you haven't read or followed was written above you probably should do that now as here we only really discuss in detail the extra components that are specific to a simulation on the cortical surface.
@@ -608,6 +607,20 @@ a 2d representation of the convoluted cortical surface embedded in 3d space.
 
 The first significant thing to note about surface simulations is that certain \underline{Monitors} make a lot more sense in this context than they do at the region level, and so we'll introduce a couple new \underline{Monitors} here.
 
+\begin{marginfigure}
+ \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_DefaultLocalConnectivityWaveletSpectrogram.png}%
+  \caption{Spectrogram of the spatially averaged time-series from \textit{AnatomyOfASurfaceSimulation\_branch1}.}%
+  \label{fig:default_lc_spectrogram}%
+\end{marginfigure}
+
+
+
+\begin{marginfigure}
+  \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_MexicanLocalConnectivityPotatoHead.png}%
+  \caption{EEG signals from \textit{SurfaceSimulation\_MexicanHatLocalConnectivity}}%
+  \label{fig:potato_head}%
+\end{marginfigure}
+
 \begin{simulation}
 \begin{enumerate}[resume]
 \setcounter{enumi}{5}
@@ -616,16 +629,18 @@ The first significant thing to note about surface simulations is that certain \u
 \item The second of these new monitors, which is an instantiation of a
 biophysical measurement process, is called \textbf{EEG}. 
 \item The \underline{Monitors period} is left with the default value \textbf{\unit[0.9765625]{ms}} which is equivalent to a sampling frequency of \unit[512]{Hz}.
-\item Lastly the \underline{simulation length} is \textbf{\unit[2000]{ms}}.
+\item Lastly, the \underline{simulation length} is \textbf{\unit[2000]{ms}}.
+\item Run the simulation.
+\item Once the simulation is finished, without changing any parameters, click on \includegraphics[width=0.08\textwidth]{butt_branching}.
+
 \end{enumerate}
 \end{simulation}
 
 
-\begin{marginfigure}
- \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_DefaultLocalConnectivityWaveletSpectrogram.png}%
-  \caption{Spectrogram of the spatially averaged time-series from \textit{AnatomyOfASurfaceSimulation\_DefaultLocalConnectivity}.}%
-  \label{fig:default_lc_spectrogram}%
-\end{marginfigure}
+These simulations are \textit{AnatomyOfASurfaceSimulation} and \textit{AnatomyOfASurfaceSimulation\_branch1}. In Fig. \ref{fig:default_lc_spectrogram} you can see the spectrogram of the wavelet transform of the spatially averaged time-series from 
+the simulation \textit{AnatomyOfASurfaceSimulation\_branch1}. 
+
+
 
 The first of these new \underline{Monitors},  will average over the
 space (nodes) of the simulation. \sidenote{In the case of region level simulations we
@@ -634,12 +649,11 @@ representing a fairly large chunk of brain. In surface simulations on the
 other hand we can easily have tens of thousands of nodes, and reducing this by
 averaging over sensible collections of these nodes can be valuable.} The basic
 mechanism is general, in the sense that the nodes can be broken up into any
-non-overlapping, complete, set of sets -- said another way, each node can only
-be counted in one collection and all nodes must be in one collection.  \sidenote{In fact
+non-overlapping, complete, set of sets. In other words, each node can only
+be counted in one collection and all nodes must be in one collection. \sidenote{In fact
 this is the default behaviour of the \underline{Spatial Average} monitor when
 applied to a surface simulation, that is it averages over nodes and returns
-region based time-series. } In Fig. \ref{fig:default_lc_spectrogram} you can see the \underline{spectrogram of the wavelet transform } of the spatially averaged time-series from 
-the simulation \textit{AnatomyOfASurfaceSimulation\_DefaultLocalConnectivity}. 
+region based time-series. } 
 
 
 
@@ -657,12 +671,6 @@ unsurprisingly, returns the EEG signals resulting from the simulated neural
 dynamics using in the process a lead-field or \underline{Projection Matrix}. \sidenote{The EEG monitor will return a relatively standard 62 channel set based on the
 10-20 system.} 
 
-
-\begin{marginfigure}
-  \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_MexicanLocalConnectivityPotatoHead.png}%
-  \caption{EEG signals from \textit{SurfaceSimulation\_MexicanHatLocalConnectivity}}%
-  \label{fig:potato_head}%
-\end{marginfigure}
 
 
 \begin{blah}
@@ -711,6 +719,20 @@ surface. }%
 \end{figure}
 
 
+
+
+\begin{formal}
+\begin{enumerate}[resume]
+\setcounter{enumi}{4}
+\item Select the \underline{Mexican Hat equation}. Here, we changed the default parameters. See the values in Table \ref{tab:mexicanstab}.
+\item Save your new local connectivity.
+\end{enumerate}
+\end{formal}
+
+This data structure is saved under the name \\
+\textit{LocalConnectivity\_MexicanHat\_zc\_40}.
+
+
 \begin{margintable}
   \centering
   \fontfamily{ppl}\selectfont
@@ -732,18 +754,6 @@ surface. }%
 \end{margintable}
 
 
-\begin{formal}
-\begin{enumerate}[resume]
-\setcounter{enumi}{4}
-\item Select the \underline{Mexican Hat equation}. Here, we changed the default parameters. See the values in Table \ref{tab:mexicanstab}.
-\item Save your new local connectivity.
-\end{enumerate}
-\end{formal}
-
-This data structure is saved under the name 
-\textit{LocalConnectivity\_MexicanHat\_zc\_40}.
-
-
 \begin{simulation}
 \begin{enumerate}[resume]
 \setcounter{enumi}{4}
@@ -752,7 +762,7 @@ This data structure is saved under the name
 \end{enumerate}
 \end{simulation}
 
-These results are those of and \textit{SurfaceSimulation\_MexicanHatLocalConnectivity} and \textit{SurfaceSimulation\_GaussianLocalConnectivity} respectively.
+These results are those of \textit{SurfaceSimulation\_MexicanHatLocalConnectivity} and \textit{SurfaceSimulation\_GaussianLocalConnectivity} respectively.
  
 
 \section{More Documentation}\label{sec:more-doc}
