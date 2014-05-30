@@ -192,10 +192,10 @@ We wil use the default subject connectivity matrix and surface.
     \\
     Region based simulation of an epileptic patient \\
     $\quad$\textit{Region\_TemporalLobe} \\
-    $\quad$\textit{Region\_TemporalLobe\_sEEG/EEG/MEG}  \\
+    $\quad$\textit{Region\_TemporalLobe\_sEEG\_EEG}  \\
     \\
     Surface based simulation of an epileptic patient \\
-    $\quad$\textit{Surface\_TemporalLobe\_sEEG/EEG}  \\
+    $\quad$\textit{Surface\_TemporalLobe\_sEEG\_EEG}  \\
     \\
     Modeling a stimulus \\
     $\quad$\textit{Surface\_Stimulation}  \\ 
@@ -254,7 +254,7 @@ the superior temporal cortex (rTS) and the ventral temporal cortex (rTV).
 	and set the parameter $\mathbf{x_0}$ to the value $\mathbf{-1.6}$. \underline{Submit Region Parameters} values.
   \item \underline{Configure the Visualizers} and add a \underline{Brain Viewer} and a \underline{Fourier Spectrum}, 
   then \underline{Save your choices}.
-  \item Choose an $\mathbf{integration\:step\:size}$ of \textbf{\unit[0.1]{ms}}, a $\mathbf{raw\:monitor}$ and \textbf{\unit[6000]{ms}} as a simulation length. 
+  \item Choose an $\mathbf{integration\:step\:size}$ of \textbf{\unit[0.1]{ms}}, a $\mathbf{Temporal\:average\:monitor}$ with a \textbf{sampling period} of \textbf{\unit[1]{ms}} and \textbf{\unit[6000]{ms}} as a simulation length. 
   All the other parameters are
   given in the table \ref{tab:modeltab}.
  \end{enumerate}
@@ -316,22 +316,22 @@ The results are already computed for you in \textit{Region\_TemporalLobe}
 
 \begin{blah}
   \begin{enumerate}[resume]
-  The length of seizures here is not realistic ($\sim$\unit{2}[s]), but you can always obtain realist time by multiplying
+  The length of seizures here is not realistic ($\sim$\unit[2]{s}), but you can always obtain realist time by multiplying
   all the dervivatives of the model by a small factor.
   \end{enumerate}
 \end{blah}
-We now are going to run this simulation again, but with intracranial electrodes (sEEG), EEG and MEG monitors.
+We now are going to run this simulation again, but with intracranial electrodes (sEEG) and EEG monitors.
 
 \begin{simulation}
   \begin{enumerate}
   \item Copy the former simulation.
-  \item Add three new monitors (EEG, Spherical MEG and sEEG) by hitting Ctrl and in the same time clicking on the monitor
+  \item Add two new monitors (EEG and sEEG) with a \textbf{sampling period} of \textbf{\unit[1]{ms}} by hitting Ctrl and in the same time clicking on the monitor
   you want to add.
   \item For this simulation, we will not use the \underline{Brain Viewer} so reconfigure the \underline{Viewer} tabs accordingly.
 \end{enumerate}
 \end{simulation}
 
-The results are already computed for you in \textit{Region\_TemporalLobe\_sEEG/MEG/EEG}
+The results are already computed for you in \textit{Region\_TemporalLobe\_sEEG\_EEG}
 
 \begin{simulation}
   \begin{enumerate}
@@ -366,7 +366,7 @@ The results are already computed for you in \textit{Region\_TemporalLobe\_sEEG/M
   \item Copy the former simulation.
   \item Add a \underline{Brain Viewer} visualizer.
   \item Choose the TVB's $\mathbf{default\:surface}$, the corresponding  $\mathbf{local\:connectivity}$ and a $\mathbf{Local\:coupling\:strength}$ of $\mathbf{a=0.2}$.
-  \item Add a $\mathbf{Temporal\:average}$ monitor.
+  \item Add a $\mathbf{Spatial\:average}$ monitor with a \textbf{sampling period} of \textbf{\unit[1]{ms}}
   \item Click on \underline{Set up surface model} (Fig. \ref{fig:set_up_surface_parameters}). Choose working parameters
   ($\mathbf{Model\:parameter\:x_0}$, $\mathbf{Equation:\:Gaussian}$, $\mathbf{amp=0.6}$, $\mathbf{sigma=10.}$, $\mathbf{offset=-2.2}$) and 
   click on \underline{Apply equation}.
@@ -381,7 +381,7 @@ The results are already computed for you in \textit{Region\_TemporalLobe\_sEEG/M
   \label{fig:set_up_surface_parameters}%
 \end{figure}
 
-  The results are already computed for you in \textit{Surface\_TemporalLobe\_sEEG/EEG}
+  The results are already computed for you in \textit{Surface\_TemporalLobe\_sEEG\_EEG}
  \begin{simulation}
   \begin{enumerate}
      \setcounter{enumi}{5}
@@ -483,7 +483,7 @@ The stimulus was already set for you under the name \textit{Surface\_SquareStimu
   \item Go to \textsc{simulator} and copy the former simulation.
   \item Choose the \textit{Surface\_SquareStimulus} stimulus.
   \item Set the parameter $\mathbf{x_0}$ to $\mathbf{-2.1}$
-  \item Choose only a surface average monitor.
+  \item Choose only a \textbf{Spatial average} monitor.
   \item Set the $\mathbf{Simulation\:Length}$ to \textbf{\unit[4000]{ms}}.
  
 \end{enumerate}
@@ -524,19 +524,47 @@ You can see the result of this simulation in \textit{surface stimulation}
 
 \subsection{MEG forward solution for interictal spikes}
 
-\newthought{Often} we do not have access with MEG to an epileptic seizure, but only to interictal periods.
+\newthought{MEG is rarely} recorded during a seizure and usually we have only access to interictal recordings.
 Therefore it is interesting to simulate interictal spikes in order to test forward and inverse model in MEG.
-WE are going to set the parameter $\mathbf{x0}$ in such a way that the \textbf{epileptor} will not have seizures, but only interictal spikes, 
-i.e. close to the threshold. To have interictal spikes we need to add some noise.
+We are going to set the parameter $\mathbf{x_0}$ in such a way that the Epileptor model will not trigger seizures, but only interictal spikes, 
+i.e. the model will be set close to the threshold between ictal and interictal states. 
+We will also add noise to trigger the interictal spikes.
 
   \begin{simulation}
   \begin{enumerate}
-  \item As before, we are going to introduce an heterogeneity in the surface parameter, but without putting the node epileptogenic
-  The setting is already done for you in the name simulation.
-  \item We set the \textbf{MEG} monitor.
-  \item We look at the time series.
+  \item Copy the former simulation.
+  \item Set the \textbf{Spatiotemporal Stimulus} back to the \textbf{None} value.
+  \item As we did earlier, go to \underline{Set Up region Model} and set the $\mathbf{x_0}$ parameter to $\mathbf{-3.0}$ for all 
+  nodes except for the selection \textit{right\_amy\_hip\_parahip} for which you set the value $\mathbf{-2.1}$ and for the selection
+  \textit{right\_orbital\_temporal} for which you set the value $\mathbf{-2.8}$.
+  \item Choose a \textbf{HeunStochastic} integration scheme with a \textbf{integration step-size} of $\mathbf{0.05}$. We choose
+  a smaller integration time step than previously to be sure that  the integration scheme stays stable even in presence of noise.
+  We will put noise in the two variables of the second population which are responsible for triggering interictal spikes:
+  set $\mathbf{D}$ to $\mathbf{[0., 0., 0., 0.002, 0.002, 0.]}$.
+  \item Choose the \textbf{MEG} monitor with a sampling period of \textbf{\unit[1]{ms}}
 \end{enumerate}
 \end{simulation}
+
+The results are given in \textit{Surface\_InterictalSpikes\_MEG}.
+
+  \begin{simulation}
+  \begin{enumerate}
+  \item Go to \underline{Results}, select the \underline{MEG Time series} and visualize them wit the \underline{Time Serie Visualizer}.
+  Choose the \underline{channel} $\#92$ and increase the \underline{scaling}, you should see interictal spikes on this MEG simulation.
+\end{enumerate}
+\end{simulation}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{Handout_UI_ModellingAnEpilepticPatient_MEGTimeSeries}%
+  \caption{MEG Time Series showing interictal spikes}%
+  \label{fig:ts_meg}%
+\end{figure}
+
+\begin{blah}
+You have seen that the time series of different channels generated by the MEG spherical forward solution have very different amplitudes. This is caused
+by our choice of the spherical forward solution which is not a really good model. A leadfield matrix such as the one we used for EEG
+will soon be available in TVB.
+\end{blah}
 
 \subsection{Modeling surgical resection}
 
@@ -551,10 +579,12 @@ we are going to simulate that.
   with the other nodes, give a name to the selection and save it. (Fig. \ref{fig:resec})
   \item As we choose the same regional parameters that in the first simulation, we are going to copy them directly from our
   former setting. Go to the \textit{Region\_TemporalLobe} simulation, select and copy the vaues for the parameter  $x_0$. 
-  \item Copy the surface simulation \textit{Surface\_TemporalLobe\_sEEG/EEG/MEG} and paste the array of values in the parameter $\mathbf{x_0}$.
+  \item Copy the surface simulation \textit{Surface\_TemporalLobe\_sEEG\_EEG} and paste the array of values in the parameter $\mathbf{x_0}$.
   With this direct copy-paste method, we avoid to redo the work previously done via the \underline{Set Up Region Model} panel.
   You can also use you own vector, as long as the length of this vector correspond to the number of regions.
   Change the values $\mathbf{-1.6}$ by $\mathbf{-2.2}$ in this array (i.e. we replace the dynamics of the resected node by a stable node).
+  \item Choose only a \textbf{Spatial average} monitor with a \textbf{sampling period} of \textbf{\unit[1]{ms}}.
+  \item Remove the \underline{Brain Viewer} visualizer.
   \item Do not forget to choose the right connectivity matrix and you are ready to launch the simulation.
   \end{enumerate}
 \end{simulation}
