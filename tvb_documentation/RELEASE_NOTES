@@ -1,5 +1,18 @@
 ======================================================================================================================================
  The Virtual Brain (TVB)
+ Version: 1.2 - build 62xx
+ Release Date: 4 June 2014
+ Description: New Documentation Site
+======================================================================================================================================
+    * New set of EEG sensors
+    * Selection component reused on several pages in TVB
+    * Improve speed on load-time for some visualizers
+    * Topographic viewer - same color scheme
+    * Several bug-fixes (branching a running simulation, PSE discrete refresh)
+    * New scripts for the console interface
+
+======================================================================================================================================
+ The Virtual Brain (TVB)
  Version: 1.1.3 - build 5810
  Release Date: 9 April 2014
  Description: Epileptor Model
