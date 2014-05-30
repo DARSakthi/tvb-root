@@ -185,14 +185,16 @@ Your Own Brain Network Model.
     $\quad$ \textit{AnatomyOfARegionSimulation\_a} \\
     $\quad$\textit{AnatomyOfARegionSimulation\_b}  \\ 
     \\
-    \multicolumn{1}{l}{Stochastic Simulations}\\
-     $\quad$\textit{AnatomyOfARegionSimulation\_c}  \\
+    \multicolumn{1}{l}{Looking At The Results}\\
     \\
     \multicolumn{1}{l}{Parameter Space Exploration}\\
      $\quad$\textit{AnatomyOfARegionSimulation\_pse\_a} \\
     \\
     \multicolumn{1}{l}{Simulation Continuation or branching}\\
      $\quad$\textit{AnatomyOfARegionSimulation\_a\_branch1} \\
+    \\
+    \multicolumn{1}{l}{Stochastic Simulations}\\
+     $\quad$\textit{AnatomyOfARegionSimulation\_c}  \\
     \\
     \multicolumn{1}{l}{Extra}\\
      $\quad$\textit{AnatomyOfARegionSimulation\_d}  \\ 
@@ -201,6 +203,7 @@ Your Own Brain Network Model.
      \multicolumn{1}{l}{Modelling the Neural Activity}\\
      \multicolumn{1}{l}{On the Folded Cortex}\\
     $\quad$\textit{AnatomyOfASurfaceSimulation} \\
+    $\quad$\textit{AnatomyOfASurfaceSimulation\_branch1}
     \\
     \multicolumn{1}{l}{Define Your Own Local Connectivity}\\
       $\quad$\textit{SurfaceSimulation\_GaussianLocalConnectivity} \\
@@ -233,7 +236,7 @@ TVB:
 
 \begin{figure}[h]
   \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_SimulatorArea}%
-  \caption{TVB Simulator page}%
+  \caption{TVB's \textsc{Simulator} page}%
   \label{fig:fig}%
 \end{figure}
 
@@ -687,12 +690,13 @@ larger scale dynamics modelled by neural fields.
 \begin{enumerate}
 \item Go to \textsc{Connectivity} $\rightarrow$ \textsc{Local Connectivity}. 
 In this area we'll build two different kernels: a Gaussian and a Mexican Hat kernel. 
-We'll start with the Gaussian kernel. This data structure is saved under the name \textit{LocalConnectivity\_Gaussian\_zc\_40}.
+We'll start with the Gaussian kernel. 
 \item Select the \underline{equation defining the spatial profile} of your \underline{local connectivity}. Here, we'll leave the defaults.
-\item Select a \underline{cutoff distance}, that is, the distance up to which a given node is connected to its neighbourhood \citep{Spiegler_2013}. Ideally, you want the function to have essentially dropped to zero by the cutoff distance. Here this value is set to \textbf{\unit[40]{mm}}. See Fig. \ref{fig:lc_gaussian}
+\item Select a \underline{cutoff distance}, that is, the distance up to which a given node is connected to its neighbourhood \citep{Spiegler_2013, Sanz-Leon_2014}. Ideally, you want the function to have essentially dropped to zero by the \textbf{cutoff distance}. Here this value is set to \textbf{\unit[40]{mm}}. See Fig. \ref{fig:lc_gaussian}.
 \item Name your \underline{Local connectivity} and save it by clicking on \underline{Create new Local Connectivity} on the bottom left corner. 
 \end{enumerate}
 \end{formal}
+This data structure is saved under the name \textit{LocalConnectivity\_Gaussian\_zc\_40}.
 
 \begin{figure}[h]
   \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_YourOwnLocalConnectivity}%
@@ -706,13 +710,6 @@ surface. }%
   \label{fig:lc_gaussian}%
 \end{figure}
 
-
-\begin{formal}
-\begin{enumerate}[resume]
-\setcounter{enumi}{3}
-\item Select the \underline{Mexican Hat equation}. Here, we changed the default parameters See the values in Table \ref{tab:mexicanstab}
-\end{enumerate}
-\end{formal}
 
 \begin{margintable}
   \centering
@@ -733,6 +730,19 @@ surface. }%
   \caption{\textit{LocalConnectivity\_MexicanHat\_zc\_40} parameters. }
   \label{tab:mexicanstab}
 \end{margintable}
+
+
+\begin{formal}
+\begin{enumerate}[resume]
+\setcounter{enumi}{4}
+\item Select the \underline{Mexican Hat equation}. Here, we changed the default parameters. See the values in Table \ref{tab:mexicanstab}.
+\item Save your new local connectivity.
+\end{enumerate}
+\end{formal}
+
+This data structure is saved under the name 
+\textit{LocalConnectivity\_MexicanHat\_zc\_40}.
+
 
 \begin{simulation}
 \begin{enumerate}[resume]
