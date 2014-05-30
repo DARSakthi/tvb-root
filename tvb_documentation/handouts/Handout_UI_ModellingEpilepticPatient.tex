@@ -166,11 +166,11 @@ relevant scenarios such as stimulation, modelisation of forward solution of sEEG
 forward solution of MEG  with interictal spikes; and, modelisation of surgery with resection of a part of the brain.
 
 \begin{blah}
-Another important step is to process data from neuroimaging modalities into TVB. We are currently developping a pipeline (github.com/timpx/scripts) that will let you easily prepare your data in a format suitable for import
+Another important step is to process data from neuroimaging modalities into TVB. We are currently developing a pipeline (github.com/timpx/scripts) that will let you easily prepare your data in a format suitable for import
 into TVB. All you will need for this pipeline will be a T1 MRI and a Diffusion MRI from the subject. You can find these data
 in database such as the Human Connectome project. At the end of the pipeline, you will have a connectivity, a surface and a region mapping,
 i.e. you will be able to do region based and surface based simulations.
-We will use the different fonctionalities that you have learned in the previous sessions.
+We will use the different functionalities that you have learned in the previous sessions.
 \end{blah}
 
 \subsection{Project: Session\_V\_ModellingEpilepticPatient }\label{sec:project_data}
@@ -178,7 +178,7 @@ We will use the different fonctionalities that you have learned in the previous 
 \newthought{In this project}, all the data were already generated. We'll only go through the necessary steps 
 required to reproduce the simulations listed in Table~\ref{tab:simtab}, along with the relevant outline.
 You can always start over, click along and/or try to change parameters.
-We wil use the default subject connectivity matrix and surface.
+We will use the default subject connectivity matrix and surface.
 
 
 \begin{margintable}
@@ -279,7 +279,7 @@ the superior temporal cortex (rTS) and the ventral temporal cortex (rTV).
 
 \begin{marginfigure}
   \includegraphics[width=\linewidth]{Handout_UI_ModellingAnEpilepticPatient_BrainMenu}%
-  \caption{Brain menu: you can increase the scaling and change the variable which is shown}%
+  \caption{Brain menu: you can increase the scaling and change the variable to be displayed.}%
   \label{fig:brain_menu}%
 \end{marginfigure}
 
@@ -291,12 +291,12 @@ The results are already computed for you in \textit{Region\_TemporalLobe}
   \begin{enumerate}
   \setcounter{enumi}{4}
   \item Visualize the time series. Click on \underline{Select channels} and select all the channels. 
-	You will need to increase the scaling by clicking on the brain menu (Fig. \ref{fig:brain_menu}). Visualize 
+	You will need to increase the scaling by clicking on \includegraphics[width=0.01\textwidth]{butt_brain_menu}(Fig. \ref{fig:brain_menu}). Visualize 
 	the $y_0$ (Fig. \ref{fig:first_pop}) then the $y_3$ state variable (Fig. \ref{fig:second_pop}) by 
-	changing it in the \underline{Brain Menu}. You can see a succession of 3 seizures, use the mouse
+	changing it in the \includegraphics[width=0.01\textwidth]{butt_brain_menu}. You can see a succession of 3 seizures, use the mouse
 	 to zoom in and out in the time series area.
-  \item Visualize the results in the brainviewer, you will need to increase the rendering speed 
-	(timesteps per Frame) by clicking on the \underline{Brain Menu}.
+  \item Visualize the results in the \underline{Brain Viewer}, you will need to increase the rendering speed 
+	(timesteps per Frame) by clicking on the \includegraphics[width=0.01\textwidth]{butt_brain_menu}.
 \end{enumerate}
 \end{simulation}
   
@@ -316,8 +316,8 @@ The results are already computed for you in \textit{Region\_TemporalLobe}
 
 \begin{blah}
   \begin{enumerate}[resume]
-  The length of seizures here is not realistic ($\sim$\unit[2]{s}), but you can always obtain realist time by multiplying
-  all the dervivatives of the model by a small factor.
+  The length of seizures here is not realistic ($\sim$\unit[2]{s}), but you can always obtain realistic time by multiplying
+  all the derivatives of the model by a small factor.
   \end{enumerate}
 \end{blah}
 We now are going to run this simulation again, but with intracranial electrodes (sEEG) and EEG monitors.
@@ -325,9 +325,8 @@ We now are going to run this simulation again, but with intracranial electrodes 
 \begin{simulation}
   \begin{enumerate}
   \item Copy the former simulation.
-  \item Add two new monitors (EEG and sEEG) with a \textbf{sampling period} of \textbf{\unit[1]{ms}} by hitting Ctrl and in the same time clicking on the monitor
-  you want to add.
-  \item For this simulation, we will not use the \underline{Brain Viewer} so reconfigure the \underline{Viewer} tabs accordingly.
+  \item Add two new monitors (EEG and sEEG) with a \textbf{sampling period} of \textbf{\unit[1]{ms}} by hitting Ctrl and at the same time clicking on the monitor you want to add.
+  \item For this simulation, we will not use the \underline{Brain Viewer} so reconfigure the \underline{View} tabs accordingly.
 \end{enumerate}
 \end{simulation}
 
@@ -358,7 +357,7 @@ The results are already computed for you in \textit{Region\_TemporalLobe\_sEEG\_
 
 \subsection{Surface based simulation of an epileptic patient}
 
- \newthought{To account} also for seizure propagation and not only seizure recruitement, we have to use surface based simulations.
+ \newthought{To account} also for seizure propagation and not only seizure recruitment, we have to use surface based simulations.
  It also allows to have a more accurate representation of the MEG/EEG/sEEG signal.
  
   \begin{simulation}
@@ -562,8 +561,7 @@ The results are given in \textit{Surface\_InterictalSpikes\_MEG}.
 
 \begin{blah}
 You have seen that the time series of different channels generated by the MEG spherical forward solution have very different amplitudes. This is caused
-by our choice of the spherical forward solution which is not a really good model. A leadfield matrix such as the one we used for EEG
-will soon be available in TVB.
+by our choice of the spherical forward solution which is not a really good model. A better approach is to use the MEG leadfield matrix, such as the one we used for EEG. Such a matrix will soon be available in TVB.
 \end{blah}
 
 \subsection{Modeling surgical resection}
@@ -578,7 +576,7 @@ we are going to simulate that.
   \item As you learned in session \#3, select the nodes lAMYG, lHC and lPHC via your former selection, delete all their in-out and out-in connections
   with the other nodes, give a name to the selection and save it. (Fig. \ref{fig:resec})
   \item As we choose the same regional parameters that in the first simulation, we are going to copy them directly from our
-  former setting. Go to the \textit{Region\_TemporalLobe} simulation, select and copy the vaues for the parameter  $x_0$. 
+  former setting. Go to the \textit{Region\_TemporalLobe} simulation, select and copy the values for the parameter  $x_0$. 
   \item Copy the surface simulation \textit{Surface\_TemporalLobe\_sEEG\_EEG} and paste the array of values in the parameter $\mathbf{x_0}$.
   With this direct copy-paste method, we avoid to redo the work previously done via the \underline{Set Up Region Model} panel.
   You can also use you own vector, as long as the length of this vector correspond to the number of regions.
