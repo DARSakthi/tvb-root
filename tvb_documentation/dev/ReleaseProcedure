@@ -38,6 +38,11 @@ When creating a new TVB set of release packages you should:
         admin/zwe1m@rt
         Upload new ZIP with distributions under "Document" entity
         Create new entity TVB-Release with references towards the ZIP documents uploaded at the previous step.
+    - TVB Documentation Site needs to be updated separately, by copying from Hudson the latest ZIP
+        https://hudson.codemart.ro/hudson/view/TVB/job/TVB%20-%20Documentation%20Site/
+        scp -i [] -P 2222 tvb-documentation-site.zip root@req.thevirtualbrain.org:/opt/apache2/
+        Unzip at /opt/tvb-documentation-site
+        Check at docs.thevirtualbrain.com
 
     - connecting to the live server: 
 	    	ssh -i [authorized-private-key-path] -p 2222 root@req.thevirtualbrain.org
