@@ -17,7 +17,7 @@ cd _build/
 mv html tvb-documentation-site
 zip -r tvb-documentation-site.zip tvb-documentation-site
 
-mv TVB_Documentation_Site.zip ../../../
+mv tvb-documentation-site.zip ../../../
 
 cd ..
 rm -R _build
