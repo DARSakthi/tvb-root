@@ -132,26 +132,36 @@ def copy_distribution_dataset(dist_path, library_path):
     """
     included_data = [("__init__.py", "$INSIDE.__init__.py"),
                      ("cff.dataset_74.cff", "$OUTSIDE.dataset_74.cff"),
-                     ("connectivity.connectivity_96.zip",
-                      "$OUTSIDE.connectivity_regions_96.zip"),
+                     ("connectivity.connectivity_96.zip", "$OUTSIDE.connectivity_regions_96.zip"),
                      ("sensors.EEG_unit_vectors_BrainProducts_62.txt.bz2", "$OUTSIDE.EEG_Sensors.txt.bz2"),
                      ("sensors.meg_channels_reg13.txt.bz2", "$OUTSIDE.MEG_Sensors.txt.bz2"),
+
                      ("cff.dataset_74.cff", "$INSIDE.cff.dataset_74.cff"),
                      ("cff.__init__.py", "$INSIDE.cff.__init__.py"),
+
+                     ("connectivity.connectivity_74.zip", "$INSIDE.connectivity.connectivity_74.zip"),
                      ("connectivity.dti_pipeline_regions.txt", "$INSIDE.connectivity.dti_pipeline_regions.txt"),
                      ("connectivity.__init__.py", "$INSIDE.connectivity.__init__.py"),
-                     ("projectionMatrix.surface_reg_13_eeg_62.mat",
-                      "$INSIDE.projectionMatrix.surface_reg_13_eeg_62.mat"),
-                     ("projectionMatrix.region_conn_74_eeg_1020_62.mat",
-                      "$INSIDE.projectionMatrix.region_conn_74_eeg_1020_62.mat"),
+
+                     ("projectionMatrix.surface_reg_13_eeg_62.mat", "$INSIDE.projectionMatrix.surface_reg_13_eeg_62.mat"),
+                     ("projectionMatrix.region_conn_74_eeg_1020_62.mat", "$INSIDE.projectionMatrix.region_conn_74_eeg_1020_62.mat"),
                      ("projectionMatrix.__init__.py", "$INSIDE.projectionMatrix.__init__.py"),
-                     ("sensors.EEG_unit_vectors_BrainProducts_62.txt.bz2",
-                      "$INSIDE.sensors.EEG_unit_vectors_BrainProducts_62.txt.bz2"),
+
+                     ("sensors.EEG_unit_vectors_BrainProducts_62.txt.bz2", "$INSIDE.sensors.EEG_unit_vectors_BrainProducts_62.txt.bz2"),
                      ("sensors.meg_channels_reg13.txt.bz2", "$INSIDE.sensors.meg_channels_reg13.txt.bz2"),
                      ("sensors.internal_39.txt.bz2", "$INSIDE.sensors.internal_39.txt.bz2"),
                      ("sensors.__init__.py", "$INSIDE.sensors.__init__.py"),
+
                      ("surfaceData.__init__.py", "$INSIDE.surfaceData.__init__.py"),
+                     ("surfaceData.cortex_reg13.surface_cortex_reg13.zip", "$INSIDE.surfaceData.cortex_reg13.surface_cortex_reg13.zip"),
+                     ("surfaceData.outer_skin_4096.zip", "$INSIDE.surfaceData.outer_skin_4096.zip"),
+                     ("surfaceData.inner_skull_4096.zip", "$INSIDE.surfaceData.inner_skull_4096.zip"),
+                     ("surfaceData.outer_skull_4096.zip", "$INSIDE.surfaceData.outer_skull_4096.zip"),
                      ("surfaceData.eeg_skin_surface.zip", "$INSIDE.surfaceData.eeg_skin_surface.zip"),
+                     ("surfaceData.face_surface_old.zip", "$INSIDE.surfaceData.face_surface_old.zip"),
+                     ("surfaceData.cortex_reg13.all_regions_cortex_reg13.txt", "$INSIDE.surfaceData.cortex_reg13.all_regions_cortex_reg13.txt"),
+                     ("surfaceData.cortex_reg13.local_connectivity_surface_cortex_reg13.mat", "$INSIDE.surfaceData.cortex_reg13.local_connectivity_surface_cortex_reg13.mat"),
+
                      ("obj.__init__.py", "$INSIDE.obj.__init__.py"),
                      ("obj.face_surface.obj", "$INSIDE.obj.face_surface.obj"), ]
 
