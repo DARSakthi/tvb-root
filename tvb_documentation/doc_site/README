@@ -1,0 +1,18 @@
+
+This is the documentation source for building TVB documentation web-site.
+
+In order to have a new documentation site generated, just run
+
+make -f MakeFile html
+
+in the folder where MakeFile is placed.
+
+TODO about documentation:
+- styles/TVB_logo.svg is duplicate
+- several link_*.rst files were necessary to be able to group the RST under a separate folder then the manuals
+- doc_site/advances/images and schemas as shortcuts
+- doc_site/basic/screenshots and icons shortcuts
+
+- automatically copy API html result
+- improve 'index'
+- full version read from tvb.config

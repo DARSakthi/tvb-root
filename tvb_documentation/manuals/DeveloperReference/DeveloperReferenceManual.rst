@@ -157,7 +157,7 @@ I. Main System Components
 =========================
 In the following chapters, we intend to describe the architectural details of TVB, starting from a top level view, and going deeper in detail, as the document proceeds.
 
-.. image:: images/VB_level1.jpg
+.. image:: schemas/VB_level1.jpg
    :width: 100%
    :align: center
 
@@ -234,7 +234,7 @@ II. Second Level of Detail
 ==========================
 In this second drawing, you can find the same main components as in the previous level of detail, each of them only gaining several sub-components inside.
 
-.. image:: images/VB_level2.jpg
+.. image:: schemas/VB_level2.jpg
    :width: 100%
    :align: center
 
@@ -438,7 +438,7 @@ The logical difference between the pre-processor component an the post-processin
 
 III. Third Level of Detail
 ==========================
-.. image:: images/VB_level3.jpg
+.. image:: schemas/VB_level3.jpg
    :width: 100%
    :align: center
 
@@ -664,7 +664,7 @@ Both the Pre and Post processors will have a similar structure, only different a
 IV. Forth Level of Detail
 =========================
 
-.. image:: images/VB_level4.jpg
+.. image:: schemas/VB_level4.jpg
    :width: 100%
    :align: center
 
@@ -676,7 +676,7 @@ Colors in the names of the modules, were used only to spot similarity (e.g Data 
 
 The previous drawings does not include IO elements, to make the entire picture readable, but in the drawing below, some blocks got fewer sub-components, and the IO elements were included. Both drawings (previous one and next one) are at the same level of detail, they should complete each other.
 
-.. image:: images/VB_level4_h.jpg
+.. image:: schemas/VB_level4_h.jpg
    :width: 100%
    :align: center
 
@@ -851,7 +851,7 @@ This component remains unchanged from the upper level.
 V. Fifth Level of Detail
 ========================
 
-.. image:: images/VB_level5.jpg
+.. image:: schemas/VB_level5.jpg
    :width: 100%
    :align: center
 

@@ -577,11 +577,3 @@ Structural Anatomical Parcellations:
   * FSL AAL 90
   * Hagmann (based on Desikan)
 
-
-Authors:
-  * Stuart Knock
-  * Paula Sanz-Leon
-  * Petra Ritter
-
-
-

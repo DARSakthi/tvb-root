@@ -264,6 +264,7 @@ def create_modules_toc_file(master_package, modules, opts, name='index'):
         text += '   %s\n' % module
 
     import tvb.simulator
+    import tvb.config
     sim_folder = os.path.dirname(tvb.simulator.__file__)
 
     write_verbatim_demos(
@@ -273,8 +274,8 @@ def create_modules_toc_file(master_package, modules, opts, name='index'):
     text += '   demos'
     text += '\n'
     text += '\n'    
-    sci_library_folder = os.path.dirname(os.path.dirname(sim_folder))
-    authors_file = os.path.join(sci_library_folder, AUTHORS_FILE)
+    frw_folder = os.path.dirname(os.path.dirname(os.path.dirname(tvb.config.__file__)))
+    authors_file = os.path.join(frw_folder, AUTHORS_FILE)
     new_file_path = os.path.join(opts.destdir, XML_FOLDER, AUTHORS_FILE)
     shutil.copy(authors_file, new_file_path)
     text += AUTHORS_INCLUDE
