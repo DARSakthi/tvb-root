@@ -14,7 +14,8 @@ make -f MakeFile html
 cp -R ../../dist/api _build/html/
 
 cd _build/
-zip -r TVB_Documentation_Site.zip html
+mv html TVB_Documentation_Site
+zip -r TVB_Documentation_Site.zip TVB_Documentation_Site
 
 mv TVB_Documentation_Site.zip ../../../
 
