@@ -188,17 +188,17 @@ Your Own Brain Network Model.
     \multicolumn{1}{l}{Looking At The Results}\\
     \\
     \multicolumn{1}{l}{Parameter Space Exploration}\\
-     $\quad$\textit{AnatomyOfARegionSimulation\_pse\_a} \\
+     $\quad$\textit{AnatomyOfARegionSimulation\_pse} \\
     \\
     \multicolumn{1}{l}{Simulation Continuation or branching}\\
      $\quad$\textit{AnatomyOfARegionSimulation\_a\_branch1} \\
     \\
     \multicolumn{1}{l}{Stochastic Simulations}\\
      $\quad$\textit{AnatomyOfARegionSimulation\_c}  \\
-    \\
-    \multicolumn{1}{l}{Extra}\\
-     $\quad$\textit{AnatomyOfARegionSimulation\_d}  \\ 
-     $\quad$\textit{AnatomyOfARegionSimulation\_d\_branch1}  \\ 
+%    \\
+%    \multicolumn{1}{l}{Extra}\\
+%     $\quad$\textit{AnatomyOfARegionSimulation\_bold}  \\ 
+%     $\quad$\textit{AnatomyOfARegionSimulation\_bold\_branch1}  \\ 
     \\
      \multicolumn{1}{l}{Modelling the Neural Activity}\\
      \multicolumn{1}{l}{On the Folded Cortex}\\
@@ -324,10 +324,9 @@ data returned can become prohibitively large.}
     \toprule
     Window & Visualizer/Analyzer \\
     \midrule
-             top-left          &   Time Series   \\
-             top-right        &   Brain Viewer\\
-             bottom-left    &   Fourier Transform        \\
-             bottom-right  &   Wavelet Spectrogram \\
+             top-left        &   Brain Viewer\\
+             top-right    &   Fourier Transform        \\
+             bottom   &   Wavelet Spectrogram \\
     \bottomrule
   \end{tabular}
   \caption{Selected visualizers. It is possible to configure up to 12 different windows. }
@@ -406,7 +405,7 @@ range of values that will be explored. We'll see how to do this in the next sect
 
 \newthought{TVB will launch a simulation} for
 every value. \sidenote{For the time being, parameter space explorations are restricted to
-two dimensions.} The example is set up in \textit{AnatomyOfARegionSimulation\_pse\_a}. 
+two dimensions.} The example is set up in \textit{AnatomyOfARegionSimulation\_pse}. 
 
 \begin{simulation}
 \begin{enumerate}
@@ -420,13 +419,13 @@ two dimensions.} The example is set up in \textit{AnatomyOfARegionSimulation\_ps
 
 \begin{marginfigure}
   \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_PSEDiscrete}%
-  \caption{Discrete parameter space map from \textit{AnatomyOfARegionSimulation\_pse\_a}}%
+  \caption{Discrete parameter space map from \textit{AnatomyOfARegionSimulation\_pse}}%
   \label{fig:pse_discrete}%
 \end{marginfigure}
 
 \begin{marginfigure}
   \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_PSEContinuous}%
-  \caption{Continuous parameter space map from \textit{AnatomyOfARegionSimulation\_pse\_a}}%
+  \caption{Continuous parameter space map from \textit{AnatomyOfARegionSimulation\_pse}}%
   \label{fig:pse_continuous}%
 \end{marginfigure}
 
@@ -569,15 +568,28 @@ Observe the differences using the \underline{Spectrogram of the Wavelet Transfor
 \end{marginfigure}
 
 
-\subsection{Extra}\label{sec:results}
-
-If you are already anxious and wondering about fMRI and some other biophysical output modalities, in \textit{AnatomyOfARegionSimulation\_d\_branch1} we've generated \unit[4]{min} worth of data using a convolution based model of the BOLD signal (see Fig. \ref{fig:BOLD}). Load this simulation if you want to see the parameter values.
-
-\begin{marginfigure}%
-\includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_BOLD}%
-  \caption{BOLD signals from \textit{AnatomyOfARegionSimulation\_d\_branch1}}%
-  \label{fig:BOLD}%
-\end{marginfigure}
+%\subsection{Extra}\label{sec:results}
+%
+%If you are already anxious and wondering about fMRI and some other biophysical output modalities, in \textit{AnatomyOfARegionSimulation\_bold\_branch1} we've generated \unit[4]{min} worth of data using a convolution based model of the BOLD signal (see Fig. \ref{fig:BOLD}). Load this simulation if you want to see the parameter values.
+%
+%\begin{simulation}
+%\begin{enumerate}
+%\item Copy\textit{AnatomyOfAregionSimulation\_stochastic}.
+%\item Select the \textbf{BOLD} monitor and the \textbf{Mixtures Of Gammas} kernel. The latter represents the Haemodynamic Response Function. 
+%\item The monitor's \textbf{sampling period} is \textbf{\unit[2000]{ms}}.
+%\item Run the simulation for \textbf{\unit[60000]{ms}}.
+%\item Once this simulation is finished, change the \textbf{simulation length} to \textbf{\unit[240000]{ms}} and click on \includegraphics[width=0.08\textwidth]{butt_branching}.
+%\end{enumerate}
+%\end{simulation}
+%
+%The results are in \textit{AnatomyOfARegionSimulation\_bold} and \textit{AnatomyOfARegionSimulation\_bold\_branch1}.
+%
+%
+%\begin{marginfigure}%
+%\includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_BOLD}%
+%  \caption{BOLD signals from \textit{AnatomyOfARegionSimulation\_d\_branch1}}%
+%  \label{fig:BOLD}%
+%\end{marginfigure}
 
 \newpage
 \subsection{Modelling the Neural Activity on the Folded Cortex}\label{sec:surface_simulations}
@@ -607,11 +619,11 @@ a 2d representation of the convoluted cortical surface embedded in 3d space.
 
 The first significant thing to note about surface simulations is that certain \underline{Monitors} make a lot more sense in this context than they do at the region level, and so we'll introduce a couple new \underline{Monitors} here.
 
-\begin{marginfigure}
- \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_DefaultLocalConnectivityWaveletSpectrogram.png}%
-  \caption{Spectrogram of the spatially averaged time-series from \textit{AnatomyOfASurfaceSimulation\_branch1}.}%
-  \label{fig:default_lc_spectrogram}%
-\end{marginfigure}
+%\begin{marginfigure}
+% \includegraphics[width=\linewidth]{Handout_UI_BuildingYourOwnBrainNetworkModel_DefaultLocalConnectivityWaveletSpectrogram.png}%
+%  \caption{Spectrogram of the spatially averaged time-series from \textit{AnatomyOfASurfaceSimulation\_branch1}.}%
+%  \label{fig:default_lc_spectrogram}%
+%\end{marginfigure}
 
 
 
@@ -627,9 +639,9 @@ The first significant thing to note about surface simulations is that certain \u
 \item The first of these new \underline{Monitors} is called
 \textbf{{SpatialAverage}}. To select several monitors press the key Command or Control while you select them.
 \item The second of these new monitors, which is an instantiation of a
-biophysical measurement process, is called \textbf{EEG}. 
-\item The \underline{Monitors period} is left with the default value \textbf{\unit[0.9765625]{ms}} which is equivalent to a sampling frequency of \unit[512]{Hz}.
-\item Lastly, the \underline{simulation length} is \textbf{\unit[2000]{ms}}.
+biophysical measurement process, is called \textbf{EEG}. The third will be the \textbf{Temporal Average}.
+\item The \underline{Monitors period} is left with the default value \textbf{\unit[1.953125]{ms}} which is equivalent to a sampling frequency of \unit[256]{Hz}.
+\item Lastly, the \underline{simulation length} is \textbf{\unit[500]{ms}}.
 \item Run the simulation.
 \item Once the simulation is finished, without changing any parameters, click on \includegraphics[width=0.08\textwidth]{butt_branching}.
 
@@ -637,8 +649,7 @@ biophysical measurement process, is called \textbf{EEG}.
 \end{simulation}
 
 
-These simulations are \textit{AnatomyOfASurfaceSimulation} and \textit{AnatomyOfASurfaceSimulation\_branch1}. In Fig. \ref{fig:default_lc_spectrogram} you can see the spectrogram of the wavelet transform of the spatially averaged time-series from 
-the simulation \textit{AnatomyOfASurfaceSimulation\_branch1}. 
+These simulations are \textit{AnatomyOfASurfaceSimulation} and \textit{AnatomyOfASurfaceSimulation\_branch1}. 
 
 
 
@@ -699,8 +710,8 @@ larger scale dynamics modelled by neural fields.
 \item Go to \textsc{Connectivity} $\rightarrow$ \textsc{Local Connectivity}. 
 In this area we'll build two different kernels: a Gaussian and a Mexican Hat kernel. 
 We'll start with the Gaussian kernel. 
-\item Select the \underline{equation defining the spatial profile} of your \underline{local connectivity}. Here, we'll leave the defaults.
-\item Select a \underline{cutoff distance}, that is, the distance up to which a given node is connected to its neighbourhood \citep{Spiegler_2013, Sanz-Leon_2014}. Ideally, you want the function to have essentially dropped to zero by the \textbf{cutoff distance}. Here this value is set to \textbf{\unit[40]{mm}}. See Fig. \ref{fig:lc_gaussian}.
+\item Select the \underline{equation defining the spatial profile} of your \underline{local connectivity}. Here, we'll set \textbf{sigma} to \textbf{\unit[15]{mm}}.
+\item Ideally, you want the function to have essentially dropped to zero by the \textbf{cutoff distance}. The \underline{cutoff distance}, that is, the distance up to which a given node is connected to its neighbourhood \citep{Spiegler_2013, Sanz-Leon_2014} is set to \textbf{\unit[40]{mm}}. See Fig. \ref{fig:lc_gaussian}.
 \item Name your \underline{Local connectivity} and save it by clicking on \underline{Create new Local Connectivity} on the bottom left corner. 
 \end{enumerate}
 \end{formal}
@@ -753,12 +764,15 @@ This data structure is saved under the name \\
   \label{tab:mexicanstab}
 \end{margintable}
 
+Finally, we will run two  more simulations using different local connectivity kernels. 
 
 \begin{simulation}
 \begin{enumerate}[resume]
 \setcounter{enumi}{4}
-\item Finally, we run two  more simulations, using the same parameters described in \textit{AnatomyOfASurfaceSimulation}, but using  \textbf{\textit{LocalConnectivity\_MexicanHat\_zc\_40}} in one case and  \textbf{\textit{LocalConnectivity\_Guassian\_zc\_40}} in the other case. The \textbf{local connectivity strength} is set to \textbf{-0.001}. 
-
+\item Copy \textit{AnatomyOfASurfaceSimulation}.
+\item Change the \textbf{local connectivity} to \textbf{\textit{LocalConnectivity\_Gaussian\_zc\_40}} and set the \textbf{local connectivity strength} to \textbf{0.001}. Run the simulation.
+\item Copy again \textit{AnatomyOfASurfaceSimulation}. 
+\item This time select \textbf{\textit{LocalConnectivity\_MexicanHat\_zc\_40}}. The \textbf{local connectivity strength} is set to \textbf{-0.001}. Run the simulation. 
 \end{enumerate}
 \end{simulation}
 

@@ -198,8 +198,8 @@ patient.
 
     $\quad$\textit{Control\_g2d\_pse}           \\
     $\quad$\textit{Stroke\_g2d\_pse}             \\
-    $\quad$\textit{Control\_g2d\_init\_bold} \\
-    $\quad$\textit{Stroke\_g2d\_init\_bold}        \\  
+    %$\quad$\textit{Control\_g2d\_init\_bold} \\
+    %$\quad$\textit{Stroke\_g2d\_init\_bold}        \\  
     $\quad$\textit{Control\_g2d\_init\_bold\_branch1}           \\
     $\quad$\textit{Stroke\_g2d\_init\_bold\_branch1} \\ 
     \\
@@ -208,8 +208,8 @@ patient.
     \multicolumn{1}{l}{A Higher-dimensional Model}\\
     $\quad$\textit{Control\_sj3d\_pse}\\
     $\quad$\textit{Stroke\_sj3d\_pse}\\
-    $\quad$\textit{Control\_sj3d\_init\_bold}\\
-    $\quad$\textit{Stroke\_sj3d\_init\_bold}\\
+    %$\quad$\textit{Control\_sj3d\_init\_bold}\\
+    %$\quad$\textit{Stroke\_sj3d\_init\_bold}\\
     $\quad$\textit{Control\_sj3d\_init\_bold\_branch1}\\
     $\quad$\textit{Stroke\_sj3d\_init\_bold\_branch2}\\
     \bottomrule
@@ -503,14 +503,29 @@ These are simulations $\circ$  \textit{Default\_g2d\_pse}, $\circ$ \textit{NoInt
 \begin{simulation}
   \begin{enumerate}
   \item Go to the \textsc{simulator} area. 
-  \item Select the \textbf{stroke connectivity, ID: 111886}. We proceed to launch a PSE using the same model and simulation parameters as found in Table 2 of the first session. This is simulation \textit{Control\_g2d\_pse}.
+  \item Select the \textbf{control connectivity, ID: 111886}. We proceed to launch a PSE using the same model and simulation parameters as found in Table 2 of the first session. This is simulation \textit{Control\_g2d\_pse}.
   \item Copy the previous simulation and launch a second PSE where, but this time use the \textbf{stroke connectivity, ID:111887}. The results are in simulation \textit{Stroke\_g2d\_pse}.
   \item Select a point in the resulting \underline{Parameter Space Discrete} map, for instance the one with \underline{conduction speed} equal to \textbf{\unitfrac[7]{mm}{ms}} and \underline{global coupling strength} \textbf{a}$\mathbf{=}$\textbf{\unit[0.008][au]}. Tag the time-series (e.g \underline{Datatype Tag 3}: \textbf{ThisPoint}). 
   
  \item Repeat the previous step for the same point in \textit{Control\_g2d\_pse}.
  
+  \item Then, using the parameters from the previously tagged points, launch two \textbf{\unit[60]{s}} long simulations. 
+  \item  Use the \textbf{BOLD monitor} and the \textbf{Mixture of Gammas} \underline{HRF kernel} with its default parameters. The \underline{sampling period} of the monitor is \textbf{\unit[2000]{ms}}. 
+\end{enumerate}
+\end{simulation} 
+
+These two simulations are not included in this project, but you will need them if you want to reproduce the simulations  described below. 
+
+
+\begin{simulation}
+\begin{enumerate}[resume]
+\setcounter{enumi}{6}
+  \item Using the branching mechanism, launch \textbf{\unit[4]{min}} simulations from the two previous ones. 
   \end{enumerate}
 \end{simulation}
+
+These are \textit{Control\_g2d\_init\_bold\_branch1} and \textit{Stroke\_g2d\_init\_bold\_branch1}.
+
  
  \begin{marginfigure}%
   \includegraphics[width=0.82\linewidth]{Handout_UI_ModellingStructuralLesions_FourierAddFilter}
@@ -598,7 +613,15 @@ These are simulations $\circ$  \textit{Default\_g2d\_pse}, $\circ$ \textit{NoInt
 \begin{enumerate}[resume]
 \setcounter{enumi}{7}
   \item Then, using the parameters from the previously tagged points, launch two \textbf{\unit[60]{s}} long simulations. This time, in addition to the variable \textbf{xi}, select also the variable \textbf{alpha}.
-  \item  Use the \textbf{BOLD monitor} and the \textbf{Mixture of Gammas} \underline{HRF kernel} with its default parameters. The \underline{sampling period} of the monitor is \textbf{\unit[2000]{ms}}. The results are in \textit{Control\_sj3d\_init\_bold} and \textit{Stroke\_sj3d\_init\_bold}.
+  \item  Use the \textbf{BOLD monitor} and the \textbf{Mixture of Gammas} \underline{HRF kernel} with its default parameters. The \underline{sampling period} of the monitor is \textbf{\unit[2000]{ms}}. 
+\end{enumerate}
+\end{simulation} 
+
+These two simulations are not included in this project, but you will need them if you want to reproduce the simulations that are described below. 
+
+\begin{simulation}
+\begin{enumerate}[resume]
+\setcounter{enumi}{9}
   \item Using the branching mechanism, launch \textbf{\unit[4]{min}} simulations from the two previous ones. These are \textit{Control\_sj3d\_init\_bold\_branch1} and \textit{Stroke\_sj3d\_init\_bold\_branch1}.
   \end{enumerate}
 \end{simulation}
