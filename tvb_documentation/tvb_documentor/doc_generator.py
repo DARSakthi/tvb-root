@@ -312,6 +312,7 @@ class DocGenerator:
                     '-a',  # Use option "-a" : build all
                     '-q',  # Log only Warn and Error
                     '-c', conf_folder,  # Specify path where to find conf.py
+                    '-d', temp_folder,
                     temp_folder,  # Source folder
                     self._dist_api_folder,  # Output folder
                     ]
