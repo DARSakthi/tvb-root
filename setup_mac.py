@@ -64,7 +64,7 @@ def _create_command_file(command_file_name, command, before_message, done_messag
 
 #--------------------------- PY2APP specific configurations--------------------------------------------
 
-PY2APP_PACKAGES = ['tvb_bin', 'cherrypy', 'email', 'h5py', 'idlelib', 'migrate', 'minixsv',
+PY2APP_PACKAGES = ['cherrypy', 'email', 'h5py', 'idlelib', 'migrate', 'minixsv',
                    'numpy', 'scipy', 'sklearn', 'tables', 'tvb']
 
 PY2APP_INCLUDES = ['apscheduler', 'apscheduler.scheduler', 'cfflib', 'cmath', 'contextlib', 'formencode',
@@ -145,10 +145,11 @@ _create_command_file('contributor_setup', 'export PYTHONPATH=tvb.app/Contents/Re
 
 #py2app should have a --exclude-dynamic parameter but it doesn't seem to work until now
 for entry in EXCLUDED_DYNAMIC_LIBS:
-    path = os.path.join(DIST_FOLDER, 'tvb.app', 'Contents', 'Frameworks', entry)
+    path = os.path.join(DIST_FOLDER, "tvb.app", "Contents", "Frameworks", entry)
     if os.path.exists(path):
         os.remove(path)
 
+PyInstallerPacker.add_tvb_bin_folder(DIST_FOLDER, os.path.join("tvb.app", "Contents", "Resources", "lib", "python2.7"))
 PyInstallerPacker.generate_final_zip("TVB_MacOS", os.path.join("tvb.app", "Contents", "Resources", "lib", "python2.7"))
 
 ## Clean after install      

@@ -177,7 +177,7 @@ class PyInstallerPacker():
 
 
     @staticmethod
-    def __add_bin_data(base_folder, data_folder):
+    def add_tvb_bin_folder(base_folder, data_folder):
         """
         Add our custom 'tvb_bin' python package to the distribution pack.
         """
@@ -258,7 +258,7 @@ class PyInstallerPacker():
 
         os.mkdir(os.path.join(base_folder, data_folder, 'exe'))
         shutil.copy(python_exe_path, os.path.join(base_folder, data_folder, 'exe', PYTHON_EXE))
-        PyInstallerPacker.__add_bin_data(base_folder, data_folder)
+        PyInstallerPacker.add_tvb_bin_folder(base_folder, data_folder)
         PyInstallerPacker.__copy_matplotlib_code(base_folder, data_folder)
         PyInstallerPacker.__copy_pkg_resources(base_folder, data_folder)
         if extra_includes:
