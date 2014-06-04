@@ -9,6 +9,6 @@ but also files for loading default datatypes when working in console mode.
 This should be treated as a regular Python module.
 Possibly what you want after cloning this locally, it to run
 
-python setup.py develop
+    python setup.py develop
 
 to have it linked into your current Python instance.
