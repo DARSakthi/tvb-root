@@ -55,9 +55,6 @@ def load_package(package_name):
 load_package('tvb_bin')
 shutil.rmtree('tvb_bin.egg-info', True)
 
-load_package('tvb_data')
-shutil.rmtree('tvb_data.egg-info', True)
-
 load_package('third_party_licenses')
 shutil.rmtree('third_party_licenses.egg-info', True)
 
@@ -68,6 +65,13 @@ setup(
     install_requires=["rst2pdf", "PIL>=1.1.7", "sphinx"]
 )
 shutil.rmtree(os.path.join("tvb_documentation", 'tvb_documentor.egg-info'), True)
+
+setup(
+    name='tvb_data',
+    packages=find_packages('tvb_data'),
+    package_dir={'': 'tvb_data'}
+)
+shutil.rmtree(os.path.join("tvb_data", 'tvb_data.egg-info'), True)
 
 setup(
     name='mplh5canvas',

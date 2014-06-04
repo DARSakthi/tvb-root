@@ -8,12 +8,13 @@
 #   https://repo.thevirtualbrain.org/svn/tvb/trunk/ --trunk=framework_tvb
 #   https://repo.thevirtualbrain.org/svn/tvb/trunk/ --trunk=scientific_library
 #   https://repo.thevirtualbrain.org/svn/tvb/trunk/externals/ --trunk=geodesic_distance
-#   https://repo.thevirtualbrain.org/svn/tvb/trunk/docs --trunk=manuals
+#   https://repo.thevirtualbrain.org/svn/tvb/trunk/ --trunk=tvb_documentation
+#   https://repo.thevirtualbrain.org/svn/tvb/trunk/ --trunk=tvb_data
 
 
 ## Initialize new 3rd party SYNCHRONIZATION REPO:
 
-    git svn clone -s -r4900:HEAD --no-minimize-url https://repo.thevirtualbrain.org/svn/tvb/trunk/docs --trunk=manuals
+    git svn clone -s -r6000:HEAD --no-minimize-url https://repo.thevirtualbrain.org/svn/tvb/trunk/ --trunk=tvb_documentation
     cd docs
     git pull $$URL_GIT$$ trunk
 

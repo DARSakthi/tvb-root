@@ -45,7 +45,7 @@ When creating a new TVB set of release packages you should:
         Check at docs.thevirtualbrain.com
 
     - connecting to the live server: 
-	    	ssh -i [authorized-private-key-path] -p 2222 root@req.thevirtualbrain.org
+	    	ssh -i [authorized-private-key-path] -p *** root@req.thevirtualbrain.org
 	    	# update tvb-root on the live-server (www.thevirtualbrain.org/demo)
 	    	cd /root/tvb-root/ 
 	    	svn update 
@@ -59,11 +59,8 @@ When creating a new TVB set of release packages you should:
 	    	cd cd /opt/apache-tomcat/bin
 	    	sh startup.sh
 	    	# you should not remove /opt/apache-tomcat/.tvb folder, because in there we keep the DB where registered users are placed.
-    - connecting to the cluster:
-	       ssh tvbadmin@139.124.148.57
-	       pwd: tvb23
-	       
-    - update Git repositories (docs/HowToGIT)
+
+    - update Git repositories (dev/HowToGIT)
        
     - let the Force be with Us!
     
