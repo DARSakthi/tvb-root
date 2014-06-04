@@ -1,5 +1,5 @@
-TVB Tutorials in raw form
-============================
+TVB Documentation in raw form
+====================================
 
 The use-case that we recommend for all contributors is the following:
 
@@ -18,4 +18,4 @@ The use-case that we recommend for all contributors is the following:
   and use Git as a normal user for commits/branches
 - Any change you do in the cloned folder, should be visible in the script or web interface of TVB 
   (but in most cases a restart of TVB is required for changes to become visible)
-- For contributing to tvb documentation, you can independently fork and later push into "docs" repository.
+- For contributing to tvb documentation, you can independently fork and later push into "tvb_docs" repository.
