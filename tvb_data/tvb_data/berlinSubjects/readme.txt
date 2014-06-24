@@ -55,3 +55,9 @@ Before importing this ProjectionMatrix in TVB, you need to have the Connectivity
 ## 7. [subID]_[date]_RegionMapping.txt
 A single ASCII-file consisting of #CortexMeshVertices entries, depicting which region each vertex of the cortical mesh belongs to.
 Before importing this RegionMapping data in TVB, you need to import the Connectivity and the CorticalSurface for the subject. You also need to match them correctly in the user interface when importing the RegionMapping.
+
+
+
+
+For Subject QL, also an empirical BOLD signal can be found: QL_BOLD_regiontimecourse.mat
+To import this file, try "TimeSeries MAT" importer of TVB, and specify "QL_BOLD_regiontimecourse" for field "Matlab DataSet Name".
