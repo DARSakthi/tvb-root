@@ -1,14 +1,16 @@
 TVB-DATA
 =====================
 
-Various demonstration data for use with TVB are provided here.
+Various demonstration datasets for use with The Virtual Brain are provided here.
 
-Here we will find compatible file/folder structures to be uploaded in TVB software,
-but also files for loading default datatypes when working in console mode.
+Here you will find:
+* compatible file/folder structures that can be uploaded thorugh the web interface of TVB; and
+* the default datasets used when working in ``console`` or `library` mode.
 
-This should be treated as a regular Python module.
-Possibly what you want after cloning this locally, it to run
+This repository should be treated as a regular Python module.
+Possibly what you want to do after cloning it locally is:
 
+    cd tvb-data/
     python setup.py develop
 
-to have it linked into your current Python instance.
+to have it linked into your current Python environment.
