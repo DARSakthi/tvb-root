@@ -76,29 +76,41 @@ def vertex_transform2(vertex):
     vertex = [float(x) for x in vertex[:3]]
     rotation = rotation_matrix([0.0, 0.0, 1.0], math.pi)
 
-    return rotation.dot( np.array(vertex[:3])*1.08 + np.array([1.0, 2.0, -10.0]))
+    return rotation.dot(np.array(vertex[:3]) * 1.08 + np.array([1.0, 2.0, -10.0]))
+
+
+def vertex_transform3(vertex):
+    """
+    After recent changes in the received OBJ files (28 Nov 2014),
+    we need to rotate with 92 degrees and do a small translation for  good match with the default cortex.
+    """
+    vertex = np.array([float(x) * 10 for x in vertex[:3]]) + np.array([0.0, -60.0, 30.0])
+    rotation = rotation_matrix([1.0, 0.0, 0.0], - math.pi / 1.8)
+    return np.dot(rotation, vertex)
+
 
 
 if __name__ == "__main__":
 
-    with open("face_surface_original.obj") as obj_file:
-        with open("face_surface.obj", "w") as result_file:
+    for name in ["eeg_cap", "face_surface"]:
+        with open("%s_original.obj" % name) as obj_file:
+            with open("%s.obj" % name, "w") as result_file:
 
-            for line_nr, line in enumerate(obj_file):
-                line = line.strip()
+                for line_nr, line in enumerate(obj_file):
+                    line = line.strip()
 
-                if line == "" or line[0] == '#':
-                    result_file.write(line + "\n")
-                    continue
+                    if line == "" or line[0] == '#':
+                        result_file.write(line + "\n")
+                        continue
 
-                tokens = line.split()
-                line_type = tokens[0]
+                    tokens = line.split()
+                    line_type = tokens[0]
 
-                if line_type != "v":
-                    result_file.write(line + "\n")
-                    continue
+                    if line_type != "v":
+                        result_file.write(line + "\n")
+                        continue
 
-                new_vertex = vertex_transform2(tokens[1:])
-                result_file.write("v %f %f %f \n" % tuple(new_vertex.tolist()))
+                    new_vertex = vertex_transform3(tokens[1:])
+                    result_file.write("v %f %f %f \n" % tuple(new_vertex.tolist()))
 
 
