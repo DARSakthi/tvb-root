@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:annotation>
+    	<xs:documentation>
+	    	This is a validation XML schema.
+			You should use this in case you intend to produce TVB compatible ontology export.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:simpleType name="alfaNumericString">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:pattern value="[a-zA-Z0-9]*" />
+		</xs:restriction>
+	</xs:simpleType>
+
+    <xs:element name="TVBOnto">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="TVBTerm" type="TVBTermType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="version" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType name="TVBTermType">
+        <xs:sequence>
+            <xs:element name="OntClass" type="OntClassType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="label" type="xs:string" use="required"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="OntClassType">
+        <xs:sequence>
+            <xs:element name="OntClass" type="OntClassType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="uri" type="xs:string" use="required"/>
+        <xs:attribute name="label" type="xs:string" use="optional"/>
+        <xs:attribute name="synonym" type="xs:string" use="optional"/>
+        <xs:attribute name="definition" type="xs:string" use="optional"/>
+        <xs:attribute name="linkAttributeURI" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+</xs:schema>
+
