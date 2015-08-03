@@ -90,7 +90,7 @@ def write_heuristic_map(m, pth):
 
 VOXELS_PTH = '_rm+thal&bg_1mm_20111013_uint8.nii'
 VERTICES_PTH = '_surface_80k_vertices.txt'
-REGION_ID2IDX_PTH = '../../connectivity/dti_pipeline_regions.txt'
+REGION_ID2IDX_PTH = '_connectivity_96_to_pipeline_idx.txt'
 REGION_CENTERS = '_connectivity_96_positions.txt'
 
 
