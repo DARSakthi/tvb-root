@@ -1,6 +1,12 @@
------------------------------------------
-EEG_unit_vectors_BrainProducts_62.txt.bz2
------------------------------------------
+
+Naming convention:
+- [sensor_type]_[provenance_or_type]_[number_of_sensors].[extension]
+- all lower case
+
+
+
+eeg_unitvector_62.txt.bz2
+--------------------------
 
 EEG sensor orientations and labeling.
 They originate from http://www.brainproducts.com/
